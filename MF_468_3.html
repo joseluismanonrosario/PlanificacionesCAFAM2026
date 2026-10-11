@@ -1,0 +1,4334 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planificación Modular - MF_468_3 (MINERD / CAFAM)</title>
+    <style>
+      :root {
+        --color-verde-ra: #a9d18e;
+        --color-verde-header: #c5e0b4;
+        --color-azul-info: #bdd7ee;
+        --color-salmon-ec: #fce4d6;
+        --color-amarillo-nota: #ffff00;
+        --border-color: #000000;
+      }
+      * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #525659;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 8.5pt;
+        line-height: 1.2;
+        color: #000;
+      }
+      .top-toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background-color: #1f2937;
+        color: #fff;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 24px;
+        gap: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      }
+      .toolbar-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .toolbar-title {
+        font-size: 13px;
+        font-weight: bold;
+      }
+      .nav-ra-buttons {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .btn-ra {
+        background-color: #374151;
+        color: #e5e7eb;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-size: 11px;
+        font-weight: bold;
+        border-radius: 4px;
+        border: 1px solid #4b5563;
+      }
+      .btn-ra:hover {
+        background-color: #2563eb;
+        color: #fff;
+      }
+      .btn-print {
+        background-color: #16a34a;
+        color: #fff;
+        border: none;
+        padding: 7px 15px;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .btn-print:hover {
+        background-color: #15803d;
+      }
+      .document-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 15px 60px 15px;
+        gap: 35px;
+      }
+      .ra-container {
+        background-color: #ffffff;
+        width: 100%;
+        max-width: 216mm;
+        padding: 12mm 14mm 14mm 14mm;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        box-sizing: border-box;
+        scroll-margin-top: 60px;
+      }
+      .header-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 4px;
+      }
+      .header-table td {
+        border: none !important;
+        padding: 0;
+        vertical-align: middle;
+      }
+      .logo-cafam-img {
+        max-width: 65px;
+        height: auto;
+        display: block;
+      }
+      .logo-detp-img {
+        max-width: 140px;
+        height: auto;
+        display: block;
+        margin-left: auto;
+      }
+      .header-text {
+        text-align: center;
+        font-size: 9pt;
+        line-height: 1.25;
+        padding: 0 8px;
+      }
+      .header-text .t1 {
+        font-weight: bold;
+        font-size: 9.5pt;
+      }
+      .header-text .t2 {
+        font-weight: bold;
+        font-size: 9pt;
+      }
+      .header-text .t3 {
+        font-size: 8.5pt;
+      }
+      .header-text .t4 {
+        font-weight: bold;
+        font-size: 9pt;
+        margin-top: 1px;
+      }
+      .docente-update-bar {
+        text-align: center;
+        font-size: 7.2pt;
+        font-style: italic;
+        color: #333;
+        margin-bottom: 5px;
+      }
+      .docente-update-bar span {
+        margin: 0 10px;
+      }
+      .section-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 8.5pt;
+        margin-top: 4px;
+        margin-bottom: 3px;
+      }
+      table.minerd-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 5px;
+        font-size: 7.8pt;
+        table-layout: fixed;
+      }
+      table.minerd-table td,
+      table.minerd-table th {
+        border: 1px solid var(--border-color);
+        padding: 2.2px 3.5px;
+        vertical-align: middle;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      .bg-green-ra {
+        background-color: var(--color-verde-ra) !important;
+        font-weight: bold;
+      }
+      .bg-green-header {
+        background-color: var(--color-verde-header) !important;
+        font-weight: bold;
+        text-align: center;
+      }
+      .bg-blue-info {
+        background-color: var(--color-azul-info) !important;
+        font-weight: bold;
+      }
+      .bg-salmon-header {
+        background-color: var(--color-salmon-ec) !important;
+        font-weight: bold;
+        text-align: center;
+      }
+      .bg-yellow-note {
+        background-color: var(--color-amarillo-nota) !important;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .text-bold {
+        font-weight: bold;
+      }
+      .valign-top {
+        vertical-align: top !important;
+      }
+      .footer-bar {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #000;
+        padding-top: 4px;
+        margin-top: 12px;
+        font-size: 7.5pt;
+        font-weight: bold;
+      }
+      @page {
+        size: letter portrait;
+        margin: 8mm 8mm 8mm 8mm;
+      }
+      @media print {
+        html,
+        body {
+          background-color: #fff !important;
+          width: 100%;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        .top-toolbar {
+          display: none !important;
+        }
+        .document-wrapper {
+          padding: 0 !important;
+          margin: 0 !important;
+          gap: 0 !important;
+          display: block !important;
+        }
+        .ra-container {
+          box-shadow: none !important;
+          padding: 0 !important;
+          margin: 0 auto !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          page-break-before: always;
+        }
+        .ra-container:first-child {
+          page-break-before: avoid;
+        }
+        table.minerd-table {
+          page-break-inside: auto;
+        }
+        tr {
+          page-break-inside: avoid;
+          page-break-after: auto;
+        }
+        thead {
+          display: table-header-group;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Barra superior fija con los enlaces a cada RA del documento -->
+    <div class="top-toolbar">
+      <div class="toolbar-left">
+        <span class="toolbar-title"
+          >MF_468_3: Montaje de sistemas de automatización industrial y
+          robótica</span
+        >
+        <div class="nav-ra-buttons">
+          <a href="#ra7-1" class="btn-ra">RA 7.1</a>
+          <a href="#ra7-2" class="btn-ra">RA 7.2</a>
+          <a href="#ra7-3" class="btn-ra">RA 7.3</a>
+          <a href="#ra7-4" class="btn-ra">RA 7.4</a>
+          <a href="#ra7-5" class="btn-ra">RA 7.5</a>
+          <a href="#ra7-6" class="btn-ra">RA 7.6</a>
+          <a href="#ra7-7" class="btn-ra">RA 7.7</a>
+          <a href="#ra7-8" class="btn-ra">RA 7.8</a>
+          <a href="#ra7-9" class="btn-ra">RA 7.9</a>
+          <a href="#ra7-10" class="btn-ra">RA 7.10</a>
+          <a href="#ra7-11" class="btn-ra">RA 7.11</a>
+        </div>
+      </div>
+      <button class="btn-print" onclick="window.print()">
+        Descargar / Guardar como PDF
+      </button>
+    </div>
+
+    <div class="document-wrapper">
+      <!-- ========================================== -->
+      <!-- BLOQUE 1: RESULTADO DE APRENDIZAJE RA 7.1 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-1">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Regional/Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Politécnico:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Ordenanza:</td>
+            <td>07-2025</td>
+            <td class="bg-blue-info">Título / Bachillerato:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos (ELE050_3)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Montaje de sistemas de automatización industrial y robótica</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_468_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Anual:</td>
+            <td>225 Horas / Año (5 Horas / Semana)</td>
+            <td class="bg-blue-info">Duración Calendario / Año:</td>
+            <td>39 Semanas Relativas | 2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC_468_3:</strong> Montar sistemas de automatización
+              industrial y robótica.
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <thead>
+            <tr>
+              <th class="bg-green-header" style="width: 14%">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">RA 7.7</th>
+              <th class="bg-green-header">RA 7.8</th>
+              <th class="bg-green-header">RA 7.9</th>
+              <th class="bg-green-header">RA 7.10</th>
+              <th class="bg-green-header">RA 7.11</th>
+              <th class="bg-green-header" style="width: 10%">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">10 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.1
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_468_3</td>
+              <td>
+                <strong>UC_468_3:</strong> Montar sistemas de automatización
+                industrial y robótica.
+              </td>
+              <td class="text-center">15 Horas (5 h/sem)</td>
+              <td class="text-center">Sem. 1 a Sem. 3 (3 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 7.1: Mostrar,
+                en experimentos del laboratorio, el estado lógico y el
+                funcionamiento de los circuitos electrónicos digitales.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio (RA):</strong> Nivel 4: Análisis
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a trabajar:</strong> 9 Pts
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.1
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC VS CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Caracterizar la conmutación por transistores y las funciones
+                lógicas fundamentales en sistemas digitales.
+              </td>
+              <td class="text-center valign-top">CE7.1.1, CE7.1.2</td>
+              <td class="valign-top">
+                <strong>CE7.1.1:</strong> Demostrar las características
+                funcionales de un circuito conmutador con transistores, mediante
+                prácticas de laboratorio.<br />
+                <strong>CE7.1.2:</strong> Describir las funciones lógicas
+                fundamentales utilizadas en los circuitos electrónicos
+                digitales.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Implementar operaciones aritméticas lógicas del álgebra de Boole
+                y montaje de flip-flops/registros.
+              </td>
+              <td class="text-center valign-top">CE7.1.3, CE7.1.4</td>
+              <td class="valign-top">
+                <strong>CE7.1.3:</strong> Realizar operaciones aritméticas
+                lógicas aplicando los teoremas y leyes fundamentales del Álgebra
+                de Boole.<br />
+                <strong>CE7.1.4:</strong> Montar circuitos de flip-flops y
+                registros.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Demostrar rigurosidad técnica, orden y compromiso con la
+                seguridad en el montaje de circuitos digitales.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizaje (RA 7.1) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades de Enseñanza y Aprendizaje
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.7.1.1.</strong> Analizar el comportamiento del
+                transistor como conmutador y verificar experimentalmente la
+                tabla de verdad de las compuertas lógicas fundamentales (AND,
+                OR, NOT, NAND, NOR) en protoboard, midiendo niveles lógicos de
+                tensión con sonda digital y osciloscopio.<br />
+                <em
+                  >(Evidencia: Reporte técnico de análisis de circuitos lógicos
+                  con tablas de verdad y oscilogramas).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 1 - Sem. 2</td>
+              <td class="valign-top">Lista de cotejo / Rúbrica analítica</td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Circuitos electrónicos digitales.
+                Transistor como conmutador. Álgebra de Boole y funciones
+                lógicas.<br />
+                <strong>Procedimentales:</strong> Montaje de circuitos
+                combinacionales en protoboard. Medición de niveles lógicos con
+                osciloscopio.<br />
+                <strong>Actitudinales:</strong> Orden, método de trabajo y rigor
+                en la verificación de niveles lógicos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top text-center">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.7.1.2.</strong> Diseñar e implementar en laboratorio
+                un circuito secuencial con flip-flops R-S, J-K y D para la
+                construcción de un registro de desplazamiento de 4 bits,
+                comprobando su secuencia mediante reloj digital.<br />
+                <em
+                  >(Evidencia: Módulo secuencial funcional en protoboard y
+                  diagrama de estados verificado).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 3</td>
+              <td class="valign-top">
+                Rúbrica analítica de proyectos digitales
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Circuitos secuenciales.
+                Flip-flops R-S, J-K, D. Registros de desplazamiento.<br />
+                <strong>Procedimentales:</strong> Diseño y simplificación de
+                circuitos secuenciales. Montaje y prueba de contadores y
+                registros.<br />
+                <strong>Actitudinales:</strong> Trabajo en equipo, compromiso
+                con las normas de seguridad y prevención de riesgos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Se manifiesta en la atención
+                a las normas de seguridad, el uso correcto del equipo de
+                protección personal, el trabajo limpio y colaborativo en el
+                taller de automatización industrial y robótica.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Escala de actitudes / Registro de observación
+              </td>
+              <td class="valign-top">
+                Integrados en los saberes actitudinales transversales:
+                rigurosidad, orden, seguridad y apego a normas.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 2: RESULTADO DE APRENDIZAJE RA 7.2 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-2">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Regional/Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Politécnico:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Ordenanza:</td>
+            <td>07-2025</td>
+            <td class="bg-blue-info">Título / Bachillerato:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos (ELE050_3)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Montaje de sistemas de automatización industrial y robótica</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_468_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Anual:</td>
+            <td>225 Horas / Año (5 Horas / Semana)</td>
+            <td class="bg-blue-info">Duración Calendario / Año:</td>
+            <td>39 Semanas Relativas | 2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC_468_3:</strong> Montar sistemas de automatización
+              industrial y robótica.
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <thead>
+            <tr>
+              <th class="bg-green-header" style="width: 14%">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">RA 7.7</th>
+              <th class="bg-green-header">RA 7.8</th>
+              <th class="bg-green-header">RA 7.9</th>
+              <th class="bg-green-header">RA 7.10</th>
+              <th class="bg-green-header">RA 7.11</th>
+              <th class="bg-green-header" style="width: 10%">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">10 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.2
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_468_3</td>
+              <td>
+                <strong>UC_468_3:</strong> Montar sistemas de automatización
+                industrial y robótica.
+              </td>
+              <td class="text-center">15 Horas (5 h/sem)</td>
+              <td class="text-center">Sem. 4 a Sem. 6 (3 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 7.2:
+                Describir dispositivos programables, identificando su
+                funcionalidad y determinando sus características técnicas.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio (RA):</strong> Nivel 3: Aplicación
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a trabajar:</strong> 9 Pts
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.2
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC VS CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Interpretar esquemas eléctricos de sistemas secuenciales e
+                identificar dispositivos programables en automatismos reales.
+              </td>
+              <td class="text-center valign-top">CE7.2.1, CE7.2.2</td>
+              <td class="valign-top">
+                <strong>CE7.2.1:</strong> Interpretar esquemas eléctricos de
+                sistemas secuenciales reales, identificando los dispositivos
+                programables del sistema y determinando las acciones generales
+                de control.<br />
+                <strong>CE7.2.2:</strong> Identificar dispositivos programables
+                en automatismos reales (máquina herramienta, robots, etc.).
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Seleccionar y comparar características técnicas de autómatas
+                programables (PLC compactos, modulares, relés inteligentes)
+                mediante catálogos técnicos.
+              </td>
+              <td class="text-center valign-top">CE7.2.3</td>
+              <td class="valign-top">
+                <strong>CE7.2.3:</strong> Determinar las características
+                técnicas de los dispositivos programables en catálogos de
+                fabricantes.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Valorar la precisión en la lectura de manuales técnicos y el
+                respeto por las especificaciones de fabricantes.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizaje (RA 7.2) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades de Enseñanza y Aprendizaje
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.7.2.1.</strong> Identificar y clasificar relés
+                programables y PLCs (compactos y modulares) en armarios de
+                automatización industrial, analizando sus entradas/salidas
+                digitales, fuente de alimentación y puertos de comunicación
+                según esquemas eléctricos.<br />
+                <em
+                  >(Evidencia: Ficha técnica comparativa de arquitectura de PLCs
+                  e informe de levantamiento de automatismos).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 4 - Sem. 5</td>
+              <td class="valign-top">Lista de cotejo / Escala estimativa</td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Relés programables y PLCs.
+                Arquitectura interna, CPU, fuentes, entradas/salidas digitales y
+                analógicas.<br />
+                <strong>Procedimentales:</strong> Identificación física de
+                componentes en cuadros de automatismos. Lectura de catálogos
+                industriales.<br />
+                <strong>Actitudinales:</strong> Responsabilidad y rigor en la
+                interpretación de especificaciones técnicas.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.7.2.2.</strong> Determinar la configuración de
+                hardware e interconexión de un autómata programable para una
+                celda de manufactura flexible a partir del manual técnico del
+                fabricante.<br />
+                <em
+                  >(Evidencia: Diagrama de arquitectura de hardware y
+                  especificación de módulos de E/S).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 6</td>
+              <td class="valign-top">Lista de cotejo de arquitectura de PLC</td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Módulos de expansión, buses de
+                campo, tiempos de ejecución y capacidad de memoria.<br />
+                <strong>Procedimentales:</strong> Selección de PLCs comerciales
+                según requerimientos de carga y comunicaciones.<br />
+                <strong>Actitudinales:</strong> Cuidado y respeto en el manejo
+                de documentación técnica comercial.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Se manifiesta en la atención
+                a las normas de seguridad, el uso correcto del equipo de
+                protección personal, el trabajo limpio y colaborativo en el
+                taller de automatización industrial y robótica.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Escala de actitudes / Registro de observación
+              </td>
+              <td class="valign-top">
+                Integrados en los saberes actitudinales transversales:
+                rigurosidad, orden, seguridad y apego a normas.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 3: RESULTADO DE APRENDIZAJE RA 7.3 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-3">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Regional/Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Politécnico:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Ordenanza:</td>
+            <td>07-2025</td>
+            <td class="bg-blue-info">Título / Bachillerato:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos (ELE050_3)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Montaje de sistemas de automatización industrial y robótica</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_468_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Anual:</td>
+            <td>225 Horas / Año (5 Horas / Semana)</td>
+            <td class="bg-blue-info">Duración Calendario / Año:</td>
+            <td>39 Semanas Relativas | 2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC_468_3:</strong> Montar sistemas de automatización
+              industrial y robótica.
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <thead>
+            <tr>
+              <th class="bg-green-header" style="width: 14%">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">RA 7.7</th>
+              <th class="bg-green-header">RA 7.8</th>
+              <th class="bg-green-header">RA 7.9</th>
+              <th class="bg-green-header">RA 7.10</th>
+              <th class="bg-green-header">RA 7.11</th>
+              <th class="bg-green-header" style="width: 10%">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">10 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.3
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_468_3</td>
+              <td>
+                <strong>UC_468_3:</strong> Montar sistemas de automatización
+                industrial y robótica.
+              </td>
+              <td class="text-center">15 Horas (5 h/sem)</td>
+              <td class="text-center">Sem. 7 a Sem. 9 (3 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 7.3:
+                Establecer las secuencias de control de los sistemas
+                secuenciales programados, interpretando los requerimientos y
+                estableciendo los procedimientos de programación necesarios.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio (RA):</strong> Nivel 4: Análisis
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a trabajar:</strong> 9 Pts
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.3
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC VS CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Analizar requerimientos funcionales y estructurar diagramas de
+                flujo/GRAFCET para la secuencia de control de automatismos.
+              </td>
+              <td class="text-center valign-top">CE7.3.1, CE7.3.2</td>
+              <td class="valign-top">
+                <strong>CE7.3.1:</strong> Determinar los requerimientos técnicos
+                y funcionales.<br />
+                <strong>CE7.3.2:</strong> Establecer la secuencia de control.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Planificar las fases de programación y entornos de desarrollo,
+                identificando puntos críticos y condiciones de emergencia.
+              </td>
+              <td class="text-center valign-top">
+                CE7.3.3, CE7.3.4, CE7.3.5, CE7.3.6
+              </td>
+              <td class="valign-top">
+                <strong>CE7.3.3:</strong> Identificar las fases de
+                programación.<br />
+                <strong>CE7.3.4:</strong> Reconocer los distintos entornos de
+                programación.<br />
+                <strong>CE7.3.5:</strong> Evaluar los puntos críticos de la
+                programación.<br />
+                <strong>CE7.3.6:</strong> Elaborar un plan detallado para la
+                programación.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Mostrar estructuración sistemática y enfoque riguroso en el
+                diseño de algoritmos de control industrial.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizaje (RA 7.3) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades de Enseñanza y Aprendizaje
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.7.3.1.</strong> Analizar las especificaciones
+                operativas de un proceso industrial de empaque y diseñar la
+                secuencia de control en diagrama GRAFCET (Niveles 1 y 2),
+                detallando las transiciones, etapas y acciones asociadas.<br />
+                <em
+                  >(Evidencia: Documento de especificación GRAFCET y diagrama de
+                  flujo estructurado).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 7 - Sem. 8</td>
+              <td class="valign-top">Rúbrica analítica de diseño GRAFCET</td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Secuencia de control, diagramas
+                de flujo y GRAFCET. Etapas, transiciones y
+                divergencias/convergencias.<br />
+                <strong>Procedimentales:</strong> Modelado algorítmico de
+                procesos secuenciales. Análisis de condiciones de inicio y
+                paro.<br />
+                <strong>Actitudinales:</strong> Enfoque lógico, sistemático y
+                metódico en la estructuración de secuencias.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.7.3.2.</strong> Evaluar las fases de programación y
+                determinar los puntos críticos de seguridad, paradas de
+                emergencia y modos de operación (Manual/Automático) para el plan
+                de programación del autómata.<br />
+                <em
+                  >(Evidencia: Plan de programación detallado con matriz de
+                  contingencias operativas).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 9</td>
+              <td class="valign-top">
+                Lista de cotejo de planificación algorítmica
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Fases de desarrollo de software
+                para PLCs. Entornos de programación. Tratamiento de
+                emergencias.<br />
+                <strong>Procedimentales:</strong> Identificación de fallas
+                potenciales en la secuencia y desarrollo de rutinas de
+                seguridad.<br />
+                <strong>Actitudinales:</strong> Responsabilidad y prioridad
+                absoluta por la seguridad operativa.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Se manifiesta en la atención
+                a las normas de seguridad, el uso correcto del equipo de
+                protección personal, el trabajo limpio y colaborativo en el
+                taller de automatización industrial y robótica.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Escala de actitudes / Registro de observación
+              </td>
+              <td class="valign-top">
+                Integrados en los saberes actitudinales transversales:
+                rigurosidad, orden, seguridad y apego a normas.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 4: RESULTADO DE APRENDIZAJE RA 7.4 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-4">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Regional/Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Politécnico:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Ordenanza:</td>
+            <td>07-2025</td>
+            <td class="bg-blue-info">Título / Bachillerato:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos (ELE050_3)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Montaje de sistemas de automatización industrial y robótica</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_468_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Anual:</td>
+            <td>225 Horas / Año (5 Horas / Semana)</td>
+            <td class="bg-blue-info">Duración Calendario / Año:</td>
+            <td>39 Semanas Relativas | 2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC_468_3:</strong> Montar sistemas de automatización
+              industrial y robótica.
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <thead>
+            <tr>
+              <th class="bg-green-header" style="width: 14%">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">RA 7.7</th>
+              <th class="bg-green-header">RA 7.8</th>
+              <th class="bg-green-header">RA 7.9</th>
+              <th class="bg-green-header">RA 7.10</th>
+              <th class="bg-green-header">RA 7.11</th>
+              <th class="bg-green-header" style="width: 10%">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">10 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.4
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_468_3</td>
+              <td>
+                <strong>UC_468_3:</strong> Montar sistemas de automatización
+                industrial y robótica.
+              </td>
+              <td class="text-center">20 Horas (5 h/sem)</td>
+              <td class="text-center">Sem. 10 a Sem. 13 (4 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 7.4:
+                Programar autómatas programables, partiendo de la secuencia de
+                control, utilizando técnicas estructuradas y documentación
+                técnica de los fabricantes.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio (RA):</strong> Nivel 4: Análisis
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a trabajar:</strong> 10 Pts
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.4
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC VS CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Aplicar funciones lógicas, direccionamiento de memoria y
+                lenguajes de programación (LD, FBD, ST, SFC/GRAFCET) en software
+                de automatización.
+              </td>
+              <td class="text-center valign-top">
+                CE7.4.1, CE7.4.2, CE7.4.3, CE7.4.4
+              </td>
+              <td class="valign-top">
+                <strong>CE7.4.1:</strong> Asociar sistemas de numeración y
+                sistemas de codificación de la información.<br />
+                <strong>CE7.4.2:</strong> Identificar funciones lógicas.<br />
+                <strong>CE7.4.3:</strong> Analizar estructura y características
+                de los autómatas programables.<br />
+                <strong>CE7.4.4:</strong> Emplear diferentes métodos de
+                programación básica de autómatas: lenguajes y procedimientos de
+                programación.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Desarrollar, simular y depurar programas estructurados en
+                autómatas de diferentes marcas comerciales, garantizando
+                escalabilidad y legibilidad.
+              </td>
+              <td class="text-center valign-top">
+                CE7.4.5, CE7.4.6, CE7.4.7, CE7.4.8, CE7.4.9
+              </td>
+              <td class="valign-top">
+                <strong>CE7.4.5:</strong> Asociar los diferentes bloques o
+                unidades de organización de programa.<br />
+                <strong>CE7.4.6:</strong> Editar programas para PLC, partiendo
+                de lenguajes de programación y documentación del fabricante.<br />
+                <strong>CE7.4.7:</strong> Realizar los programas, facilitando
+                futuras modificaciones.<br />
+                <strong>CE7.4.8:</strong> Programar PLC de distintos
+                fabricantes.<br />
+                <strong>CE7.4.9:</strong> Comprobar que el funcionamiento del
+                programa coincide con la secuencia de control establecida.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Demostrar orden, cumplimiento de estándares de programación y
+                buenas prácticas de documentación de código.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizaje (RA 7.4) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades de Enseñanza y Aprendizaje
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.7.4.1.</strong> Desarrollar en Lenguaje Ladder (LD) y
+                Bloques de Funciones (FBD) el programa de control para una
+                estación de mezcla de líquidos, integrando marcas internas,
+                temporizadores (TON/TOF) y contadores (CTU).<br />
+                <em
+                  >(Evidencia: Código fuente estructurado en software de
+                  simulación con tabla de variables).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 10 - Sem. 11</td>
+              <td class="valign-top">
+                Rúbrica analítica de programación de PLC
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Lenguajes IEC 61131-3 (LD, FBD,
+                ST, SFC). Direccionamiento de memoria, temporizadores y
+                contadores.<br />
+                <strong>Procedimentales:</strong> Programación estructurada de
+                PLC. Parametrización de bloques de función.<br />
+                <strong>Actitudinales:</strong> Rigor en la denominación de
+                variables y claridad en los comentarios de código.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.7.4.2.</strong> Programar, cargar y depurar en
+                simulador el código para PLCs de distintas marcas (Siemens,
+                Allen Bradley, Omron), verificando la coincidencia exacta del
+                programa con la secuencia de control requerida.<br />
+                <em
+                  >(Evidencia: Informe de simulación y proyectos de software
+                  depurados en múltiples entornos).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 12 - Sem. 13</td>
+              <td class="valign-top">
+                Lista de cotejo de validación de software PLC
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Transferencia de programa,
+                monitoreo en tiempo real, tablas de forzado y depuración.<br />
+                <strong>Procedimentales:</strong> Prueba funcional de rutinas de
+                control en entornos multimarca.<br />
+                <strong>Actitudinales:</strong> Autonomía, perseverancia y
+                sistematicidad en la detección de errores de software.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Se manifiesta en la atención
+                a las normas de seguridad, el uso correcto del equipo de
+                protección personal, el trabajo limpio y colaborativo en el
+                taller de automatización industrial y robótica.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Escala de actitudes / Registro de observación
+              </td>
+              <td class="valign-top">
+                Integrados en los saberes actitudinales transversales:
+                rigurosidad, orden, seguridad y apego a normas.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 5: RESULTADO DE APRENDIZAJE RA 7.5 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-5">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Regional/Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Politécnico:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Ordenanza:</td>
+            <td>07-2025</td>
+            <td class="bg-blue-info">Título / Bachillerato:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos (ELE050_3)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Montaje de sistemas de automatización industrial y robótica</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_468_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Anual:</td>
+            <td>225 Horas / Año (5 Horas / Semana)</td>
+            <td class="bg-blue-info">Duración Calendario / Año:</td>
+            <td>39 Semanas Relativas | 2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC_468_3:</strong> Montar sistemas de automatización
+              industrial y robótica.
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <thead>
+            <tr>
+              <th class="bg-green-header" style="width: 14%">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">RA 7.7</th>
+              <th class="bg-green-header">RA 7.8</th>
+              <th class="bg-green-header">RA 7.9</th>
+              <th class="bg-green-header">RA 7.10</th>
+              <th class="bg-green-header">RA 7.11</th>
+              <th class="bg-green-header" style="width: 10%">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">10 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.5
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_468_3</td>
+              <td>
+                <strong>UC_468_3:</strong> Montar sistemas de automatización
+                industrial y robótica.
+              </td>
+              <td class="text-center">20 Horas (5 h/sem)</td>
+              <td class="text-center">Sem. 14 a Sem. 17 (4 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 7.5: Montar y
+                mantener sistemas automáticos con control programable,
+                interpretando documentación técnica y verificando su
+                funcionamiento.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio (RA):</strong> Nivel 3: Aplicación
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a trabajar:</strong> 9 Pts
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.5
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC VS CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Mappear entradas/salidas (digitales/analógicas) y cablear
+                periféricos del PLC al entorno industrial asegurando la
+                comunicación software-dispositivo.
+              </td>
+              <td class="text-center valign-top">CE7.5.1, CE7.5.2, CE7.5.3</td>
+              <td class="valign-top">
+                <strong>CE7.5.1:</strong> Establecer en el PLC las entradas,
+                salidas (analógicas y digitales) y el referenciado de las
+                mismas.<br />
+                <strong>CE7.5.2:</strong> Conectar los equipos y elementos
+                periféricos del sistema.<br />
+                <strong>CE7.5.3:</strong> Establecer la comunicación del
+                software con el dispositivo programable.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Implementar programas secuenciales, probar el funcionamiento y
+                ejecutar el diagnóstico y solución de fallas en autómatas.
+              </td>
+              <td class="text-center valign-top">
+                CE7.5.4, CE7.5.5, CE7.5.6, CE7.5.7
+              </td>
+              <td class="valign-top">
+                <strong>CE7.5.4:</strong> Realizar circuitos básicos de control
+                con autómatas programables.<br />
+                <strong>CE7.5.5:</strong> Elaborar pequeños programas
+                secuenciales de control, y verificar su funcionamiento.<br />
+                <strong>CE7.5.6:</strong> Localizar y solucionar disfunciones en
+                circuitos automáticos básicos con autómatas.<br />
+                <strong>CE7.5.7:</strong> Aplicar las normas de calidad en las
+                intervenciones.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Cumplir con las normas de calidad, seguridad eléctrica e higiene
+                en la interconexión de PLCs.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizaje (RA 7.5) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades de Enseñanza y Aprendizaje
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.7.5.1.</strong> Realizar el montaje físico y
+                conexionado del módulo PLC en cuadro de control, cableando
+                botonera de mando, sensores inductivos/ópticos y actuadores
+                electromecánicos, y estableciendo enlace de comunicación
+                Ethernet/MPI.<br />
+                <em
+                  >(Evidencia: Cuadro automatizado con PLC cableado y
+                  comunicación verificada).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 14 - Sem. 15</td>
+              <td class="valign-top">
+                Guía de observación / Lista de cotejo de montaje
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Referenciado de E/S. Cableado de
+                periferia distribuida. Buses de comunicación industrial.<br />
+                <strong>Procedimentales:</strong> Ponchado, etiquetado y
+                conexionado físico de E/S a regletas. Configuración IP y
+                descarga.<br />
+                <strong>Actitudinales:</strong> Cumplimiento de normas de
+                seguridad eléctrica (REBT) y orden en el cableado.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.7.5.2.</strong> Diagnosticar y corregir disfunciones
+                simuladas en el cableado de entradas/salidas y en la lógica del
+                autómata, utilizando herramientas de monitoreo en línea y
+                multímetro.<br />
+                <em
+                  >(Evidencia: Ficha técnica de mantenimiento con diagnóstico y
+                  corrección de averías).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 16 - Sem. 17</td>
+              <td class="valign-top">
+                Rúbrica de mantenimiento de automatismos
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Técnicas de localización de
+                averías en PLCs. Diagnóstico remoto y local. Indicadores LED de
+                estado.<br />
+                <strong>Procedimentales:</strong> Rastreos de señal con tabla de
+                observación, aislamiento de fallas y sustitución de módulos.<br />
+                <strong>Actitudinales:</strong> Responsabilidad y
+                profesionalismo en intervenciones de mantenimiento.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Se manifiesta en la atención
+                a las normas de seguridad, el uso correcto del equipo de
+                protección personal, el trabajo limpio y colaborativo en el
+                taller de automatización industrial y robótica.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Escala de actitudes / Registro de observación
+              </td>
+              <td class="valign-top">
+                Integrados en los saberes actitudinales transversales:
+                rigurosidad, orden, seguridad y apego a normas.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 6: RESULTADO DE APRENDIZAJE RA 7.6 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-6">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Regional/Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Politécnico:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Ordenanza:</td>
+            <td>07-2025</td>
+            <td class="bg-blue-info">Título / Bachillerato:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos (ELE050_3)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Montaje de sistemas de automatización industrial y robótica</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_468_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Anual:</td>
+            <td>225 Horas / Año (5 Horas / Semana)</td>
+            <td class="bg-blue-info">Duración Calendario / Año:</td>
+            <td>39 Semanas Relativas | 2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC_468_3:</strong> Montar sistemas de automatización
+              industrial y robótica.
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <thead>
+            <tr>
+              <th class="bg-green-header" style="width: 14%">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">RA 7.7</th>
+              <th class="bg-green-header">RA 7.8</th>
+              <th class="bg-green-header">RA 7.9</th>
+              <th class="bg-green-header">RA 7.10</th>
+              <th class="bg-green-header">RA 7.11</th>
+              <th class="bg-green-header" style="width: 10%">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">10 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.6
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_468_3</td>
+              <td>
+                <strong>UC_468_3:</strong> Montar sistemas de automatización
+                industrial y robótica.
+              </td>
+              <td class="text-center">20 Horas (5 h/sem)</td>
+              <td class="text-center">Sem. 18 a Sem. 21 (4 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 7.6: Integrar
+                PLC en el montaje de una máquina, equipo o línea de producción
+                automatizada para el control de la misma, conexionándolo,
+                adaptando y/o elaborando sencillos programas, y comprobando y
+                manteniendo su funcionamiento.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio (RA):</strong> Nivel 4: Análisis
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a trabajar:</strong> 9 Pts
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.6
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC VS CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Interpretar esquemas multifilares, diagramas de tiempo y GRAFCET
+                para la integración de PLCs en líneas de producción.
+              </td>
+              <td class="text-center valign-top">CE7.6.1, CE7.6.2, CE7.6.3</td>
+              <td class="valign-top">
+                <strong>CE7.6.1:</strong> Obtener información de diagramas
+                funcionales, de secuencia y de tiempo.<br />
+                <strong>CE7.6.2:</strong> Obtener información de los esquemas de
+                sistemas automáticos.<br />
+                <strong>CE7.6.3:</strong> Recoger la secuencia de movimientos de
+                sistemas automáticos de manipulación.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Montar, conexionar y ajustar periféricos en red, verificar la
+                puesta en marcha y solucionar averías
+                mecánicas/eléctricas/software en celdas de producción.
+              </td>
+              <td class="text-center valign-top">CE7.6.4 a CE7.6.11</td>
+              <td class="valign-top">
+                <strong>CE7.6.4:</strong> Elaborar sencillos programas de
+                control.<br />
+                <strong>CE7.6.5:</strong> Verificar el funcionamiento de un
+                sistema automático controlado por PLC.<br />
+                <strong>CE7.6.6:</strong> Regular y verificar magnitudes del
+                sistema.<br />
+                <strong>CE7.6.7:</strong> Montar y conexionar elementos de
+                sistemas mecánicos, eléctricos, neumáticos/hidráulicos.<br />
+                <strong>CE7.6.8:</strong> Verificar funcionamiento correcto en
+                puesta en marcha.<br />
+                <strong>CE7.6.9:</strong> Identificar síntomas de averías.<br />
+                <strong>CE7.6.10:</strong> Localizar elemento responsable de
+                avería.<br />
+                <strong>CE7.6.11:</strong> Restablecer el funcionamiento del
+                sistema.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Trabajar colaborativamente con proactividad, responsabilidad y
+                apego estricto a las normas de seguridad industrial.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizaje (RA 7.6) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades de Enseñanza y Aprendizaje
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.7.6.1.</strong> Integrar un autómata programable en
+                una estación de manipulación y clasificación de piezas,
+                conexionando sensores de presencia, actuadores neumáticos y
+                reguladores de velocidad según planos multifilares.<br />
+                <em
+                  >(Evidencia: Estación automatizada integrada en funcionamiento
+                  continuo).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 18 - Sem. 19</td>
+              <td class="valign-top">
+                Rúbrica analítica de integración industrial
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Integración de sistemas
+                mecánicos, neumáticos y de control. Grafcet de manipulación.<br />
+                <strong>Procedimentales:</strong> Interconexión de válvulas,
+                cilindros y PLC. Sincronización de movimientos.<br />
+                <strong>Actitudinales:</strong> Trabajo en equipo, proactividad
+                y rigor técnico.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.7.6.2.</strong> Ejecutar la puesta en marcha de la
+                celda automatizada, ajustar variables físicas (presión,
+                velocidad) y solucionar averías complejas de hardware/software
+                restableciendo la producción.<br />
+                <em
+                  >(Evidencia: Protocolo de prueba de puesta en marcha e informe
+                  de resolución de fallas).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 20 - Sem. 21</td>
+              <td class="valign-top">Lista de cotejo de puesta en marcha</td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Puesta a punto de líneas
+                automatizadas. Síntomas de averías e interferencias
+                electromagnéticas.<br />
+                <strong>Procedimentales:</strong> Regulación de caudal/presión,
+                modificación de código en caliente y pruebas de carga.<br />
+                <strong>Actitudinales:</strong> Compromiso con los plazos y
+                seguridad operacional.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Se manifiesta en la atención
+                a las normas de seguridad, el uso correcto del equipo de
+                protección personal, el trabajo limpio y colaborativo en el
+                taller de automatización industrial y robótica.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Escala de actitudes / Registro de observación
+              </td>
+              <td class="valign-top">
+                Integrados en los saberes actitudinales transversales:
+                rigurosidad, orden, seguridad y apego a normas.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 7: RESULTADO DE APRENDIZAJE RA 7.7 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-7">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Regional/Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Politécnico:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Ordenanza:</td>
+            <td>07-2025</td>
+            <td class="bg-blue-info">Título / Bachillerato:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos (ELE050_3)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Montaje de sistemas de automatización industrial y robótica</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_468_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Anual:</td>
+            <td>225 Horas / Año (5 Horas / Semana)</td>
+            <td class="bg-blue-info">Duración Calendario / Año:</td>
+            <td>39 Semanas Relativas | 2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC_468_3:</strong> Montar sistemas de automatización
+              industrial y robótica.
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <thead>
+            <tr>
+              <th class="bg-green-header" style="width: 14%">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">RA 7.7</th>
+              <th class="bg-green-header">RA 7.8</th>
+              <th class="bg-green-header">RA 7.9</th>
+              <th class="bg-green-header">RA 7.10</th>
+              <th class="bg-green-header">RA 7.11</th>
+              <th class="bg-green-header" style="width: 10%">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">10 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.7
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_468_3</td>
+              <td>
+                <strong>UC_468_3:</strong> Montar sistemas de automatización
+                industrial y robótica.
+              </td>
+              <td class="text-center">15 Horas (5 h/sem)</td>
+              <td class="text-center">Sem. 22 a Sem. 24 (3 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 7.7: Diseñar
+                y ejecutar, en forma práctica, circuitos neumáticos básicos para
+                máquinas o sistemas.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio (RA):</strong> Nivel 3: Aplicación
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a trabajar:</strong> 9 Pts
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.7
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC VS CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Representar esquemas neumáticos bajo norma ISO 1219 y analizar
+                elementos de producción, tratamiento de aire comprimido y
+                actuadores/válvulas.
+              </td>
+              <td class="text-center valign-top">
+                CE7.7.1, CE7.7.2, CE7.7.3, CE7.7.4
+              </td>
+              <td class="valign-top">
+                <strong>CE7.7.1:</strong> Identificar la simbología
+                normalizada.<br />
+                <strong>CE7.7.2:</strong> Representar esquemas de sistemas
+                neumáticos e hidráulicos para automatización.<br />
+                <strong>CE7.7.3:</strong> Analizar componentes neumáticos de
+                acuerdo con especificaciones técnicas.<br />
+                <strong>CE7.7.4:</strong> Relacionar los dispositivos neumáticos
+                con su funcionalidad.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Montar, interconectar y ensayar circuitos neumáticos con
+                cilindros de simple/doble efecto, fitings, manómetros y
+                reguladores de caudal.
+              </td>
+              <td class="text-center valign-top">
+                CE7.7.5, CE7.7.6, CE7.7.7, CE7.7.8, CE7.7.9
+              </td>
+              <td class="valign-top">
+                <strong>CE7.7.5:</strong> Montar circuitos neumáticos con
+                dispositivos electromecánicos y neumáticos.<br />
+                <strong>CE7.7.6:</strong> Interconectar los circuitos de acuerdo
+                con los diseños.<br />
+                <strong>CE7.7.7:</strong> Operar fitings, manómetros reguladores
+                y elementos asociados.<br />
+                <strong>CE7.7.8:</strong> Efectuar pruebas de funcionamiento y
+                mediciones.<br />
+                <strong>CE7.7.9:</strong> Operar el circuito probando sus
+                características de funcionamiento.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Respetar las normas de seguridad en la manipulación de líneas
+                neumáticas bajo presión.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizaje (RA 7.7) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades de Enseñanza y Aprendizaje
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.7.7.1.</strong> Diseñar en software de simulación
+                neumática (FluidSIM) un circuito de mando directo e indirecto
+                para el avance y retroceso de un cilindro de doble efecto con
+                regulación de velocidad y accionamiento por rodillo.<br />
+                <em
+                  >(Evidencia: Esquema neumático simulado y parametrizado).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 22</td>
+              <td class="valign-top">
+                Lista de cotejo de simulación neumática
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Simbología neumática ISO 1219.
+                Válvulas distribuidoras (3/2, 5/2), cilindros, unidad FRL.<br />
+                <strong>Procedimentales:</strong> Diseño de planos neumáticos.
+                Cálculo de caudal y fuerza neumática.<br />
+                <strong>Actitudinales:</strong> Atención a la simbología
+                normalizada y precisión en el diseño.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.7.7.2.</strong> Montar en el panel del taller el
+                circuito de automatización neumática, conectando tubos de
+                poliamida, fitings de acople rápido, reguladores de presión y
+                realizar pruebas funcionales a 6 bar.<br />
+                <em
+                  >(Evidencia: Panel neumático montado y probado sin fugas de
+                  aire).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 23 - Sem. 24</td>
+              <td class="valign-top">Rúbrica de montaje neumático</td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Producción y distribución de aire
+                comprimido. Racoraje, manómetros y silenciadores.<br />
+                <strong>Procedimentales:</strong> Cortado y conexionado de
+                tubería flexible. Purga y regulación de presión operacional.<br />
+                <strong>Actitudinales:</strong> Apego estricto a las normas de
+                seguridad con aire a presión.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Se manifiesta en la atención
+                a las normas de seguridad, el uso correcto del equipo de
+                protección personal, el trabajo limpio y colaborativo en el
+                taller de automatización industrial y robótica.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Escala de actitudes / Registro de observación
+              </td>
+              <td class="valign-top">
+                Integrados en los saberes actitudinales transversales:
+                rigurosidad, orden, seguridad y apego a normas.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 8: RESULTADO DE APRENDIZAJE RA 7.8 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-8">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Regional/Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Politécnico:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Ordenanza:</td>
+            <td>07-2025</td>
+            <td class="bg-blue-info">Título / Bachillerato:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos (ELE050_3)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Montaje de sistemas de automatización industrial y robótica</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_468_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Anual:</td>
+            <td>225 Horas / Año (5 Horas / Semana)</td>
+            <td class="bg-blue-info">Duración Calendario / Año:</td>
+            <td>39 Semanas Relativas | 2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC_468_3:</strong> Montar sistemas de automatización
+              industrial y robótica.
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <thead>
+            <tr>
+              <th class="bg-green-header" style="width: 14%">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">RA 7.7</th>
+              <th class="bg-green-header">RA 7.8</th>
+              <th class="bg-green-header">RA 7.9</th>
+              <th class="bg-green-header">RA 7.10</th>
+              <th class="bg-green-header">RA 7.11</th>
+              <th class="bg-green-header" style="width: 10%">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">10 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.8
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_468_3</td>
+              <td>
+                <strong>UC_468_3:</strong> Montar sistemas de automatización
+                industrial y robótica.
+              </td>
+              <td class="text-center">15 Horas (5 h/sem)</td>
+              <td class="text-center">Sem. 25 a Sem. 27 (3 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 7.8: Diseñar
+                y ejecutar, en forma práctica, circuitos hidráulicos básicos
+                para máquinas o sistemas.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio (RA):</strong> Nivel 3: Aplicación
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a trabajar:</strong> 9 Pts
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.8
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC VS CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Interpretar simbología hidráulica normalizada y analizar el
+                funcionamiento de bombas, grupo oleohidráulico, válvulas
+                distribuidoras y cilindros/motores hidráulicos.
+              </td>
+              <td class="text-center valign-top">
+                CE7.8.1, CE7.8.2, CE7.8.3, CE7.8.4
+              </td>
+              <td class="valign-top">
+                <strong>CE7.8.1:</strong> Identificar simbología normalizada.<br />
+                <strong>CE7.8.2:</strong> Representar esquemas de sistemas de
+                control hidráulico de circuitos.<br />
+                <strong>CE7.8.3:</strong> Analizar dispositivos y componentes
+                hidráulicos según especificaciones técnicas.<br />
+                <strong>CE7.8.4:</strong> Relacionar los dispositivos
+                hidráulicos con su funcionalidad.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Montar, interconectar mangueras de alta presión, ajustar
+                válvulas de alivio y realizar mediciones operativas en bancos de
+                entrenamiento hidráulicos.
+              </td>
+              <td class="text-center valign-top">
+                CE7.8.5, CE7.8.6, CE7.8.7, CE7.8.8, CE7.8.9
+              </td>
+              <td class="valign-top">
+                <strong>CE7.8.5:</strong> Montar circuitos hidráulicos con
+                componentes electromecánicos e hidráulicos.<br />
+                <strong>CE7.8.6:</strong> Interconectar circuitos de acuerdo con
+                los diseños.<br />
+                <strong>CE7.8.7:</strong> Operar fitings, manómetros reguladores
+                y elementos asociados.<br />
+                <strong>CE7.8.8:</strong> Efectuar pruebas de funcionamiento y
+                mediciones.<br />
+                <strong>CE7.8.9:</strong> Operar el circuito probando sus
+                características de funcionamiento.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Adoptar medidas rigurosas de seguridad e higiene contra fugas de
+                aceite y sobrepresión oleohidráulica.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizaje (RA 7.8) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades de Enseñanza y Aprendizaje
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.7.8.1.</strong> Diseñar el plano oleohidráulico de una
+                prensa de estampado con avance rápido/lento mediante válvula de
+                secuencia y regulación de presión máxima de trabajo.<br />
+                <em
+                  >(Evidencia: Esquema hidráulico parametrizado y memoria de
+                  cálculo de fuerzas).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 25</td>
+              <td class="valign-top">Lista de cotejo de diseño hidráulico</td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Simbología oleohidráulica. Grupo
+                de accionamiento hidráulico, bombas de engranajes, aceite
+                hidráulico.<br />
+                <strong>Procedimentales:</strong> Selección de válvulas de
+                presión, caudal y bloqueo en catálogos técnicos.<br />
+                <strong>Actitudinales:</strong> Rigor en la aplicación de
+                normativas de representación gráfica.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.7.8.2.</strong> Montar en el banco de entrenamiento
+                oleohidráulico el circuito con válvula limitadora de presión,
+                distribuidora 4/3 accionada por palanca y mangueras de alta
+                presión, midiendo la presión con manómetro.<br />
+                <em
+                  >(Evidencia: Circuito hidráulico montado y verificado en
+                  funcionamiento seguro).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 26 - Sem. 27</td>
+              <td class="valign-top">Rúbrica de montaje hidráulico</td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Mangueras flexibles, acoples
+                rápidos, tanques, filtros y manómetros de glicerina.<br />
+                <strong>Procedimentales:</strong> Ensamblado de líneas de
+                presión y retorno. Ajuste de la válvula de alivio de
+                seguridad.<br />
+                <strong>Actitudinales:</strong> Limpieza personal, uso de EPP y
+                prevención de derrames de fluido hidráulico.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Se manifiesta en la atención
+                a las normas de seguridad, el uso correcto del equipo de
+                protección personal, el trabajo limpio y colaborativo en el
+                taller de automatización industrial y robótica.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Escala de actitudes / Registro de observación
+              </td>
+              <td class="valign-top">
+                Integrados en los saberes actitudinales transversales:
+                rigurosidad, orden, seguridad y apego a normas.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 9: RESULTADO DE APRENDIZAJE RA 7.9 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-9">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Regional/Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Politécnico:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Ordenanza:</td>
+            <td>07-2025</td>
+            <td class="bg-blue-info">Título / Bachillerato:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos (ELE050_3)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Montaje de sistemas de automatización industrial y robótica</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_468_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Anual:</td>
+            <td>225 Horas / Año (5 Horas / Semana)</td>
+            <td class="bg-blue-info">Duración Calendario / Año:</td>
+            <td>39 Semanas Relativas | 2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC_468_3:</strong> Montar sistemas de automatización
+              industrial y robótica.
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <thead>
+            <tr>
+              <th class="bg-green-header" style="width: 14%">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">RA 7.7</th>
+              <th class="bg-green-header">RA 7.8</th>
+              <th class="bg-green-header">RA 7.9</th>
+              <th class="bg-green-header">RA 7.10</th>
+              <th class="bg-green-header">RA 7.11</th>
+              <th class="bg-green-header" style="width: 10%">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">10 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.9
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_468_3</td>
+              <td>
+                <strong>UC_468_3:</strong> Montar sistemas de automatización
+                industrial y robótica.
+              </td>
+              <td class="text-center">20 Horas (5 h/sem)</td>
+              <td class="text-center">Sem. 28 a Sem. 31 (4 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 7.9: Montar
+                circuitos de automatismos eléctricos cableados, neumáticos e
+                hidráulicos, interpretando esquemas y facilitando el
+                mantenimiento.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio (RA):</strong> Nivel 4: Análisis
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a trabajar:</strong> 9 Pts
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.9
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC VS CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Dimensionar protecciones y seleccionar captadores (presostatos,
+                detectores inductivos/capacitivos/fotoeléctricos) para sistemas
+                híbridos.
+              </td>
+              <td class="text-center valign-top">CE7.9.1.a, CE7.9.1.b</td>
+              <td class="valign-top">
+                <strong>CE7.9.1.a:</strong> Seleccionar los dispositivos de
+                captación y actuación electromecánica, neumática o
+                hidráulica.<br />
+                <strong>CE7.9.1.b:</strong> Dimensionar los dispositivos de
+                protección eléctrica.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Montar y cablear circuitos electroneumáticos y
+                electrohidráulicos secuenciales con módulos de seguridad técnica
+                (paro de emergencia, relé de seguridad).
+              </td>
+              <td class="text-center valign-top">CE7.9.1.c a g</td>
+              <td class="valign-top">
+                <strong>CE7.9.1.c:</strong> Montar circuitos secuenciales
+                eléctricos cableados.<br />
+                <strong>CE7.9.1.d:</strong> Montar circuitos secuenciales
+                neumáticos y electroneumáticos.<br />
+                <strong>CE7.9.1.e:</strong> Montar circuitos hidráulicos de
+                control manual y electrohidráulicos de control secuencial.<br />
+                <strong>CE7.9.1.f:</strong> Desarrollar circuitos de seguridad
+                técnica.<br />
+                <strong>CE7.9.1.g:</strong> Respetar las normas de seguridad.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Demostrar disciplina, orden en el agrupamiento de
+                cables/mangueras y cumplimiento de la normativa
+                eléctrica/ambiental.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizaje (RA 7.9) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades de Enseñanza y Aprendizaje
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.7.9.1.</strong> Analizar y dimensionar los
+                dispositivos de captación (sensores inductivos, magnéticos) y
+                protección eléctrica (disyuntores, fusibles) para un sistema
+                electroneumático de empaquetado.<br />
+                <em
+                  >(Evidencia: Memoria de dimensionamiento eléctrico e informe
+                  de selección de captadores).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 28 - Sem. 29</td>
+              <td class="valign-top">Rúbrica de dimensionamiento técnico</td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Electroneumática y
+                electrohidráulica. Sensores de proximidad, presostatos,
+                electroválvulas.<br />
+                <strong>Procedimentales:</strong> Cálculo de protecciones contra
+                cortocircuito y sobrecarga. Mapeo de señales de mando.<br />
+                <strong>Actitudinales:</strong> Precisión matemática y rigor en
+                la selección de protecciones de seguridad.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.7.9.2.</strong> Montar en cuadro y panel el circuito
+                electroneumático secuencial A+ B+ A- B- con solenoides de 24VDC
+                e integrar la seta de emergencia con relé de seguridad de doble
+                canal.<br />
+                <em
+                  >(Evidencia: Sistema híbrido electroneumático cableado, tubado
+                  y verificado en ciclo continuo).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 30 - Sem. 31</td>
+              <td class="valign-top">
+                Rúbrica de montaje de automatismos híbridos
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Circuitos de mando a 24VDC, relés
+                auxiliares, electroválvulas monoestables/biestables. Categorías
+                de seguridad.<br />
+                <strong>Procedimentales:</strong> Cableado estructurado en
+                canaleta, marcado de mangueras y prueba de corte de
+                seguridad.<br />
+                <strong>Actitudinales:</strong> Pulcritud, orden en el peinado
+                de cables y apego a la norma de seguridad industrial.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Se manifiesta en la atención
+                a las normas de seguridad, el uso correcto del equipo de
+                protección personal, el trabajo limpio y colaborativo en el
+                taller de automatización industrial y robótica.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Escala de actitudes / Registro de observación
+              </td>
+              <td class="valign-top">
+                Integrados en los saberes actitudinales transversales:
+                rigurosidad, orden, seguridad y apego a normas.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 10: RESULTADO DE APRENDIZAJE RA 7.10 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-10">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Regional/Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Politécnico:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Ordenanza:</td>
+            <td>07-2025</td>
+            <td class="bg-blue-info">Título / Bachillerato:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos (ELE050_3)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Montaje de sistemas de automatización industrial y robótica</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_468_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Anual:</td>
+            <td>225 Horas / Año (5 Horas / Semana)</td>
+            <td class="bg-blue-info">Duración Calendario / Año:</td>
+            <td>39 Semanas Relativas | 2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC_468_3:</strong> Montar sistemas de automatización
+              industrial y robótica.
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <thead>
+            <tr>
+              <th class="bg-green-header" style="width: 14%">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">RA 7.7</th>
+              <th class="bg-green-header">RA 7.8</th>
+              <th class="bg-green-header">RA 7.9</th>
+              <th class="bg-green-header">RA 7.10</th>
+              <th class="bg-green-header">RA 7.11</th>
+              <th class="bg-green-header" style="width: 10%">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">10 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.10
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_468_3</td>
+              <td>
+                <strong>UC_468_3:</strong> Montar sistemas de automatización
+                industrial y robótica.
+              </td>
+              <td class="text-center">20 Horas (5 h/sem)</td>
+              <td class="text-center">Sem. 32 a Sem. 35 (4 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 7.10:
+                Configurar sistemas robóticos y/o de control de movimiento,
+                seleccionando y conectando los elementos que lo componen.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio (RA):</strong> Nivel 3: Aplicación
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a trabajar:</strong> 9 Pts
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.10
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC VS CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Seleccionar sensores, actuadores y drivers para la comunicación
+                de robots/manipuladores con el entorno e interpretar esquemas
+                con buses industriales.
+              </td>
+              <td class="text-center valign-top">CE7.10.1.a, b, c</td>
+              <td class="valign-top">
+                <strong>CE7.10.1.a:</strong> Seleccionar elementos de captación
+                y actuación para comunicar los robots con su entorno.<br />
+                <strong>CE7.10.1.b:</strong> Realizar croquis y esquemas de
+                sistemas robóticos mediante buses de comunicación industrial.<br />
+                <strong>CE7.10.1.c:</strong> Utilizar simbología normalizada
+                para la representación de dispositivos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Conectar componentes de celda robotizada e instalar dispositivos
+                de seguridad (barreras fotoeléctricas, vallado, setas) en el
+                entorno del robot.
+              </td>
+              <td class="text-center valign-top">CE7.10.1.d, e, f</td>
+              <td class="valign-top">
+                <strong>CE7.10.1.d:</strong> Representar los elementos de
+                seguridad requeridos en el entorno de un robot.<br />
+                <strong>CE7.10.1.e:</strong> Conectar los componentes del
+                sistema robótico y/o de control de movimiento.<br />
+                <strong>CE7.10.1.f:</strong> Aplicar las medidas de seguridad.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Conciencia crítica de seguridad en celdas robotizadas y
+                precisión en el tendido de buses de comunicación.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizaje (RA 7.10) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades de Enseñanza y Aprendizaje
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.7.10.1.</strong> Diseñar el esquema de interconexión
+                de un robot industrial con su controlador, servo-drivers de ejes
+                y bus de comunicación industrial (PROFINET/Profibus) para
+                intercambio de señales I/O.<br />
+                <em
+                  >(Evidencia: Plano de arquitectura de la celda robotizada y
+                  mapa de señales).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 32 - Sem. 33</td>
+              <td class="valign-top">Escala estimativa / Lista de cotejo</td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Cinemática y morfología de robots
+                industriales. Drivers de control de movimiento, servomotores,
+                buses de campo.<br />
+                <strong>Procedimentales:</strong> Elaboración de diagramas de
+                conexión entre controlador de robot y periféricos.<br />
+                <strong>Actitudinales:</strong> Responsabilidad y minuciosidad
+                en el trazado de redes de comunicación.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.7.10.2.</strong> Efectuar el cableado físico de las
+                señales de entrada/salida de la garra neumática del robot y
+                conectar los dispositivos de seguridad de la celda (barreras
+                ópticas, paro de emergencia y rearme).<br />
+                <em
+                  >(Evidencia: Celda robotizada interconectada y verificada en
+                  su entorno de trabajo).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 34 - Sem. 35</td>
+              <td class="valign-top">Rúbrica de integración robótica</td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Módulos de seguridad en robótica.
+                Cortinas de luz, cierres de enclavamiento, TCP (Tool Center
+                Point).<br />
+                <strong>Procedimentales:</strong> Conexionado físico de
+                sensores, actuadores de la herramienta final y barreras de
+                seguridad.<br />
+                <strong>Actitudinales:</strong> Conciencia de seguridad y
+                prevención de riesgos mecánicos en entornos robotizados.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Se manifiesta en la atención
+                a las normas de seguridad, el uso correcto del equipo de
+                protección personal, el trabajo limpio y colaborativo en el
+                taller de automatización industrial y robótica.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Escala de actitudes / Registro de observación
+              </td>
+              <td class="valign-top">
+                Integrados en los saberes actitudinales transversales:
+                rigurosidad, orden, seguridad y apego a normas.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 11: RESULTADO DE APRENDIZAJE RA 7.11 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-11">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Regional/Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Politécnico:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Ordenanza:</td>
+            <td>07-2025</td>
+            <td class="bg-blue-info">Título / Bachillerato:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos (ELE050_3)</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Montaje de sistemas de automatización industrial y robótica</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_468_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Anual:</td>
+            <td>225 Horas / Año (5 Horas / Semana)</td>
+            <td class="bg-blue-info">Duración Calendario / Año:</td>
+            <td>39 Semanas Relativas | 2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC_468_3:</strong> Montar sistemas de automatización
+              industrial y robótica.
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <thead>
+            <tr>
+              <th class="bg-green-header" style="width: 14%">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">RA 7.7</th>
+              <th class="bg-green-header">RA 7.8</th>
+              <th class="bg-green-header">RA 7.9</th>
+              <th class="bg-green-header">RA 7.10</th>
+              <th class="bg-green-header">RA 7.11</th>
+              <th class="bg-green-header" style="width: 10%">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">3 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center">4 Sem.</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">10 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center">9 Pts</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.11
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_468_3</td>
+              <td>
+                <strong>UC_468_3:</strong> Montar sistemas de automatización
+                industrial y robótica.
+              </td>
+              <td class="text-center">20 Horas (5 h/sem)</td>
+              <td class="text-center">Sem. 36 a Sem. 39 (4 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 7.11:
+                Verificar el funcionamiento de robots y/o sistemas de control de
+                movimiento, ajustando los dispositivos de control y aplicando
+                las normas de seguridad.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio (RA):</strong> Nivel 4: Análisis
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a trabajar:</strong> 9 Pts
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.11
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC VS CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Verificar protocolos de puesta en servicio, calibrar sensores
+                internos (encoders, resolvers) para el posicionamiento del robot
+                y monitorear señales I/O.
+              </td>
+              <td class="text-center valign-top">CE7.11.1.a, b, c, d</td>
+              <td class="valign-top">
+                <strong>CE7.11.1.a:</strong> Verificar el funcionamiento de los
+                dispositivos de seguridad.<br />
+                <strong>CE7.11.1.b:</strong> Comprobar el cumplimiento del
+                protocolo de puesta en servicio de un robot.<br />
+                <strong>CE7.11.1.c:</strong> Verificar la secuencia de
+                funcionamiento.<br />
+                <strong>CE7.11.1.d:</strong> Calibrar los sensores internos para
+                el posicionamiento de un robot.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Probar secuencias de movimiento, evaluar la respuesta ante
+                situaciones anómalas y validar la seguridad según norma ISO
+                10218.
+              </td>
+              <td class="text-center valign-top">CE7.11.1.e, f, g</td>
+              <td class="valign-top">
+                <strong>CE7.11.1.e:</strong> Comprobar la respuesta de los
+                sistemas de control de movimiento ante situaciones anómalas.<br />
+                <strong>CE7.11.1.f:</strong> Monitorear el estado de las señales
+                externas e internas y el valor de los datos procesados.<br />
+                <strong>CE7.11.1.g:</strong> Cumplir las normas de seguridad.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Rigurosidad y responsabilidad ética en la certificación de
+                seguridad y puesta en marcha de sistemas robóticos.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizaje (RA 7.11) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades de Enseñanza y Aprendizaje
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.7.11.1.</strong> Calibrar las coordenadas de la
+                herramienta (TCP) y los ceros de articulación (zeroing/homing)
+                de un robot industrial mediante la consola de programación
+                (Teach Pendant).<br />
+                <em
+                  >(Evidencia: Informe de calibración de ejes y calibración de
+                  TCP validado).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 36 - Sem. 37</td>
+              <td class="valign-top">
+                Lista de cotejo de calibración robótica
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Sistemas de coordenadas de robot
+                (World, Tool, Joint). Encoders absolutos/incrementales. Puesta a
+                punto.<br />
+                <strong>Procedimentales:</strong> Calibración de ceros mecánicos
+                y definición geométrica de la herramienta final.<br />
+                <strong>Actitudinales:</strong> Rigor técnico y precisión en el
+                ajuste de posicionamiento del robot.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.7.11.2.</strong> Programar y verificar la trayectoria
+                de paletizado de piezas del robot, monitoreando las señales I/O
+                y ensayando la respuesta de parada de seguridad ante la
+                interrupción de la cortina fotoeléctrica.<br />
+                <em
+                  >(Evidencia: Proyecto integrador de paletizado robótico
+                  funcionando e informe de certificación de seguridad).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 38 - Sem. 39</td>
+              <td class="valign-top">
+                Rúbrica analítica de proyecto integrador robótico
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Programación de trayectorias
+                (PTP, LIN, CIRC). Ensayo de seguridad (ISO 10218). Diagnóstico
+                de fallas en ejes.<br />
+                <strong>Procedimentales:</strong> Ejecución en modo automático,
+                simulación de emergencias y ajuste de velocidad de trabajo.<br />
+                <strong>Actitudinales:</strong> Máxima responsabilidad ética y
+                rigurosidad en la puesta en servicio de celda de manufactura.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Se manifiesta en la atención
+                a las normas de seguridad, el uso correcto del equipo de
+                protección personal, el trabajo limpio y colaborativo en el
+                taller de automatización industrial y robótica.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Escala de actitudes / Registro de observación
+              </td>
+              <td class="valign-top">
+                Integrados en los saberes actitudinales transversales:
+                rigurosidad, orden, seguridad y apego a normas.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

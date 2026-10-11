@@ -1,0 +1,2291 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planificación Modular - INCO-MF037_3 (CAFAM / MINERD)</title>
+    <style>
+      :root {
+        --color-verde-ra: #a9d18e;
+        --color-verde-header: #c5e0b4;
+        --color-azul-info: #bdd7ee;
+        --color-salmon-ec: #fce4d6;
+        --color-amarillo-nota: #ffff00;
+        --border-color: #000000;
+      }
+      * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #525659;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 8.5pt;
+        line-height: 1.2;
+        color: #000;
+      }
+      .top-toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background-color: #1f2937;
+        color: #fff;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 24px;
+        gap: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      }
+      .toolbar-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .toolbar-title {
+        font-size: 13px;
+        font-weight: bold;
+      }
+      .nav-ra-buttons {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .btn-ra {
+        background-color: #374151;
+        color: #e5e7eb;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-size: 11px;
+        font-weight: bold;
+        border-radius: 4px;
+        border: 1px solid #4b5563;
+      }
+      .btn-ra:hover {
+        background-color: #2563eb;
+        color: #fff;
+      }
+      .btn-print {
+        background-color: #16a34a;
+        color: #fff;
+        border: none;
+        padding: 7px 15px;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .btn-print:hover {
+        background-color: #15803d;
+      }
+      .document-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 15px 60px 15px;
+        gap: 35px;
+      }
+      .ra-container {
+        background-color: #ffffff;
+        width: 100%;
+        max-width: 216mm;
+        padding: 12mm 14mm 14mm 14mm;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        box-sizing: border-box;
+        scroll-margin-top: 60px;
+      }
+      .header-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 4px;
+      }
+      .header-table td {
+        border: none !important;
+        padding: 0;
+        vertical-align: middle;
+      }
+      .logo-cafam-img {
+        max-width: 65px;
+        height: auto;
+        display: block;
+      }
+      .logo-detp-img {
+        max-width: 140px;
+        height: auto;
+        display: block;
+        margin-left: auto;
+      }
+      .header-text {
+        text-align: center;
+        font-size: 9pt;
+        line-height: 1.25;
+        padding: 0 8px;
+      }
+      .header-text .t1 {
+        font-weight: bold;
+        font-size: 9.5pt;
+      }
+      .header-text .t2 {
+        font-weight: bold;
+        font-size: 9pt;
+      }
+      .header-text .t3 {
+        font-size: 8.5pt;
+      }
+      .header-text .t4 {
+        font-weight: bold;
+        font-size: 9pt;
+        margin-top: 1px;
+      }
+      .docente-update-bar {
+        text-align: center;
+        font-size: 7.2pt;
+        font-style: italic;
+        color: #333;
+        margin-bottom: 5px;
+      }
+      .docente-update-bar span {
+        margin: 0 10px;
+      }
+      .section-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 8.5pt;
+        margin-top: 4px;
+        margin-bottom: 3px;
+      }
+      table.minerd-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 5px;
+        font-size: 7.8pt;
+        table-layout: fixed;
+      }
+      table.minerd-table td,
+      table.minerd-table th {
+        border: 1px solid var(--border-color);
+        padding: 2.2px 3.5px;
+        vertical-align: middle;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      .bg-green-ra {
+        background-color: var(--color-verde-ra) !important;
+        font-weight: bold;
+      }
+      .bg-green-header {
+        background-color: var(--color-verde-header) !important;
+        font-weight: bold;
+        text-align: center;
+      }
+      .bg-blue-info {
+        background-color: var(--color-azul-info) !important;
+        font-weight: bold;
+      }
+      .bg-salmon-header {
+        background-color: var(--color-salmon-ec) !important;
+        font-weight: bold;
+        text-align: center;
+      }
+      .bg-yellow-note {
+        background-color: var(--color-amarillo-nota) !important;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .text-bold {
+        font-weight: bold;
+      }
+      .valign-top {
+        vertical-align: top !important;
+      }
+      .footer-bar {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #000;
+        padding-top: 4px;
+        margin-top: 12px;
+        font-size: 7.5pt;
+        font-weight: bold;
+      }
+      @page {
+        size: letter portrait;
+        margin: 8mm 8mm 8mm 8mm;
+      }
+      @media print {
+        html,
+        body {
+          background-color: #fff !important;
+          width: 100%;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        .top-toolbar {
+          display: none !important;
+        }
+        .document-wrapper {
+          padding: 0 !important;
+          margin: 0 !important;
+          gap: 0 !important;
+          display: block !important;
+        }
+        .ra-container {
+          box-shadow: none !important;
+          padding: 0 !important;
+          margin: 0 auto !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          page-break-before: always;
+        }
+        .ra-container:first-child {
+          page-break-before: avoid;
+        }
+        table.minerd-table {
+          page-break-inside: auto;
+        }
+        tr {
+          page-break-inside: avoid;
+          page-break-after: auto;
+        }
+        thead {
+          display: table-header-group;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Barra superior fija con los enlaces a cada RA del documento -->
+    <div class="top-toolbar">
+      <div class="toolbar-left">
+        <span class="toolbar-title"
+          >INCO-MF037_3: Análisis y diseño de reporte</span
+        >
+        <div class="nav-ra-buttons">
+          <a href="#ra6-1" class="btn-ra">RA 6.1</a>
+          <a href="#ra6-2" class="btn-ra">RA 6.2</a>
+          <a href="#ra6-3" class="btn-ra">RA 6.3</a>
+          <a href="#ra6-4" class="btn-ra">RA 6.4</a>
+          <a href="#ra6-5" class="btn-ra">RA 6.5</a>
+        </div>
+      </div>
+      <button class="btn-print" onclick="window.print()">
+        Descargar / Guardar como PDF
+      </button>
+    </div>
+
+    <div class="document-wrapper">
+      <!-- ========================================== -->
+      <!-- BLOQUE 1: RESULTADO DE APRENDIZAJE RA 6.1 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra6-1">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Bachillerato Técnico en:</td>
+            <td>Diseño y Desarrollo de Aplicaciones Informáticas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito Educativo:</td>
+            <td>15-03 (Santo Domingo)</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Informática y Comunicaciones</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Año Lectivo:</td>
+            <td>2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Análisis y diseño de reporte</td>
+            <td class="bg-blue-info">Código del MF:</td>
+            <td>INCO-MF037_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Horas/Año del Módulo:</td>
+            <td>117 Horas</td>
+            <td class="bg-blue-info">Horas/Semana del MF:</td>
+            <td>3 Horas / Semana</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidades de Competencia (UC):</td>
+            <td colspan="3">
+              <strong>UC03_3:</strong> Elaborar contenido de información para
+              campañas de promoción y marketing digital. |
+              <strong>UC04_3:</strong> Revisar e identificar estrategias de
+              marketing digital utilizando herramientas de marketing. |
+              <strong>UC05_3:</strong> Medir parámetros e indicadores para
+              mejorar estrategias de marketing digital implementando
+              correctivos.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">No. del RA</th>
+              <th class="bg-green-header">RA 6.1</th>
+              <th class="bg-green-header">RA 6.2</th>
+              <th class="bg-green-header">RA 6.3</th>
+              <th class="bg-green-header">RA 6.4</th>
+              <th class="bg-green-header">RA 6.5</th>
+              <th class="bg-green-header">Total Modular</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo (Semanas)</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">7 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor (Ponderación)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center text-bold">100 Pts (100%)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 6.1 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 6.1
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">INCO-MF037_3</td>
+              <td>
+                <strong>UC03_3, UC04_3, UC05_3:</strong> Marketing y Analítica
+                Digital
+              </td>
+              <td class="text-center">24 Horas (3 h/sem)</td>
+              <td class="text-center">Sem. 1 a Sem. 8 (8 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Enunciado Oficial del RA:</strong> RA 6.1: Clasificar
+                los requerimientos de información de los diversos usuarios para
+                producir reportes empresariales, siguiendo parámetros
+                establecidos.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio Taxonómico:</strong> Nivel 4: Análisis
+                (Taxonomía de Bloom)
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA:</strong> 20 Puntos (20%)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 6.1
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación (CE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Caracterizar los tipos de reportes empresariales (internos y
+                externos) según la dimensión temporal, espacial y las
+                necesidades informativas de los distintos niveles de usuarios.
+              </td>
+              <td class="text-center valign-top">CE6.1.1, CE6.1.2</td>
+              <td class="valign-top">
+                <strong>CE6.1.1:</strong> Analizar los reportes empresariales
+                tomando en cuenta la dimensión temporal y espacial, así como las
+                necesidades informativas específicas de los diferentes
+                usuarios.<br />
+                <strong>CE6.1.2:</strong> Analizar las informaciones requeridas
+                para determinar el tipo de reporte (interno o externo) y los
+                métodos o tecnologías de reporte a utilizar.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Descomponer la estructura general de un reporte identificando
+                títulos, encabezados, líneas de detalles, repetitivos,
+                subtotales y pie de página.
+              </td>
+              <td class="text-center valign-top">CE6.1.3</td>
+              <td class="valign-top">
+                <strong>CE6.1.3:</strong> Analizar la estructura general del
+                reporte, incluyendo elementos como títulos, líneas de detalles o
+                valores repetitivos, grupos de totales y subtotales, y pie de
+                página.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="valign-top">
+                Evaluar y clasificar las herramientas y programas generadores de
+                reportes empresariales para seleccionar la tecnología más
+                adecuada al entorno institucional.
+              </td>
+              <td class="text-center valign-top">CE6.1.4</td>
+              <td class="valign-top">
+                <strong>CE6.1.4:</strong> Clasificar las herramientas de diseño
+                de reportes a fin de seleccionar la más adecuada.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Demostrar rigor metódico, sentido analítico y valoración de la
+                confidencialidad de la información en el levantamiento de
+                requerimientos.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 6.1.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Tabla Modular de Actividades y Contenidos Mediadores RA 6.1
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.1.1.</strong> Analizar un catálogo de reportes
+                corporativos reales (financieros, operacionales y directivos),
+                clasificándolos por tipo de usuario, dimensión temporal/espacial
+                y tecnología de salida, elaborando una matriz comparativa de
+                requerimientos informativos.<br />
+                <em
+                  >(Evidencia: Matriz de diagnóstico de requerimientos
+                  informativos corporativos).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 1 - Sem. 3</td>
+              <td class="valign-top">
+                Rúbrica analítica de diagnóstico de requerimientos
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Los reportes: Tipos (internos y
+                externos), partes, vistas, ejecución. Dimensión temporal y
+                espacial de la información.<br />
+                <strong>Procedimentales:</strong> Clasificación de tipos de
+                reportes y mapeo de necesidades informativas por perfil de
+                usuario.<br />
+                <strong>Actitudinales:</strong> Valoración de la importancia de
+                la gestión de reportes en las organizaciones.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.1.2.</strong> Desglosar las secciones anatómicas de un
+                conjunto de reportes impresos y digitales (encabezado, líneas de
+                detalle, agrupamientos, subtotales y pie de página),
+                construyendo una guía de arquitectura visual de reportes.<br />
+                <em
+                  >(Evidencia: Documento de especificación de arquitectura
+                  visual de reportes).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 4 - Sem. 5</td>
+              <td class="valign-top">
+                Lista de cotejo de arquitectura de reportes
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Secciones de un reporte
+                (encabezados, detalle, subtotales, pie de página, grupos).<br />
+                <strong>Procedimentales:</strong> Identificación y
+                descomposición anatómica de la estructura de reportes.<br />
+                <strong>Actitudinales:</strong> Atención al detalle en la
+                estructuración de la información.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.1.3.</strong> Evaluar y comparar programas generadores
+                de reportes (Crystal Reports, JasperReports, Power BI, SSRS),
+                seleccionando y justificando la herramienta adecuada según las
+                restricciones de infraestructura institucional.<br />
+                <em
+                  >(Evidencia: Informe técnico de selección de motor de
+                  reportes).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 6 - Sem. 8</td>
+              <td class="valign-top">
+                Escala estimativa de selección tecnológica
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Programas generadores de reportes
+                (características, licencias, instalación, soporte BD).<br />
+                <strong>Procedimentales:</strong> Evaluación comparativa de
+                motores de reportes e instalación de entornos de desarrollo.<br />
+                <strong>Actitudinales:</strong> Criterio técnico y
+                responsabilidad en la selección de software.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Se evalúa la ética
+                profesional, manejo confidencial de datos corporativos y
+                puntualidad en la entrega.<br />
+                <em
+                  >(Evidencia: Registro de observación actitudinal
+                  continua).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 1 - Sem. 8</td>
+              <td class="valign-top">
+                Guía de observación de actitudes profesionales
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Normas de confidencialidad y
+                ética del diseñador de reportes.<br />
+                <strong>Procedimentales:</strong> Aplicación de protocolos de
+                manejo seguro de datos.<br />
+                <strong>Actitudinales:</strong> Responsabilidad y cuidado en el
+                manejo de la información.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 2: RESULTADO DE APRENDIZAJE RA 6.2 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra6-2">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Bachillerato Técnico en:</td>
+            <td>Diseño y Desarrollo de Aplicaciones Informáticas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito Educativo:</td>
+            <td>15-03 (Santo Domingo)</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Informática y Comunicaciones</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Año Lectivo:</td>
+            <td>2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Análisis y diseño de reporte</td>
+            <td class="bg-blue-info">Código del MF:</td>
+            <td>INCO-MF037_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Horas/Año del Módulo:</td>
+            <td>117 Horas</td>
+            <td class="bg-blue-info">Horas/Semana del MF:</td>
+            <td>3 Horas / Semana</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidades de Competencia (UC):</td>
+            <td colspan="3">
+              <strong>UC03_3:</strong> Elaborar contenido de información para
+              campañas de promoción y marketing digital. |
+              <strong>UC04_3:</strong> Revisar e identificar estrategias de
+              marketing digital utilizando herramientas de marketing. |
+              <strong>UC05_3:</strong> Medir parámetros e indicadores para
+              mejorar estrategias de marketing digital implementando
+              correctivos.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">No. del RA</th>
+              <th class="bg-green-header">RA 6.1</th>
+              <th class="bg-green-header">RA 6.2</th>
+              <th class="bg-green-header">RA 6.3</th>
+              <th class="bg-green-header">RA 6.4</th>
+              <th class="bg-green-header">RA 6.5</th>
+              <th class="bg-green-header">Total Modular</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo (Semanas)</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">7 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor (Ponderación)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center text-bold">100 Pts (100%)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 6.2 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 6.2
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">INCO-MF037_3</td>
+              <td>
+                <strong>UC03_3, UC04_3, UC05_3:</strong> Marketing y Analítica
+                Digital
+              </td>
+              <td class="text-center">24 Horas (3 h/sem)</td>
+              <td class="text-center">Sem. 9 a Sem. 16 (8 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Enunciado Oficial del RA:</strong> RA 6.2: Aplicar los
+                conocimientos recibidos para el proceso de creación de reportes
+                empresariales funcionales y oportunos, según requerimientos del
+                usuario, siguiendo parámetros establecidos para garantizar la
+                gestión y flujo de la información en la organización.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio Taxonómico:</strong> Nivel 3:
+                Aplicación (Taxonomía de Bloom)
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA:</strong> 20 Puntos (20%)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 6.2
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación (CE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Diseñar y conectar proyectos de reportes empresariales
+                estableciendo mecanismos de conexión a bases de datos
+                relacionales mediante ADO, DAO u OLE/DB.
+              </td>
+              <td class="text-center valign-top">CE6.2.1, CE6.2.2</td>
+              <td class="valign-top">
+                <strong>CE6.2.1:</strong> Diseñar y estructurar un proyecto de
+                reportes en un supuesto práctico debidamente caracterizado,
+                considerando los requerimientos funcionales y técnicos
+                definidos.<br />
+                <strong>CE6.2.2:</strong> Especificar el mecanismo a implementar
+                para la conexión a la base de datos (ActiveX Data Objects (ADO),
+                Data Access Object (DAO), y Object Linking and Embedding for
+                Databases (OLE/DB)).
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Integrar tablas y consultas definiendo secciones de encabezado,
+                líneas de detalle, pies de página y estructuras de agrupación
+                con totales y subtotales.
+              </td>
+              <td class="text-center valign-top">CE6.2.3, CE6.2.5</td>
+              <td class="valign-top">
+                <strong>CE6.2.3:</strong> Integrar las tablas que contienen los
+                datos requeridos en el informe, creando las secciones de
+                encabezado del reporte, encabezados de página y línea de
+                detalles, conforme a las especificaciones y requerimientos
+                establecidos.<br />
+                <strong>CE6.2.5:</strong> Realizar grupos de totales y
+                subtotales según requerimientos de la organización y resumen de
+                datos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="valign-top">
+                Aplicar formatos de datos, estilos de diseño corporativos,
+                fórmulas y funciones avanzadas en la generación del informe.
+              </td>
+              <td class="text-center valign-top">CE6.2.4</td>
+              <td class="valign-top">
+                <strong>CE6.2.4:</strong> Aplicar los formatos necesarios a los
+                informes adjuntándolos a los estilos de diseños definidos por la
+                organización.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Demostrar precisión en el cálculo de totales, pulcritud estética
+                en el diseño visual y ética en el manejo de datos empresariales.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 6.2.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Tabla Modular de Actividades y Contenidos Mediadores RA 6.2
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.2.1.</strong> Crear un proyecto de reportes en un
+                generador de informes (ej. Crystal Reports / Jasper),
+                configurando la cadena de conexión a SQL mediante OLE/DB/ADO y
+                vinculando las tablas del sistema comercial.<br />
+                <em
+                  >(Evidencia: Proyecto de reporte configurado con conexión a BD
+                  activa).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 9 - Sem. 11</td>
+              <td class="valign-top">
+                Lista de cotejo de conectividad de datos
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Gestión de reportes, proyecto de
+                reporte, cadenas de conexión (ADO, DAO, OLE/DB), conjuntos de
+                datos (datasets).<br />
+                <strong>Procedimentales:</strong> Configuración de proveedores
+                de datos y pruebas de conectividad SQL.<br />
+                <strong>Actitudinales:</strong> Rigor técnico en la integración
+                de repositorios de datos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.2.2.</strong> Construir la plantilla funcional del
+                reporte incorporando encabezados institucionales, líneas de
+                detalle mapeadas a campos SQL, y grupos de ordenamiento con
+                subtotales acumulados.<br />
+                <em
+                  >(Evidencia: Archivo ejecutable de reporte estructurado con
+                  secciones de detalle y resumen).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 12 - Sem. 14</td>
+              <td class="valign-top">
+                Rúbrica analítica de maquetación funcional de reportes
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Secciones del reporte, líneas de
+                detalle, encabezados y pies de grupo, expresiones de
+                agrupación.<br />
+                <strong>Procedimentales:</strong> Maquetación de campos,
+                creación de estructuras de agrupación y cálculo de
+                subtotales.<br />
+                <strong>Actitudinales:</strong> Pulcritud y precisión
+                operacional.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.2.3.</strong> Aplicar reglas de formato condicional,
+                estilos tipográficos corporativos, máscaras de moneda/fecha y
+                fórmulas personalizadas para validar totales y filtros de
+                búsqueda.<br />
+                <em
+                  >(Evidencia: Informe impreso/digital con formatos corporativos
+                  y fórmulas validadas).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 15 - Sem. 16</td>
+              <td class="valign-top">
+                Escala estimativa de diseño visual de reportes
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Formatos de números, fechas y
+                monedas, fórmulas, funciones, filtros y parámetros de
+                reporte.<br />
+                <strong>Procedimentales:</strong> Aplicación de estilos de
+                diseño, máscaras de edición y sintaxis de fórmulas.<br />
+                <strong>Actitudinales:</strong> Orientación a la calidad del
+                producto final y satisfacción del usuario.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Evaluación continua de la honestidad en el manejo de cifras,
+                consistencia estética y cumplimiento de especificaciones
+                técnicas.<br />
+                <em
+                  >(Evidencia: Registro de observación actitudinal en
+                  laboratorio).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 9 - Sem. 16</td>
+              <td class="valign-top">Guía de observación actitudinal</td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Estándares de calidad y estética
+                empresarial.<br />
+                <strong>Procedimentales:</strong> Verificación de consistencia
+                de datos.<br />
+                <strong>Actitudinales:</strong> Ética, compromiso con la
+                exactitud de los resultados.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 3: RESULTADO DE APRENDIZAJE RA 6.3 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra6-3">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Bachillerato Técnico en:</td>
+            <td>Diseño y Desarrollo de Aplicaciones Informáticas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito Educativo:</td>
+            <td>15-03 (Santo Domingo)</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Informática y Comunicaciones</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Año Lectivo:</td>
+            <td>2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Análisis y diseño de reporte</td>
+            <td class="bg-blue-info">Código del MF:</td>
+            <td>INCO-MF037_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Horas/Año del Módulo:</td>
+            <td>117 Horas</td>
+            <td class="bg-blue-info">Horas/Semana del MF:</td>
+            <td>3 Horas / Semana</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidades de Competencia (UC):</td>
+            <td colspan="3">
+              <strong>UC03_3:</strong> Elaborar contenido de información para
+              campañas de promoción y marketing digital. |
+              <strong>UC04_3:</strong> Revisar e identificar estrategias de
+              marketing digital utilizando herramientas de marketing. |
+              <strong>UC05_3:</strong> Medir parámetros e indicadores para
+              mejorar estrategias de marketing digital implementando
+              correctivos.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">No. del RA</th>
+              <th class="bg-green-header">RA 6.1</th>
+              <th class="bg-green-header">RA 6.2</th>
+              <th class="bg-green-header">RA 6.3</th>
+              <th class="bg-green-header">RA 6.4</th>
+              <th class="bg-green-header">RA 6.5</th>
+              <th class="bg-green-header">Total Modular</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo (Semanas)</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">7 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor (Ponderación)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center text-bold">100 Pts (100%)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 6.3 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 6.3
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">INCO-MF037_3</td>
+              <td>
+                <strong>UC03_3, UC04_3, UC05_3:</strong> Marketing y Analítica
+                Digital
+              </td>
+              <td class="text-center">21 Horas (3 h/sem)</td>
+              <td class="text-center">Sem. 17 a Sem. 23 (7 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Enunciado Oficial del RA:</strong> RA 6.3: Presentar o
+                entregar reportes que cumplan los requerimientos de información,
+                según criterios definidos por la organización, para garantizar
+                la portabilidad de la información contenida.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio Taxonómico:</strong> Nivel 3:
+                Aplicación (Taxonomía de Bloom)
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA:</strong> 20 Puntos (20%)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 6.3
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación (CE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Configurar canales de salida y visualización de reportes para su
+                presentación interactiva en pantalla, impresión física y
+                exportación multiplataforma.
+              </td>
+              <td class="text-center valign-top">CE6.3.1, CE6.3.3</td>
+              <td class="valign-top">
+                <strong>CE6.3.1:</strong> Configurar mecanismos para acceder a
+                los reportes mediante impresión, presentación y visualización en
+                pantalla, conforme a los requerimientos de la organización.<br />
+                <strong>CE6.3.3:</strong> Gestionar la salida de los reportes
+                para su distribución en medios físicos y virtuales, según las
+                necesidades informativas de la organización.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Implementar procedimientos de publicación en servidores
+                digitales, respaldo en medios magnéticos/ópticos y distribución
+                controlada.
+              </td>
+              <td class="text-center valign-top">CE6.3.2, CE6.3.4</td>
+              <td class="valign-top">
+                <strong>CE6.3.2:</strong> Implementar mecanismos para almacenar
+                y publicar los reportes en medios digitales, asegurando su
+                disponibilidad para los distintos usuarios.<br />
+                <strong>CE6.3.4:</strong> Establecer procedimientos para la
+                grabación de reportes en discos compactos u otros medios de
+                respaldo, cumpliendo con los lineamientos institucionales.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Mostrar responsabilidad en la preservación de respaldos,
+                garantía de portabilidad y respeto a las políticas de seguridad
+                de la información.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 6.3.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Tabla Modular de Actividades y Contenidos Mediadores RA 6.3
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.3.1.</strong> Configurar los visores de reportes
+                (ReportViewer/Web Viewer) integrando opciones de exportación a
+                PDF, Excel y CSV, validando la integridad del diseño en cada
+                formato.<br />
+                <em
+                  >(Evidencia: Módulo de visualización con exportación
+                  multiplataforma validada).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 17 - Sem. 19</td>
+              <td class="valign-top">
+                Lista de cotejo de exportación y portabilidad
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Canales de salida (pantalla,
+                impresión, exportación PDF/XLS/CSV), visores de reportes.<br />
+                <strong>Procedimentales:</strong> Integración de visores
+                web/desktop y validación de fidelidad de formato exportado.<br />
+                <strong>Actitudinales:</strong> Compromiso con la accesibilidad
+                y usabilidad de la información.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.3.2.</strong> Desarrollar un protocolo de publicación
+                automática de reportes ejecutivos en servidor de archivos/portal
+                web, ejecutando tareas de resguardo y almacenamiento seguro.<br />
+                <em
+                  >(Evidencia: Expediente de publicación digital y protocolo de
+                  respaldo de informes).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 20 - Sem. 23</td>
+              <td class="valign-top">
+                Rúbrica analítica de gestión de respaldos e información
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Servidores de reportes,
+                almacenamiento digital, respaldos (backup), políticas de
+                seguridad.<br />
+                <strong>Procedimentales:</strong> Configuración de rutas de
+                publicación y scripts de respaldo automatizado.<br />
+                <strong>Actitudinales:</strong> Responsabilidad en la custodia y
+                preservación de archivos críticos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Cumplimiento de las normas de custodia institucional de
+                documentos y rigor en la ejecución de copias de seguridad.<br />
+                <em
+                  >(Evidencia: Registro de observación de hábitos de
+                  seguridad).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 17 - Sem. 23</td>
+              <td class="valign-top">
+                Registro de observación de hábitos de seguridad
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Políticas institucionales de
+                seguridad de la información.<br />
+                <strong>Procedimentales:</strong> Verificación de copias de
+                seguridad.<br />
+                <strong>Actitudinales:</strong> Conciencia sobre la
+                confidencialidad y disponibilidad de los datos.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 4: RESULTADO DE APRENDIZAJE RA 6.4 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra6-4">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Bachillerato Técnico en:</td>
+            <td>Diseño y Desarrollo de Aplicaciones Informáticas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito Educativo:</td>
+            <td>15-03 (Santo Domingo)</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Informática y Comunicaciones</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Año Lectivo:</td>
+            <td>2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Análisis y diseño de reporte</td>
+            <td class="bg-blue-info">Código del MF:</td>
+            <td>INCO-MF037_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Horas/Año del Módulo:</td>
+            <td>117 Horas</td>
+            <td class="bg-blue-info">Horas/Semana del MF:</td>
+            <td>3 Horas / Semana</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidades de Competencia (UC):</td>
+            <td colspan="3">
+              <strong>UC03_3:</strong> Elaborar contenido de información para
+              campañas de promoción y marketing digital. |
+              <strong>UC04_3:</strong> Revisar e identificar estrategias de
+              marketing digital utilizando herramientas de marketing. |
+              <strong>UC05_3:</strong> Medir parámetros e indicadores para
+              mejorar estrategias de marketing digital implementando
+              correctivos.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">No. del RA</th>
+              <th class="bg-green-header">RA 6.1</th>
+              <th class="bg-green-header">RA 6.2</th>
+              <th class="bg-green-header">RA 6.3</th>
+              <th class="bg-green-header">RA 6.4</th>
+              <th class="bg-green-header">RA 6.5</th>
+              <th class="bg-green-header">Total Modular</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo (Semanas)</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">7 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor (Ponderación)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center text-bold">100 Pts (100%)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 6.4 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 6.4
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">INCO-MF037_3</td>
+              <td>
+                <strong>UC03_3, UC04_3, UC05_3:</strong> Marketing y Analítica
+                Digital
+              </td>
+              <td class="text-center">24 Horas (3 h/sem)</td>
+              <td class="text-center">Sem. 24 a Sem. 31 (8 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Enunciado Oficial del RA:</strong> RA 6.4: Medir
+                parámetros e indicadores para mejorar estrategias de marketing
+                digital implementando los correctivos en las pautas recibidas.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio Taxonómico:</strong> Nivel 4: Análisis
+                (Taxonomía de Bloom)
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA:</strong> 20 Puntos (20%)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 6.4
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación (CE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Manipular e identificar técnicas estándar de mercadeo para
+                especificar métricas de rendimiento (KPIs), recolección de datos
+                y actualización de pautas digitales.
+              </td>
+              <td class="text-center valign-top">CE6.4.1, CE6.4.2</td>
+              <td class="valign-top">
+                <strong>CE6.4.1:</strong> Manipular técnicas estándar de
+                mercadeo para especificar las medidas, recolectar y mantener los
+                datos necesarios para la medición, conforme a los requerimientos
+                establecidos.<br />
+                <strong>CE6.4.2:</strong> Utilizar técnicas estándar para
+                definir las medidas, establecer mecanismos de recolección y
+                mantener actualizados los datos requeridos para la medición.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Utilizar herramientas tecnológicas de analítica digital para
+                procesar e interpretar datos de pautas, identificando
+                desviaciones y sugiriendo mejoras en la recolección.
+              </td>
+              <td class="text-center valign-top">
+                CE6.4.4, CE6.4.5, CE6.4.6, CE6.4.7, CE6.4.8
+              </td>
+              <td class="valign-top">
+                <strong>CE6.4.4:</strong> Identificar y actualizar el
+                conocimiento sobre herramientas de medición utilizadas para el
+                análisis de datos.<br />
+                <strong>CE6.4.5:</strong> Utilizar herramientas de medición para
+                el análisis de los datos, garantizando la interpretación precisa
+                de los resultados.<br />
+                <strong>CE6.4.6 / CE6.4.7 / CE6.4.8:</strong> Identificar,
+                proponer e implementar mejoras en métodos de recolección de
+                datos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="valign-top">
+                Generar, producir y distribuir informes de rendimiento
+                orientados a la toma de decisiones estratégicas en campañas
+                digitales.
+              </td>
+              <td class="text-center valign-top">CE6.4.3, CE6.4.9</td>
+              <td class="valign-top">
+                <strong>CE6.4.3:</strong> Generar, producir y distribuir
+                informes orientados al desarrollo de estrategias de marketing
+                digital.<br />
+                <strong>CE6.4.9:</strong> Identificar cómo generar, producir y
+                distribuir informes asegurando la correcta difusión de los
+                resultados.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Fomentar la objetividad analítica, precisión en la
+                interpretación de métricas y proactividad en la mejora continua
+                de estrategias.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 6.4.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Tabla Modular de Actividades y Contenidos Mediadores RA 6.4
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.4.1.</strong> Analizar un dataset de métricas de
+                marketing digital (CTR, CPC, Conversiones, ROI), identificando
+                los KPIs críticos y estructurando el plan de recolección
+                periódica de datos.<br />
+                <em
+                  >(Evidencia: Documento de especificación de KPIs y plan de
+                  medición).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 24 - Sem. 26</td>
+              <td class="valign-top">
+                Rúbrica analítica de definición de KPIs
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Métricas e indicadores de
+                marketing digital (CTR, ROI, CPA, impresiones), técnicas de
+                recolección.<br />
+                <strong>Procedimentales:</strong> Definición de variables de
+                medición y diseño de mecanismos de captura de datos.<br />
+                <strong>Actitudinales:</strong> Pensamiento estratégico y
+                enfoque a metas operativas.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.4.2.</strong> Procesar datos de desempeño mediante
+                herramientas analíticas (Google Analytics / Looker Studio),
+                auditando los métodos de captura actual e implementando 3
+                mejoras de optimización.<br />
+                <em
+                  >(Evidencia: Informe de auditoría y optimización de captura de
+                  datos).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 27 - Sem. 29</td>
+              <td class="valign-top">
+                Lista de cotejo de herramientas analíticas
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Herramientas de analítica
+                digital, métodos de optimización de recolección, auditoría de
+                datos.<br />
+                <strong>Procedimentales:</strong> Uso de paneles analíticos,
+                diagnóstico de errores de captura y reformulación de métodos.<br />
+                <strong>Actitudinales:</strong> Rigor científico y honestidad en
+                el análisis de datos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.4.3.</strong> Elaborar y distribuir un informe
+                ejecutivo de rendimiento de pauta digital con recomendaciones
+                correctivas para la toma de decisiones directivas.<br />
+                <em
+                  >(Evidencia: Reporte ejecutivo de rendimiento de campaña
+                  digital con análisis de impacto).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 30 - Sem. 31</td>
+              <td class="valign-top">
+                Escala estimativa de informes ejecutivos de marketing
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Estructura de informes de
+                marketing, presentación de recomendaciones y distribución de
+                resultados.<br />
+                <strong>Procedimentales:</strong> Redacción de informes
+                estratégicos y presentación ejecutiva de resultados.<br />
+                <strong>Actitudinales:</strong> Proactividad y orientación a
+                resultados estratégicos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Demostrar ética en la comunicación de indicadores y objetividad
+                crítica en la interpretación de desviaciones de pauta.<br />
+                <em>(Evidencia: Guía de observación de ética analítica).</em>
+              </td>
+              <td class="text-center valign-top">Sem. 24 - Sem. 31</td>
+              <td class="valign-top">Guía de observación de ética analítica</td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Ética en la presentación de
+                resultados e informes.<br />
+                <strong>Procedimentales:</strong> Transparencia en el reporte de
+                métricas negativas.<br />
+                <strong>Actitudinales:</strong> Integridad profesional y mejora
+                continua.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 5: RESULTADO DE APRENDIZAJE RA 6.5 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra6-5">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Bachillerato Técnico en:</td>
+            <td>Diseño y Desarrollo de Aplicaciones Informáticas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito Educativo:</td>
+            <td>15-03 (Santo Domingo)</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Informática y Comunicaciones</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Año Lectivo:</td>
+            <td>2025-2026</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Análisis y diseño de reporte</td>
+            <td class="bg-blue-info">Código del MF:</td>
+            <td>INCO-MF037_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Horas/Año del Módulo:</td>
+            <td>117 Horas</td>
+            <td class="bg-blue-info">Horas/Semana del MF:</td>
+            <td>3 Horas / Semana</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidades de Competencia (UC):</td>
+            <td colspan="3">
+              <strong>UC03_3:</strong> Elaborar contenido de información para
+              campañas de promoción y marketing digital. |
+              <strong>UC04_3:</strong> Revisar e identificar estrategias de
+              marketing digital utilizando herramientas de marketing. |
+              <strong>UC05_3:</strong> Medir parámetros e indicadores para
+              mejorar estrategias de marketing digital implementando
+              correctivos.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+            <col style="width: 13%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">No. del RA</th>
+              <th class="bg-green-header">RA 6.1</th>
+              <th class="bg-green-header">RA 6.2</th>
+              <th class="bg-green-header">RA 6.3</th>
+              <th class="bg-green-header">RA 6.4</th>
+              <th class="bg-green-header">RA 6.5</th>
+              <th class="bg-green-header">Total Modular</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo (Semanas)</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">7 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor (Ponderación)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center">20 Pts (20%)</td>
+              <td class="text-center text-bold">100 Pts (100%)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 6.5 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 6.5
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia Asociada</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">INCO-MF037_3</td>
+              <td>
+                <strong>UC03_3, UC04_3, UC05_3:</strong> Marketing y Analítica
+                Digital
+              </td>
+              <td class="text-center">24 Horas (3 h/sem)</td>
+              <td class="text-center">Sem. 32 a Sem. 39 (8 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Enunciado Oficial del RA:</strong> RA 6.5: Integrar
+                repositorios de tableros con algoritmos de Big Data o Data
+                Scientists (Inteligencia Artificial), para descubrir patrones y
+                tendencias de los beneficios de las campañas e identificar
+                formas para ser optimizada.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio Taxonómico:</strong> Nivel 4: Análisis
+                (Taxonomía de Bloom)
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA:</strong> 20 Puntos (20%)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 6.5
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación (CE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Reconocer y definir los fundamentos de Big Data, Data Science e
+                Inteligencia Artificial aplicados a la integración de
+                repositorios y tableros interactivos.
+              </td>
+              <td class="text-center valign-top">CE6.5.1, CE6.5.2</td>
+              <td class="valign-top">
+                <strong>CE6.5.1:</strong> Reconocer elementos fundamentales de
+                Big Data o Data Scientists (Inteligencia Artificial) obteniendo
+                hallazgos de los datos analizados.<br />
+                <strong>CE6.5.2:</strong> Definir elementos fundamentales para
+                integrar los repositorios de tableros con algoritmos de Big Data
+                o Data Scientists (Inteligencia Artificial).
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Integrar tableros interactivos (dashboards) vinculados a fuentes
+                avanzadas para descubrir patrones, tendencias y oportunidades de
+                optimización en campañas.
+              </td>
+              <td class="text-center valign-top">CE6.5.3, CE6.5.4</td>
+              <td class="valign-top">
+                <strong>CE6.5.3:</strong> Integrar tableros para descubrir
+                patrones y tendencias de los beneficios de campañas previamente
+                caracterizadas.<br />
+                <strong>CE6.5.4:</strong> Identificar formas para optimizar
+                tableros e informes relativos a ciencias de datos según
+                requerimientos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Promover la innovación tecnológica, el pensamiento prospectivo y
+                la valoración del análisis de datos masivos para la toma de
+                decisiones. Demostrar visión innovadora, rigor en la validación
+                de modelos analíticos y trabajo colaborativo en la presentación
+                final del proyecto.
+              </td>
+              <td class="text-center valign-top">Todos</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 6.5.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Tabla Modular de Actividades y Contenidos Mediadores RA 6.5
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.5.1.</strong> Analizar casos de estudio sobre la
+                aplicación de Big Data e Inteligencia Artificial en analítica de
+                negocios, redactando un marco conceptual sobre modelos
+                predictivos y algoritmos de clustering.<br />
+                <em
+                  >(Evidencia: Monografía sobre arquitectura de Big Data y
+                  Dashboards inteligentes).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 32 - Sem. 34</td>
+              <td class="valign-top">
+                Rúbrica analítica de investigación en Big Data/AI
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Fundamentos de Big Data, Data
+                Science, algoritmos de aprendizaje automático (IA), repositorios
+                de datos (Data Warehouse/Data Lake).<br />
+                <strong>Procedimentales:</strong> Mapeo de arquitecturas de Big
+                Data e integración con tableros empresariales.<br />
+                <strong>Actitudinales:</strong> Curiosidad científica e interés
+                por las tecnologías emergentes.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.5.2.</strong> Diseñar e integrar un Dashboard
+                interactivo en Power BI / Tableau conectando fuentes masivas de
+                datos y aplicando algoritmos visuales para descubrir tendencias
+                de consumo y patrones de respuesta.<br />
+                <em
+                  >(Evidencia: Dashboard interactivo funcional con visualización
+                  de tendencias y recomendaciones de optimización).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 35 - Sem. 39</td>
+              <td class="valign-top">
+                Rúbrica de proyecto integrador de tableros e inteligencia de
+                datos
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Tableros interactivos
+                (dashboards), visualización avanzada de datos, detección de
+                patrones y tendencias, optimización de informes.<br />
+                <strong>Procedimentales:</strong> Construcción de cuadros de
+                mando integrados, filtrado dinámico y análisis predictivo
+                visual.<br />
+                <strong>Actitudinales:</strong> Creatividad, excelencia técnica
+                y visión orientada a la innovación.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Demostrar visión innovadora, rigor en la validación de modelos
+                analíticos y trabajo colaborativo en la presentación final del
+                proyecto.<br />
+                <em
+                  >(Evidencia: Registro de observación de competencias
+                  actitudinales y trabajo en equipo).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 32 - Sem. 39</td>
+              <td class="valign-top">
+                Escala estimativa de competencias actitudinales y trabajo en
+                equipo
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Criterios de calidad e innovación
+                en soluciones de software.<br />
+                <strong>Procedimentales:</strong> Presentación y defensa de
+                proyectos analíticos.<br />
+                <strong>Actitudinales:</strong> Pensamiento crítico,
+                adaptabilidad y liderazgo técnico.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,2604 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Planificación Modular Completa - INCO-MF032_3 (CAFAM - MINERD)
+    </title>
+    <style>
+      :root {
+        --color-verde-ra: #a9d18e;
+        --color-verde-header: #c5e0b4;
+        --color-azul-info: #bdd7ee;
+        --color-salmon-ec: #fce4d6;
+        --color-amarillo-nota: #ffff00;
+        --border-color: #000000;
+      }
+
+      * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #525659;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 8.5pt;
+        line-height: 1.2;
+        color: #000;
+      }
+
+      /* BARRA SUPERIOR FIJA CON MENÚ DE RA */
+      .top-toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background-color: #1f2937;
+        color: #fff;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 24px;
+        gap: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      }
+
+      .toolbar-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .toolbar-title {
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 0.3px;
+      }
+
+      .nav-ra-buttons {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .btn-ra {
+        background-color: #374151;
+        color: #e5e7eb;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-size: 11px;
+        font-weight: bold;
+        border-radius: 4px;
+        border: 1px solid #4b5563;
+        transition: all 0.2s;
+      }
+
+      .btn-ra:hover {
+        background-color: #2563eb;
+        color: #fff;
+        border-color: #3b82f6;
+      }
+
+      .btn-print {
+        background-color: #16a34a;
+        color: #ffffff;
+        border: none;
+        padding: 7px 15px;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        transition: background 0.2s;
+      }
+
+      .btn-print:hover {
+        background-color: #15803d;
+      }
+
+      /* CONTENEDOR DEL DOCUMENTO */
+      .document-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 15px 60px 15px;
+        gap: 35px;
+      }
+
+      .ra-container {
+        background-color: #ffffff;
+        width: 100%;
+        max-width: 216mm;
+        padding: 12mm 14mm 14mm 14mm;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        box-sizing: border-box;
+        scroll-margin-top: 60px;
+      }
+
+      /* ENCABEZADOS INSTITUCIONALES */
+      .header-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 4px;
+      }
+
+      .header-table td {
+        border: none !important;
+        padding: 0;
+        vertical-align: middle;
+      }
+
+      .logo-cafam-img {
+        max-width: 65px;
+        height: auto;
+        display: block;
+      }
+
+      .logo-detp-img {
+        max-width: 140px;
+        height: auto;
+        display: block;
+        margin-left: auto;
+      }
+
+      .header-text {
+        text-align: center;
+        font-size: 9pt;
+        line-height: 1.25;
+        padding: 0 8px;
+      }
+
+      .header-text .t1 {
+        font-weight: bold;
+        font-size: 9.5pt;
+      }
+      .header-text .t2 {
+        font-weight: bold;
+        font-size: 9pt;
+      }
+      .header-text .t3 {
+        font-size: 8.5pt;
+      }
+      .header-text .t4 {
+        font-weight: bold;
+        font-size: 9pt;
+        margin-top: 1px;
+      }
+
+      .docente-update-bar {
+        text-align: center;
+        font-size: 7.2pt;
+        font-style: italic;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      .docente-update-bar span {
+        margin: 0 10px;
+      }
+
+      .section-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 8.5pt;
+        margin-top: 4px;
+        margin-bottom: 3px;
+      }
+
+      /* TABLAS OFICIALES MINERD */
+      table.minerd-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 5px;
+        font-size: 7.8pt;
+        table-layout: fixed;
+      }
+
+      table.minerd-table td,
+      table.minerd-table th {
+        border: 1px solid var(--border-color);
+        padding: 2.2px 3.5px;
+        vertical-align: middle;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+
+      .bg-green-ra {
+        background-color: var(--color-verde-ra) !important;
+        font-weight: bold;
+      }
+      .bg-green-header {
+        background-color: var(--color-verde-header) !important;
+        font-weight: bold;
+        text-align: center;
+      }
+      .bg-blue-info {
+        background-color: var(--color-azul-info) !important;
+        font-weight: bold;
+      }
+      .bg-salmon-header {
+        background-color: var(--color-salmon-ec) !important;
+        font-weight: bold;
+        text-align: center;
+      }
+      .bg-yellow-note {
+        background-color: var(--color-amarillo-nota) !important;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+      .text-bold {
+        font-weight: bold;
+      }
+      .valign-top {
+        vertical-align: top !important;
+      }
+
+      .footer-bar {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #000;
+        padding-top: 4px;
+        margin-top: 12px;
+        font-size: 7.5pt;
+        font-weight: bold;
+      }
+
+      /* REGLAS DE IMPRESIÓN Y SALTO POR RA */
+      @page {
+        size: letter portrait;
+        margin: 8mm 8mm 8mm 8mm;
+      }
+
+      @media print {
+        html,
+        body {
+          background-color: #fff !important;
+          width: 100%;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        .top-toolbar {
+          display: none !important;
+        }
+        .document-wrapper {
+          padding: 0 !important;
+          margin: 0 !important;
+          gap: 0 !important;
+          display: block !important;
+        }
+        .ra-container {
+          box-shadow: none !important;
+          padding: 0 !important;
+          margin: 0 auto !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          page-break-before: always;
+        }
+        .ra-container:first-child {
+          page-break-before: avoid;
+        }
+        table.minerd-table {
+          page-break-inside: auto;
+        }
+        tr {
+          page-break-inside: avoid;
+          page-break-after: auto;
+        }
+        thead {
+          display: table-header-group;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- BARRA DE HERRAMIENTAS Y NAVEGACIÓN SUPERIOR -->
+    <div class="top-toolbar">
+      <div class="toolbar-left">
+        <span class="toolbar-title"
+          >INCO-MF032_3 | <br />
+          Análisis y Diseño de Sistemas Informáticos</span
+        >
+        <div class="nav-ra-buttons">
+          <a href="#ra1-1" class="btn-ra">RA 1.1</a>
+          <a href="#ra1-2" class="btn-ra">RA 1.2</a>
+          <a href="#ra1-3" class="btn-ra">RA 1.3</a>
+          <a href="#ra1-4" class="btn-ra">RA 1.4</a>
+          <a href="#ra1-5" class="btn-ra">RA 1.5</a>
+        </div>
+      </div>
+      <button class="btn-print" onclick="window.print()">
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+        >
+          <path d="M6 9V2h12v7"></path>
+          <path
+            d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+          ></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        Descargar / Guardar como PDF
+      </button>
+    </div>
+
+    <div class="document-wrapper">
+      <!-- =========================================================
+         BLOQUE 1: RA 1.1
+         ========================================================= -->
+      <div class="ra-container" id="ra1-1">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+
+        <div class="docente-update-bar">
+          <span>Unidad de Apoyo y Actualización Docente – DETP.</span>
+          <span>Arcenio Paulino Salcedo, MA.</span>
+        </div>
+
+        <div class="section-title">PLANIFICACIÓN MODULAR</div>
+        <div
+          class="section-title"
+          style="font-weight: normal; margin-top: -2px"
+        >
+          Datos Generales
+        </div>
+
+        <table class="minerd-table">
+          <tr>
+            <td class="text-bold" style="width: 22%">Regional/Distrito:</td>
+            <td style="width: 78%" colspan="3">15-03</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Politécnico:</td>
+            <td colspan="3">Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Docente:</td>
+            <td colspan="3">José Luis Mañón Rosario</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Familia Profesional:</td>
+            <td colspan="3">Informática y Comunicaciones</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Ordenanza:</td>
+            <td colspan="3">07-2025</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Título o Bachillerato:</td>
+            <td colspan="3">
+              Bachillerato Técnico en Diseño y Desarrollo de Aplicaciones
+              Informáticas
+            </td>
+          </tr>
+          <tr>
+            <td class="text-bold">Módulo Formativo (MF):</td>
+            <td colspan="3">
+              INCO-MF032_3: Análisis y diseño de sistemas informáticos
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table text-center">
+          <tr>
+            <td colspan="6" class="text-bold">
+              MF # – Nombre del Módulo: INCO-MF032_3: Análisis y diseño de
+              sistemas informáticos
+            </td>
+            <td rowspan="2" class="text-bold" style="width: 14%">
+              Total<br />↓
+            </td>
+          </tr>
+          <tr class="text-bold">
+            <td style="width: 16%">No. del RA</td>
+            <td style="width: 14%">RA 1.1</td>
+            <td style="width: 14%">RA 1.2</td>
+            <td style="width: 14%">RA 1.3</td>
+            <td style="width: 14%">RA 1.4</td>
+            <td style="width: 14%">RA 1.5</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Tiempo</td>
+            <td>8 Sem.</td>
+            <td>10 Sem.</td>
+            <td>8 Sem.</td>
+            <td>5 Sem.</td>
+            <td>8 Sem.</td>
+            <td class="text-bold">39 Semanas</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Valor</td>
+            <td>20 Pts (20%)</td>
+            <td>25 Pts (25%)</td>
+            <td>20 Pts (20%)</td>
+            <td>15 Pts (15%)</td>
+            <td>20 Pts (20%)</td>
+            <td class="text-bold">100 Pts (100%)</td>
+          </tr>
+        </table>
+
+        <div class="section-title" style="margin-top: 4px">
+          MATRIZ POR RESULTADOS DE APRENDIZAJES (RA 1.1)
+        </div>
+        <table class="minerd-table">
+          <tr>
+            <td class="text-bold" style="width: 22%">
+              Nombre de la Institución:
+            </td>
+            <td style="width: 38%">
+              Colegio APEC Fernando Arturo de Meriño (CAFAM)
+            </td>
+            <td class="bg-blue-info text-center" style="width: 20%">
+              Bachillerato Técnico en:
+            </td>
+            <td style="width: 20%">
+              Diseño y Desarrollo de Aplicaciones Informáticas
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold">Módulo Formativo:</td>
+            <td>Análisis y diseño de sistemas informáticos</td>
+            <td class="bg-blue-info text-bold text-center">Código MF:</td>
+            <td>INCO-MF032_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold">Nombre del Docente:</td>
+            <td colspan="3">José Luis Mañón Rosario</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold valign-top">
+              Unidad de Competencia:
+            </td>
+            <td colspan="2" style="font-size: 7.2pt">
+              • <strong>UC_ETP_01_3:</strong> Resolución de problemas, análisis
+              y diseño de sistemas.
+            </td>
+            <td class="valign-top" style="padding: 0">
+              <table
+                style="width: 100%; height: 100%; border-collapse: collapse"
+              >
+                <tr>
+                  <td
+                    class="bg-blue-info text-bold text-center"
+                    style="border: none; border-bottom: 1px solid #000"
+                  >
+                    Código UC:
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    class="text-center"
+                    style="border: none; font-size: 7.5pt; padding: 4px"
+                  >
+                    UC_ETP_01_3
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" style="padding: 0">
+              <table
+                style="
+                  width: 100%;
+                  border-collapse: collapse;
+                  margin: 0;
+                  text-align: center;
+                "
+              >
+                <tr>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Cantidad de RA del MF:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Valor del RA a trabajar:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Horas/Semana del MF:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Fechas de Ejecución:
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none; border-right: 1px solid #000">5</td>
+                  <td style="border: none; border-right: 1px solid #000">
+                    20 Puntos (20%)
+                  </td>
+                  <td style="border: none; border-right: 1px solid #000">
+                    6 h/semana
+                  </td>
+                  <td style="border: none">Sem. 1 a Sem. 8</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-green-ra">Resultado de Aprendizaje (RA):</td>
+            <td colspan="2">
+              <strong>RA 1.1:</strong> Aplicar técnicas y herramientas
+              computacionales para la resolución de problemas, analizando los
+              componentes de algoritmos estructurados y su implementación en la
+              lógica de programación, considerando el entorno de desarrollo
+              utilizado.
+            </td>
+            <td class="bg-green-ra text-center">Nivel de Dominio (RA):</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-top: none; display: none"></td>
+            <td class="text-center" style="font-weight: bold; font-size: 7.5pt">
+              Nivel 4: Análisis
+            </td>
+          </tr>
+        </table>
+
+        <!-- Contraste EC vs CE RA 1.1 -->
+        <table class="minerd-table">
+          <thead>
+            <tr class="bg-salmon-header">
+              <th style="width: 8%">#EC</th>
+              <th style="width: 44%">Elementos de Capacidad (EC)</th>
+              <th style="width: 14%">Contraste EC vs CE</th>
+              <th style="width: 34%">
+                Criterios de Evaluación (Texto Oficial)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">EC.1</td>
+              <td>
+                Caracterizar las metodologías y etapas del proceso de resolución
+                de problemas computacionales y las funciones fundamentales del
+                ordenador en el entorno tecnológico.
+              </td>
+              <td class="text-center">CE1.1.1, CE1.1.5, CE1.1.6</td>
+              <td style="font-size: 6.8pt">
+                Describir metodologías de resolución (Polya, heurística),
+                funciones del ordenador (E/S, proceso, almacenamiento) y etapas
+                de solución de problemas.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.2</td>
+              <td>
+                Evaluar las características de los programas de software, los
+                principios de almacenamiento de datos y los tipos de datos en la
+                construcción de soluciones.
+              </td>
+              <td class="text-center">CE1.1.4, CE1.1.7, CE1.1.8</td>
+              <td style="font-size: 6.8pt">
+                Diferencia entre datos e información; características de calidad
+                del software (legibilidad, fiabilidad, eficiencia);
+                almacenamiento interno y auxiliar.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.3</td>
+              <td>
+                Analizar los elementos estructurales y la representación de
+                soluciones a problemas computacionales, como propuestas de
+                solución (algoritmos, diagramas de flujo, pseudocódigos).
+              </td>
+              <td class="text-center">CE1.1.2, CE1.1.9, CE1.1.10</td>
+              <td style="font-size: 6.8pt">
+                Elementos estructurales de algoritmos (cualitativos y
+                cuantitativos), lenguajes algorítmicos gráficos y no gráficos, y
+                flujo de datos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.4</td>
+              <td>
+                Diseñar diagramas de flujo estandarizados utilizando
+                herramientas digitales especializadas (Creately, Diagrams.net,
+                Visio, Lucidchart, Raptor).
+              </td>
+              <td class="text-center">CE1.1.3, CE1.1.11</td>
+              <td style="font-size: 6.8pt">
+                Identificar aplicaciones de diagramación y describir los
+                símbolos estandarizados en la representación de procesos
+                algorítmicos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.5</td>
+              <td>
+                Demostrar rigor metódico, capacidad analítica y precisión en la
+                estructuración lógica de soluciones algorítmicas.
+              </td>
+              <td class="text-center">Todos los CE</td>
+              <td style="font-size: 6.8pt">
+                Transversal a todos los Criterios de Evaluación del RA 1.1.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Actividades RA 1.1 (6 Columnas) -->
+        <div class="section-title" style="margin-top: 6px">
+          MATRIZ DE ACTIVIDADES Y CONTENIDOS (RA 1.1)
+        </div>
+        <table class="minerd-table" style="margin-top: 2px">
+          <thead>
+            <tr class="bg-green-header">
+              <th style="width: 17%">Elemento de Capacidad (EC)</th>
+              <th style="width: 11%">Nivel de Dominio</th>
+              <th style="width: 27%">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th style="width: 11%">Fecha / Semanas</th>
+              <th style="width: 14%">Instrumento</th>
+              <th style="width: 20%">Contenidos Mediadores</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.1:</strong> Metodologías y etapas de resolución de
+                problemas computacionales.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 4: Análisis
+              </td>
+              <td class="valign-top">
+                <strong>A.1.1.</strong> Analizar un caso de estudio sobre un
+                problema de procesamiento empresarial desglosando sus etapas
+                mediante Polya. (Evidencia: Informe técnico de análisis con
+                diagrama y arquitectura funcional).
+              </td>
+              <td class="text-center valign-top">Sem. 1-2</td>
+              <td class="valign-top">
+                Rúbrica analítica de análisis de problemas
+              </td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Metodologías (Polya), funciones
+                del ordenador, etapas.<br /><strong>Procedimentales:</strong>
+                Desglose analítico y mapeo E/S.<br /><strong
+                  >Actitudinales:</strong
+                >
+                Rigurosidad metódica.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.2:</strong> Calidad de software y principios de
+                almacenamiento de datos.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 4: Análisis
+              </td>
+              <td class="valign-top">
+                <strong>A.1.2.</strong> Evaluar algoritmos existentes analizando
+                memoria (RAM/ROM) y transformación de datos en información.
+                (Evidencia: Cuadro comparativo de calidad y gestión de memoria).
+              </td>
+              <td class="text-center valign-top">Sem. 3-4</td>
+              <td class="valign-top">Lista de cotejo de calidad de software</td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Datos vs información, calidad
+                (legibilidad, eficiencia), memoria.<br /><strong
+                  >Procedimentales:</strong
+                >
+                Evaluación de eficiencia.<br /><strong>Actitudinales:</strong>
+                Valoración de la eficiencia.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.3:</strong> Elementos estructurales de algoritmos
+                cuantitativos y cualitativos.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 4: Análisis
+              </td>
+              <td class="valign-top">
+                <strong>A.1.3.</strong> Clasificar y diseñar la estructura
+                lógica de algoritmos cualitativos y cuantitativos para un
+                sistema comercial. (Evidencia: Especificación lógica con
+                diagramas de flujo de datos).
+              </td>
+              <td class="text-center valign-top">Sem. 5-6</td>
+              <td class="valign-top">
+                Escala estimativa de representación algorítmica
+              </td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Algoritmos
+                cualitativos/cuantitativos, lenguaje gráfico/no gráfico.<br /><strong
+                  >Procedimentales:</strong
+                >
+                Clasificación y flujos.<br /><strong>Actitudinales:</strong>
+                Orden y claridad.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.4:</strong> Diagramación de flujo normalizada con
+                software especializado.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 3: Aplicación
+              </td>
+              <td class="valign-top">
+                <strong>A.1.4.</strong> Construir diagramas de flujo
+                normalizados (Diagrams.net/Raptor) para resolver problemas de
+                inventario. (Evidencia: Archivos editables y reporte de prueba
+                de escritorio).
+              </td>
+              <td class="text-center valign-top">Sem. 7-8</td>
+              <td class="valign-top">
+                Rúbrica analítica de diagramación de flujo
+              </td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Simbología estándar, herramientas
+                de diagramación.<br /><strong>Procedimentales:</strong> Modelado
+                formal y prueba de escritorio.<br /><strong
+                  >Actitudinales:</strong
+                >
+                Precisión simbólica.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.5 (Actitudinal):</strong> Rigor metódico y precisión
+                analítica.
+              </td>
+              <td class="text-center valign-top text-bold">Actitudinal</td>
+              <td colspan="4" class="text-center" style="font-style: italic">
+                Permea todos los EC y Actividades del RA 1.1. Instrumento:
+                Escala de valoración actitudinal / Registro de observación.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span
+            >Colegio APEC Fernando Arturo de Meriño (CAFAM) - Ordenanza 07-2025
+            DETP/MINERD</span
+          >
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- =========================================================
+         BLOQUE 2: RA 1.2
+         ========================================================= -->
+      <div class="ra-container" id="ra1-2">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+
+        <div class="docente-update-bar">
+          <span>Unidad de Apoyo y Actualización Docente – DETP.</span>
+          <span>Arcenio Paulino Salcedo, MA.</span>
+        </div>
+
+        <div class="section-title">PLANIFICACIÓN MODULAR</div>
+        <div
+          class="section-title"
+          style="font-weight: normal; margin-top: -2px"
+        >
+          Datos Generales
+        </div>
+
+        <table class="minerd-table">
+          <tr>
+            <td class="text-bold" style="width: 22%">Regional/Distrito:</td>
+            <td style="width: 78%" colspan="3">15-03</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Politécnico:</td>
+            <td colspan="3">Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Docente:</td>
+            <td colspan="3">José Luis Mañón Rosario</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Familia Profesional:</td>
+            <td colspan="3">Informática y Comunicaciones</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Ordenanza:</td>
+            <td colspan="3">07-2025</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Título o Bachillerato:</td>
+            <td colspan="3">
+              Bachillerato Técnico en Diseño y Desarrollo de Aplicaciones
+              Informáticas
+            </td>
+          </tr>
+          <tr>
+            <td class="text-bold">Módulo Formativo (MF):</td>
+            <td colspan="3">
+              INCO-MF032_3: Análisis y diseño de sistemas informáticos
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table text-center">
+          <tr>
+            <td colspan="6" class="text-bold">
+              MF # – Nombre del Módulo: INCO-MF032_3: Análisis y diseño de
+              sistemas informáticos
+            </td>
+            <td rowspan="2" class="text-bold" style="width: 14%">
+              Total<br />↓
+            </td>
+          </tr>
+          <tr class="text-bold">
+            <td style="width: 16%">No. del RA</td>
+            <td style="width: 14%">RA 1.1</td>
+            <td style="width: 14%">RA 1.2</td>
+            <td style="width: 14%">RA 1.3</td>
+            <td style="width: 14%">RA 1.4</td>
+            <td style="width: 14%">RA 1.5</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Tiempo</td>
+            <td>8 Sem.</td>
+            <td>10 Sem.</td>
+            <td>8 Sem.</td>
+            <td>5 Sem.</td>
+            <td>8 Sem.</td>
+            <td class="text-bold">39 Semanas</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Valor</td>
+            <td>20 Pts (20%)</td>
+            <td>25 Pts (25%)</td>
+            <td>20 Pts (20%)</td>
+            <td>15 Pts (15%)</td>
+            <td>20 Pts (20%)</td>
+            <td class="text-bold">100 Pts (100%)</td>
+          </tr>
+        </table>
+
+        <div class="section-title" style="margin-top: 4px">
+          MATRIZ POR RESULTADOS DE APRENDIZAJES (RA 1.2)
+        </div>
+        <table class="minerd-table">
+          <tr>
+            <td class="text-bold" style="width: 22%">
+              Nombre de la Institución:
+            </td>
+            <td style="width: 38%">
+              Colegio APEC Fernando Arturo de Meriño (CAFAM)
+            </td>
+            <td class="bg-blue-info text-center" style="width: 20%">
+              Bachillerato Técnico en:
+            </td>
+            <td style="width: 20%">
+              Diseño y Desarrollo de Aplicaciones Informáticas
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold">Módulo Formativo:</td>
+            <td>Análisis y diseño de sistemas informáticos</td>
+            <td class="bg-blue-info text-bold text-center">Código MF:</td>
+            <td>INCO-MF032_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold">Nombre del Docente:</td>
+            <td colspan="3">José Luis Mañón Rosario</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold valign-top">
+              Unidad de Competencia:
+            </td>
+            <td colspan="2" style="font-size: 7.2pt">
+              • <strong>UC_ETP_01_3:</strong> Resolución de problemas, análisis
+              y diseño de sistemas.
+            </td>
+            <td class="valign-top" style="padding: 0">
+              <table
+                style="width: 100%; height: 100%; border-collapse: collapse"
+              >
+                <tr>
+                  <td
+                    class="bg-blue-info text-bold text-center"
+                    style="border: none; border-bottom: 1px solid #000"
+                  >
+                    Código UC:
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    class="text-center"
+                    style="border: none; font-size: 7.5pt; padding: 4px"
+                  >
+                    UC_ETP_01_3
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" style="padding: 0">
+              <table
+                style="
+                  width: 100%;
+                  border-collapse: collapse;
+                  margin: 0;
+                  text-align: center;
+                "
+              >
+                <tr>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Cantidad de RA del MF:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Valor del RA a trabajar:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Horas/Semana del MF:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Fechas de Ejecución:
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none; border-right: 1px solid #000">5</td>
+                  <td style="border: none; border-right: 1px solid #000">
+                    25 Puntos (25%)
+                  </td>
+                  <td style="border: none; border-right: 1px solid #000">
+                    6 h/semana
+                  </td>
+                  <td style="border: none">Sem. 9 a Sem. 18</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-green-ra">Resultado de Aprendizaje (RA):</td>
+            <td colspan="2">
+              <strong>RA 1.2:</strong> Manipular operadores, funciones y
+              sentencias en pseudolenguaje para implementar soluciones
+              informáticas, cumpliendo especificaciones técnicas y garantizando
+              la precisión y eficiencia en la lógica de los algoritmos.
+            </td>
+            <td class="bg-green-ra text-center">Nivel de Dominio (RA):</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-top: none; display: none"></td>
+            <td class="text-center" style="font-weight: bold; font-size: 7.5pt">
+              Nivel 3: Aplicación
+            </td>
+          </tr>
+        </table>
+
+        <!-- Contraste EC vs CE RA 1.2 -->
+        <table class="minerd-table">
+          <thead>
+            <tr class="bg-salmon-header">
+              <th style="width: 8%">#EC</th>
+              <th style="width: 44%">Elementos de Capacidad (EC)</th>
+              <th style="width: 14%">Contraste EC vs CE</th>
+              <th style="width: 34%">
+                Criterios de Evaluación (Texto Oficial)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">EC.1</td>
+              <td>
+                Describir la estructura general del pseudolenguaje y declarar
+                los tipos de datos, variables e identificadores y constantes de
+                forma precisa en pseudocódigo.
+              </td>
+              <td class="text-center">CE1.2.1 a CE1.2.4</td>
+              <td style="font-size: 6.8pt">
+                Estructura del pseudolenguaje, tipos de datos reconocidos,
+                componentes de variables (nombre, tipo, valor) y constantes.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.2</td>
+              <td>
+                Aplicar operadores aritméticos, relacionales y lógicos
+                respetando la jerarquía de operaciones y el uso correcto de
+                paréntesis en expresiones complejas.
+              </td>
+              <td class="text-center">CE1.2.5 a CE1.2.7</td>
+              <td style="font-size: 6.8pt">
+                Operadores adecuados por expresión, precedencia de operadores y
+                uso de paréntesis para modificar el orden de evaluación.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.3</td>
+              <td>
+                Convertir expresiones algebraicas a expresiones lineales en
+                pseudolenguaje e implementar algoritmos estructurados
+                condicionales y selectivos.
+              </td>
+              <td class="text-center">CE1.2.8</td>
+              <td style="font-size: 6.8pt">
+                Conversión de expresiones algebraicas a lineales y clasificación
+                de expresiones de entrada, asignación, salida y decisión.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.4</td>
+              <td>
+                Demostrar precisión sintáctica, perseverancia en la depuración y
+                rigor lógico en la construcción de pseudocódigos.
+              </td>
+              <td class="text-center">Todos los CE</td>
+              <td style="font-size: 6.8pt">
+                Transversal a todos los Criterios de Evaluación del RA 1.2.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Actividades RA 1.2 -->
+        <div class="section-title" style="margin-top: 6px">
+          MATRIZ DE ACTIVIDADES Y CONTENIDOS (RA 1.2)
+        </div>
+        <table class="minerd-table" style="margin-top: 2px">
+          <thead>
+            <tr class="bg-green-header">
+              <th style="width: 17%">Elemento de Capacidad (EC)</th>
+              <th style="width: 11%">Nivel de Dominio</th>
+              <th style="width: 27%">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th style="width: 11%">Fecha / Semanas</th>
+              <th style="width: 14%">Instrumento</th>
+              <th style="width: 20%">Contenidos Mediadores</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.1:</strong> Sintaxis, tipos de datos, variables y
+                constantes.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 3: Aplicación
+              </td>
+              <td class="valign-top">
+                <strong>A.2.1.</strong> Construir la estructura base de un
+                algoritmo en pseudocódigo para facturación comercial declarando
+                variables y constantes. (Evidencia: Archivo de pseudocódigo base
+                formal).
+              </td>
+              <td class="text-center valign-top">Sem. 9-11</td>
+              <td class="valign-top">
+                Lista de cotejo de sintaxis y variables
+              </td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Estructura del pseudolenguaje,
+                tipos de datos, constantes.<br /><strong
+                  >Procedimentales:</strong
+                >
+                Declaración e inicialización.<br /><strong
+                  >Actitudinales:</strong
+                >
+                Precisión sintáctica.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.2:</strong> Operadores complejos y jerarquía de
+                precedencia.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 3: Aplicación
+              </td>
+              <td class="valign-top">
+                <strong>A.2.2.</strong> Resolver un cuaderno de ejercicios
+                algorítmicos con expresiones lógicas y aritméticas complejas
+                aplicando jerarquía. (Evidencia: Cuaderno de resolución
+                evaluado).
+              </td>
+              <td class="text-center valign-top">Sem. 12-14</td>
+              <td class="valign-top">
+                Escala estimativa de evaluación de operadores
+              </td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Operadores aritméticos,
+                relacionales y lógicos, precedencia.<br /><strong
+                  >Procedimentales:</strong
+                >
+                Evaluación de expresiones.<br /><strong>Actitudinales:</strong>
+                Rigor booleano.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.3:</strong> Conversión algebraica y estructuras
+                condicionales.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 3: Aplicación
+              </td>
+              <td class="valign-top">
+                <strong>A.2.3.</strong> Desarrollar algoritmos completos para
+                nómina y control de acceso convirtiendo fórmulas e implementando
+                Si-Entonces / Según. (Evidencia: Algoritmos con pruebas de
+                escritorio).
+              </td>
+              <td class="text-center valign-top">Sem. 15-18</td>
+              <td class="valign-top">
+                Rúbrica analítica de algoritmos en pseudocódigo
+              </td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Expresiones algebraicas a
+                lineales, estructuras selectivas.<br /><strong
+                  >Procedimentales:</strong
+                >
+                Codificación y trazas.<br /><strong>Actitudinales:</strong>
+                Perseverancia.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.4 (Actitudinal):</strong> Precisión sintáctica y
+                depuración metódica.
+              </td>
+              <td class="text-center valign-top text-bold">Actitudinal</td>
+              <td colspan="4" class="text-center" style="font-style: italic">
+                Permea todos los EC y Actividades del RA 1.2. Instrumento:
+                Escala de valoración actitudinal / Registro de observación.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span
+            >Colegio APEC Fernando Arturo de Meriño (CAFAM) - Ordenanza 07-2025
+            DETP/MINERD</span
+          >
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- =========================================================
+         BLOQUE 3: RA 1.3
+         ========================================================= -->
+      <div class="ra-container" id="ra1-3">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+
+        <div class="docente-update-bar">
+          <span>Unidad de Apoyo y Actualización Docente – DETP.</span>
+          <span>Arcenio Paulino Salcedo, MA.</span>
+        </div>
+
+        <div class="section-title">PLANIFICACIÓN MODULAR</div>
+        <div
+          class="section-title"
+          style="font-weight: normal; margin-top: -2px"
+        >
+          Datos Generales
+        </div>
+
+        <table class="minerd-table">
+          <tr>
+            <td class="text-bold" style="width: 22%">Regional/Distrito:</td>
+            <td style="width: 78%" colspan="3">15-03</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Politécnico:</td>
+            <td colspan="3">Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Docente:</td>
+            <td colspan="3">José Luis Mañón Rosario</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Familia Profesional:</td>
+            <td colspan="3">Informática y Comunicaciones</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Ordenanza:</td>
+            <td colspan="3">07-2025</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Título o Bachillerato:</td>
+            <td colspan="3">
+              Bachillerato Técnico en Diseño y Desarrollo de Aplicaciones
+              Informáticas
+            </td>
+          </tr>
+          <tr>
+            <td class="text-bold">Módulo Formativo (MF):</td>
+            <td colspan="3">
+              INCO-MF032_3: Análisis y diseño de sistemas informáticos
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table text-center">
+          <tr>
+            <td colspan="6" class="text-bold">
+              MF # – Nombre del Módulo: INCO-MF032_3: Análisis y diseño de
+              sistemas informáticos
+            </td>
+            <td rowspan="2" class="text-bold" style="width: 14%">
+              Total<br />↓
+            </td>
+          </tr>
+          <tr class="text-bold">
+            <td style="width: 16%">No. del RA</td>
+            <td style="width: 14%">RA 1.1</td>
+            <td style="width: 14%">RA 1.2</td>
+            <td style="width: 14%">RA 1.3</td>
+            <td style="width: 14%">RA 1.4</td>
+            <td style="width: 14%">RA 1.5</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Tiempo</td>
+            <td>8 Sem.</td>
+            <td>10 Sem.</td>
+            <td>8 Sem.</td>
+            <td>5 Sem.</td>
+            <td>8 Sem.</td>
+            <td class="text-bold">39 Semanas</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Valor</td>
+            <td>20 Pts (20%)</td>
+            <td>25 Pts (25%)</td>
+            <td>20 Pts (20%)</td>
+            <td>15 Pts (15%)</td>
+            <td>20 Pts (20%)</td>
+            <td class="text-bold">100 Pts (100%)</td>
+          </tr>
+        </table>
+
+        <div class="section-title" style="margin-top: 4px">
+          MATRIZ POR RESULTADOS DE APRENDIZAJES (RA 1.3)
+        </div>
+        <table class="minerd-table">
+          <tr>
+            <td class="text-bold" style="width: 22%">
+              Nombre de la Institución:
+            </td>
+            <td style="width: 38%">
+              Colegio APEC Fernando Arturo de Meriño (CAFAM)
+            </td>
+            <td class="bg-blue-info text-center" style="width: 20%">
+              Bachillerato Técnico en:
+            </td>
+            <td style="width: 20%">
+              Diseño y Desarrollo de Aplicaciones Informáticas
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold">Módulo Formativo:</td>
+            <td>Análisis y diseño de sistemas informáticos</td>
+            <td class="bg-blue-info text-bold text-center">Código MF:</td>
+            <td>INCO-MF032_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold">Nombre del Docente:</td>
+            <td colspan="3">José Luis Mañón Rosario</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold valign-top">
+              Unidad de Competencia:
+            </td>
+            <td colspan="2" style="font-size: 7.2pt">
+              • <strong>UC_ETP_01_3:</strong> Resolución de problemas, análisis
+              y diseño de sistemas.
+            </td>
+            <td class="valign-top" style="padding: 0">
+              <table
+                style="width: 100%; height: 100%; border-collapse: collapse"
+              >
+                <tr>
+                  <td
+                    class="bg-blue-info text-bold text-center"
+                    style="border: none; border-bottom: 1px solid #000"
+                  >
+                    Código UC:
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    class="text-center"
+                    style="border: none; font-size: 7.5pt; padding: 4px"
+                  >
+                    UC_ETP_01_3
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" style="padding: 0">
+              <table
+                style="
+                  width: 100%;
+                  border-collapse: collapse;
+                  margin: 0;
+                  text-align: center;
+                "
+              >
+                <tr>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Cantidad de RA del MF:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Valor del RA a trabajar:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Horas/Semana del MF:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Fechas de Ejecución:
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none; border-right: 1px solid #000">5</td>
+                  <td style="border: none; border-right: 1px solid #000">
+                    20 Puntos (20%)
+                  </td>
+                  <td style="border: none; border-right: 1px solid #000">
+                    6 h/semana
+                  </td>
+                  <td style="border: none">Sem. 19 a Sem. 26</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-green-ra">Resultado de Aprendizaje (RA):</td>
+            <td colspan="2">
+              <strong>RA 1.3:</strong> Planificar las actividades de análisis en
+              el ciclo de desarrollo de aplicaciones, aplicando metodologías y
+              parámetros establecidos para asegurar la eficacia en la
+              identificación de requisitos y diseño de soluciones.
+            </td>
+            <td class="bg-green-ra text-center">Nivel de Dominio (RA):</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-top: none; display: none"></td>
+            <td class="text-center" style="font-weight: bold; font-size: 7.5pt">
+              Nivel 4: Análisis
+            </td>
+          </tr>
+        </table>
+
+        <!-- Contraste EC vs CE RA 1.3 -->
+        <table class="minerd-table">
+          <thead>
+            <tr class="bg-salmon-header">
+              <th style="width: 8%">#EC</th>
+              <th style="width: 44%">Elementos de Capacidad (EC)</th>
+              <th style="width: 14%">Contraste EC vs CE</th>
+              <th style="width: 34%">
+                Criterios de Evaluación (Texto Oficial)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">EC.1</td>
+              <td>
+                Analizar la estructura organizacional de las empresas,
+                dependencias y procesos evaluando su impacto en el flujo de
+                información.
+              </td>
+              <td class="text-center">CE1.3.1 a CE1.3.3</td>
+              <td style="font-size: 6.8pt">
+                Procesos organizacionales, dependencias y departamentos, niveles
+                directivos y productivos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.2</td>
+              <td>
+                Evaluar la factibilidad técnica, económica y operacional,
+                seleccionando el método de análisis adecuado (ciclo de vida
+                clásico, estructurado o prototipos).
+              </td>
+              <td class="text-center">CE1.3.4, CE1.3.5</td>
+              <td style="font-size: 6.8pt">
+                Disponibilidad de recursos y métodos de análisis de sistemas
+                justificados al contexto.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.3</td>
+              <td>
+                Planificar la estrategia de recolección de información
+                justificando técnicas e instrumentos.
+              </td>
+              <td class="text-center">CE1.3.6</td>
+              <td style="font-size: 6.8pt">
+                Selección de técnicas de recolección (entrevistas,
+                cuestionarios, revisión, observación).
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.4</td>
+              <td>
+                Demostrar visión objetiva de la realidad institucional, ética
+                profesional y responsabilidad.
+              </td>
+              <td class="text-center">Todos los CE</td>
+              <td style="font-size: 6.8pt">
+                Transversal a todos los Criterios de Evaluación del RA 1.3.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Actividades RA 1.3 -->
+        <div class="section-title" style="margin-top: 6px">
+          MATRIZ DE ACTIVIDADES Y CONTENIDOS (RA 1.3)
+        </div>
+        <table class="minerd-table" style="margin-top: 2px">
+          <thead>
+            <tr class="bg-green-header">
+              <th style="width: 17%">Elemento de Capacidad (EC)</th>
+              <th style="width: 11%">Nivel de Dominio</th>
+              <th style="width: 27%">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th style="width: 11%">Fecha / Semanas</th>
+              <th style="width: 14%">Instrumento</th>
+              <th style="width: 20%">Contenidos Mediadores</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.1:</strong> Diagnóstico organizacional y flujos de
+                información.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 4: Análisis
+              </td>
+              <td class="valign-top">
+                <strong>A.3.1.</strong> Analizar el organigrama y mapa de
+                procesos de una empresa comercial detectando cuellos de botella
+                informativos. (Evidencia: Informe de diagnóstico y mapa de
+                procesos).
+              </td>
+              <td class="text-center valign-top">Sem. 19-21</td>
+              <td class="valign-top">
+                Rúbrica analítica de diagnóstico organizacional
+              </td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Estructura organizacional,
+                procesos y flujos.<br /><strong>Procedimentales:</strong> Mapeo
+                de procesos.<br /><strong>Actitudinales:</strong> Valoración
+                sistémica.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.2:</strong> Estudio de factibilidad y selección
+                metodológica.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 4: Análisis
+              </td>
+              <td class="valign-top">
+                <strong>A.3.2.</strong> Elaborar un estudio de factibilidad
+                integral (técnica, económica, operativa) comparando ciclos de
+                vida. (Evidencia: Documento de evaluación y propuesta
+                metodológica).
+              </td>
+              <td class="text-center valign-top">Sem. 22-24</td>
+              <td class="valign-top">
+                Rúbrica analítica de estudio de factibilidad
+              </td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Factibilidad integral y
+                metodologías.<br /><strong>Procedimentales:</strong> Análisis
+                costo-beneficio.<br /><strong>Actitudinales:</strong>
+                Objetividad profesional.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.3:</strong> Estrategia global de levantamiento de
+                información.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 3: Aplicación
+              </td>
+              <td class="valign-top">
+                <strong>A.3.3.</strong> Diseñar la estrategia global de
+                recolección de información clasificando técnicas por nivel de
+                usuario. (Evidencia: Plan de investigación y matriz de
+                técnicas).
+              </td>
+              <td class="text-center valign-top">Sem. 25-26</td>
+              <td class="valign-top">
+                Lista de cotejo de planificación de datos
+              </td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Técnicas de investigación de
+                campo.<br /><strong>Procedimentales:</strong> Selección
+                instrumental.<br /><strong>Actitudinales:</strong> Empatía
+                profesional.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.4 (Actitudinal):</strong> Ética en proyectos y visión
+                sistémica.
+              </td>
+              <td class="text-center valign-top text-bold">Actitudinal</td>
+              <td colspan="4" class="text-center" style="font-style: italic">
+                Permea todos los EC y Actividades del RA 1.3. Instrumento:
+                Escala de valoración actitudinal / Registro de observación.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span
+            >Colegio APEC Fernando Arturo de Meriño (CAFAM) - Ordenanza 07-2025
+            DETP/MINERD</span
+          >
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- =========================================================
+         BLOQUE 4: RA 1.4
+         ========================================================= -->
+      <div class="ra-container" id="ra1-4">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+
+        <div class="docente-update-bar">
+          <span>Unidad de Apoyo y Actualización Docente – DETP.</span>
+          <span>Arcenio Paulino Salcedo, MA.</span>
+        </div>
+
+        <div class="section-title">PLANIFICACIÓN MODULAR</div>
+        <div
+          class="section-title"
+          style="font-weight: normal; margin-top: -2px"
+        >
+          Datos Generales
+        </div>
+
+        <table class="minerd-table">
+          <tr>
+            <td class="text-bold" style="width: 22%">Regional/Distrito:</td>
+            <td style="width: 78%" colspan="3">15-03</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Politécnico:</td>
+            <td colspan="3">Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Docente:</td>
+            <td colspan="3">José Luis Mañón Rosario</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Familia Profesional:</td>
+            <td colspan="3">Informática y Comunicaciones</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Ordenanza:</td>
+            <td colspan="3">07-2025</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Título o Bachillerato:</td>
+            <td colspan="3">
+              Bachillerato Técnico en Diseño y Desarrollo de Aplicaciones
+              Informáticas
+            </td>
+          </tr>
+          <tr>
+            <td class="text-bold">Módulo Formativo (MF):</td>
+            <td colspan="3">
+              INCO-MF032_3: Análisis y diseño de sistemas informáticos
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table text-center">
+          <tr>
+            <td colspan="6" class="text-bold">
+              MF # – Nombre del Módulo: INCO-MF032_3: Análisis y diseño de
+              sistemas informáticos
+            </td>
+            <td rowspan="2" class="text-bold" style="width: 14%">
+              Total<br />↓
+            </td>
+          </tr>
+          <tr class="text-bold">
+            <td style="width: 16%">No. del RA</td>
+            <td style="width: 14%">RA 1.1</td>
+            <td style="width: 14%">RA 1.2</td>
+            <td style="width: 14%">RA 1.3</td>
+            <td style="width: 14%">RA 1.4</td>
+            <td style="width: 14%">RA 1.5</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Tiempo</td>
+            <td>8 Sem.</td>
+            <td>10 Sem.</td>
+            <td>8 Sem.</td>
+            <td>5 Sem.</td>
+            <td>8 Sem.</td>
+            <td class="text-bold">39 Semanas</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Valor</td>
+            <td>20 Pts (20%)</td>
+            <td>25 Pts (25%)</td>
+            <td>20 Pts (20%)</td>
+            <td>15 Pts (15%)</td>
+            <td>20 Pts (20%)</td>
+            <td class="text-bold">100 Pts (100%)</td>
+          </tr>
+        </table>
+
+        <div class="section-title" style="margin-top: 4px">
+          MATRIZ POR RESULTADOS DE APRENDIZAJES (RA 1.4)
+        </div>
+        <table class="minerd-table">
+          <tr>
+            <td class="text-bold" style="width: 22%">
+              Nombre de la Institución:
+            </td>
+            <td style="width: 38%">
+              Colegio APEC Fernando Arturo de Meriño (CAFAM)
+            </td>
+            <td class="bg-blue-info text-center" style="width: 20%">
+              Bachillerato Técnico en:
+            </td>
+            <td style="width: 20%">
+              Diseño y Desarrollo de Aplicaciones Informáticas
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold">Módulo Formativo:</td>
+            <td>Análisis y diseño de sistemas informáticos</td>
+            <td class="bg-blue-info text-bold text-center">Código MF:</td>
+            <td>INCO-MF032_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold">Nombre del Docente:</td>
+            <td colspan="3">José Luis Mañón Rosario</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold valign-top">
+              Unidad de Competencia:
+            </td>
+            <td colspan="2" style="font-size: 7.2pt">
+              • <strong>UC_ETP_01_3:</strong> Resolución de problemas, análisis
+              y diseño de sistemas.
+            </td>
+            <td class="valign-top" style="padding: 0">
+              <table
+                style="width: 100%; height: 100%; border-collapse: collapse"
+              >
+                <tr>
+                  <td
+                    class="bg-blue-info text-bold text-center"
+                    style="border: none; border-bottom: 1px solid #000"
+                  >
+                    Código UC:
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    class="text-center"
+                    style="border: none; font-size: 7.5pt; padding: 4px"
+                  >
+                    UC_ETP_01_3
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" style="padding: 0">
+              <table
+                style="
+                  width: 100%;
+                  border-collapse: collapse;
+                  margin: 0;
+                  text-align: center;
+                "
+              >
+                <tr>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Cantidad de RA del MF:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Valor del RA a trabajar:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Horas/Semana del MF:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Fechas de Ejecución:
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none; border-right: 1px solid #000">5</td>
+                  <td style="border: none; border-right: 1px solid #000">
+                    15 Puntos (15%)
+                  </td>
+                  <td style="border: none; border-right: 1px solid #000">
+                    6 h/semana
+                  </td>
+                  <td style="border: none">Sem. 27 a Sem. 31</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-green-ra">Resultado de Aprendizaje (RA):</td>
+            <td colspan="2">
+              <strong>RA 1.4:</strong> Aplicar técnicas de investigación para
+              recolectar información relevante, considerando los requerimientos
+              del usuario y el contexto del sistema a desarrollar.
+            </td>
+            <td class="bg-green-ra text-center">Nivel de Dominio (RA):</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-top: none; display: none"></td>
+            <td class="text-center" style="font-weight: bold; font-size: 7.5pt">
+              Nivel 3: Aplicación
+            </td>
+          </tr>
+        </table>
+
+        <!-- Contraste EC vs CE RA 1.4 -->
+        <table class="minerd-table">
+          <thead>
+            <tr class="bg-salmon-header">
+              <th style="width: 8%">#EC</th>
+              <th style="width: 44%">Elementos de Capacidad (EC)</th>
+              <th style="width: 14%">Contraste EC vs CE</th>
+              <th style="width: 34%">
+                Criterios de Evaluación (Texto Oficial)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">EC.1</td>
+              <td>
+                Reconocer y aplicar instrumentos de levantamiento de información
+                (cuestionarios, entrevistas, revisión documental, observación).
+              </td>
+              <td class="text-center">CE1.4.1, CE1.4.2</td>
+              <td style="font-size: 6.8pt">
+                Técnicas de investigación en análisis de requerimientos y
+                aplicación práctica en supuestos reales.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.2</td>
+              <td>
+                Capturar y clasificar tipos de datos recolectados (fechas,
+                numéricos, lógicos, textos) con precisión.
+              </td>
+              <td class="text-center">CE1.4.3</td>
+              <td style="font-size: 6.8pt">
+                Captura de datos diversos según necesidades del sistema con
+                rigor y organización.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.3</td>
+              <td>
+                Tabular los datos de entrada detallando su transformación
+                informática y organizando los resultados.
+              </td>
+              <td class="text-center">CE1.4.4, CE1.4.5</td>
+              <td style="font-size: 6.8pt">
+                Tabulación de resultados en fases iniciales y detalle del
+                tratamiento informático de datos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.4</td>
+              <td>
+                Demostrar cortesía, confidencialidad, ética en la recolección y
+                orden en el manejo documental.
+              </td>
+              <td class="text-center">Todos los CE</td>
+              <td style="font-size: 6.8pt">
+                Transversal a todos los Criterios de Evaluación del RA 1.4.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Actividades RA 1.4 -->
+        <div class="section-title" style="margin-top: 6px">
+          MATRIZ DE ACTIVIDADES Y CONTENIDOS (RA 1.4)
+        </div>
+        <table class="minerd-table" style="margin-top: 2px">
+          <thead>
+            <tr class="bg-green-header">
+              <th style="width: 17%">Elemento de Capacidad (EC)</th>
+              <th style="width: 11%">Nivel de Dominio</th>
+              <th style="width: 27%">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th style="width: 11%">Fecha / Semanas</th>
+              <th style="width: 14%">Instrumento</th>
+              <th style="width: 20%">Contenidos Mediadores</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.1:</strong> Kit de investigación de campo y
+                aplicación de técnicas.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 3: Aplicación
+              </td>
+              <td class="valign-top">
+                <strong>A.4.1.</strong> Diseñar y aplicar un kit completo de
+                investigación de campo (cuestionario, guía de entrevista, fichas
+                de observación). (Evidencia: Expediente diligenciado).
+              </td>
+              <td class="text-center valign-top">Sem. 27-29</td>
+              <td class="valign-top">Guía de observación y Rúbrica</td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Técnicas de investigación,
+                lenguaje técnico.<br /><strong>Procedimentales:</strong> Diseño
+                y validación presencial.<br /><strong>Actitudinales:</strong>
+                Confidencialidad y respeto.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.2 y EC.3:</strong> Tabulación y matriz de
+                transformación de datos.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 3: Aplicación
+              </td>
+              <td class="valign-top">
+                <strong>A.4.2.</strong> Tabular y procesar la información
+                recolectada clasificando tipos de datos y diseñando la matriz de
+                transformación a salidas. (Evidencia: Matriz tabulada y
+                flujograma de datos).
+              </td>
+              <td class="text-center valign-top">Sem. 30-31</td>
+              <td class="valign-top">Lista de cotejo de tabulación</td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Tipos de datos, matrices de
+                transformación.<br /><strong>Procedimentales:</strong>
+                Tabulación estructurada.<br /><strong>Actitudinales:</strong>
+                Rigor y organización.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.4 (Actitudinal):</strong> Protección de datos y ética
+                documental.
+              </td>
+              <td class="text-center valign-top text-bold">Actitudinal</td>
+              <td colspan="4" class="text-center" style="font-style: italic">
+                Permea todos los EC y Actividades del RA 1.4. Instrumento:
+                Escala de valoración actitudinal / Registro de observación.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span
+            >Colegio APEC Fernando Arturo de Meriño (CAFAM) - Ordenanza 07-2025
+            DETP/MINERD</span
+          >
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- =========================================================
+         BLOQUE 5: RA 1.5
+         ========================================================= -->
+      <div class="ra-container" id="ra1-5">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+
+        <div class="docente-update-bar">
+          <span>Unidad de Apoyo y Actualización Docente – DETP.</span>
+          <span>Arcenio Paulino Salcedo, MA.</span>
+        </div>
+
+        <div class="section-title">PLANIFICACIÓN MODULAR</div>
+        <div
+          class="section-title"
+          style="font-weight: normal; margin-top: -2px"
+        >
+          Datos Generales
+        </div>
+
+        <table class="minerd-table">
+          <tr>
+            <td class="text-bold" style="width: 22%">Regional/Distrito:</td>
+            <td style="width: 78%" colspan="3">15-03</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Politécnico:</td>
+            <td colspan="3">Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Docente:</td>
+            <td colspan="3">José Luis Mañón Rosario</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Familia Profesional:</td>
+            <td colspan="3">Informática y Comunicaciones</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Ordenanza:</td>
+            <td colspan="3">07-2025</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Título o Bachillerato:</td>
+            <td colspan="3">
+              Bachillerato Técnico en Diseño y Desarrollo de Aplicaciones
+              Informáticas
+            </td>
+          </tr>
+          <tr>
+            <td class="text-bold">Módulo Formativo (MF):</td>
+            <td colspan="3">
+              INCO-MF032_3: Análisis y diseño de sistemas informáticos
+            </td>
+          </tr>
+        </table>
+
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table text-center">
+          <tr>
+            <td colspan="6" class="text-bold">
+              MF # – Nombre del Módulo: INCO-MF032_3: Análisis y diseño de
+              sistemas informáticos
+            </td>
+            <td rowspan="2" class="text-bold" style="width: 14%">
+              Total<br />↓
+            </td>
+          </tr>
+          <tr class="text-bold">
+            <td style="width: 16%">No. del RA</td>
+            <td style="width: 14%">RA 1.1</td>
+            <td style="width: 14%">RA 1.2</td>
+            <td style="width: 14%">RA 1.3</td>
+            <td style="width: 14%">RA 1.4</td>
+            <td style="width: 14%">RA 1.5</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Tiempo</td>
+            <td>8 Sem.</td>
+            <td>10 Sem.</td>
+            <td>8 Sem.</td>
+            <td>5 Sem.</td>
+            <td>8 Sem.</td>
+            <td class="text-bold">39 Semanas</td>
+          </tr>
+          <tr>
+            <td class="text-bold">Valor</td>
+            <td>20 Pts (20%)</td>
+            <td>25 Pts (25%)</td>
+            <td>20 Pts (20%)</td>
+            <td>15 Pts (15%)</td>
+            <td>20 Pts (20%)</td>
+            <td class="text-bold">100 Pts (100%)</td>
+          </tr>
+        </table>
+
+        <div class="section-title" style="margin-top: 4px">
+          MATRIZ POR RESULTADOS DE APRENDIZAJES (RA 1.5)
+        </div>
+        <table class="minerd-table">
+          <tr>
+            <td class="text-bold" style="width: 22%">
+              Nombre de la Institución:
+            </td>
+            <td style="width: 38%">
+              Colegio APEC Fernando Arturo de Meriño (CAFAM)
+            </td>
+            <td class="bg-blue-info text-center" style="width: 20%">
+              Bachillerato Técnico en:
+            </td>
+            <td style="width: 20%">
+              Diseño y Desarrollo de Aplicaciones Informáticas
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold">Módulo Formativo:</td>
+            <td>Análisis y diseño de sistemas informáticos</td>
+            <td class="bg-blue-info text-bold text-center">Código MF:</td>
+            <td>INCO-MF032_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold">Nombre del Docente:</td>
+            <td colspan="3">José Luis Mañón Rosario</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info text-bold valign-top">
+              Unidad de Competencia:
+            </td>
+            <td colspan="2" style="font-size: 7.2pt">
+              • <strong>UC_ETP_01_3:</strong> Resolución de problemas, análisis
+              y diseño de sistemas.
+            </td>
+            <td class="valign-top" style="padding: 0">
+              <table
+                style="width: 100%; height: 100%; border-collapse: collapse"
+              >
+                <tr>
+                  <td
+                    class="bg-blue-info text-bold text-center"
+                    style="border: none; border-bottom: 1px solid #000"
+                  >
+                    Código UC:
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    class="text-center"
+                    style="border: none; font-size: 7.5pt; padding: 4px"
+                  >
+                    UC_ETP_01_3
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" style="padding: 0">
+              <table
+                style="
+                  width: 100%;
+                  border-collapse: collapse;
+                  margin: 0;
+                  text-align: center;
+                "
+              >
+                <tr>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Cantidad de RA del MF:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Valor del RA a trabajar:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-right: 1px solid #000;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Horas/Semana del MF:
+                  </td>
+                  <td
+                    class="bg-blue-info text-bold"
+                    style="
+                      width: 25%;
+                      border: none;
+                      border-bottom: 1px solid #000;
+                    "
+                  >
+                    Fechas de Ejecución:
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: none; border-right: 1px solid #000">5</td>
+                  <td style="border: none; border-right: 1px solid #000">
+                    20 Puntos (20%)
+                  </td>
+                  <td style="border: none; border-right: 1px solid #000">
+                    6 h/semana
+                  </td>
+                  <td style="border: none">Sem. 32 a Sem. 39</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-green-ra">Resultado de Aprendizaje (RA):</td>
+            <td colspan="2">
+              <strong>RA 1.5:</strong> Estructurar diagramas, componentes e
+              interfaces del sistema de información, integrando los datos
+              obtenidos durante la fase de investigación para asegurar la
+              coherencia funcional y técnica del sistema.
+            </td>
+            <td class="bg-green-ra text-center">Nivel de Dominio (RA):</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-top: none; display: none"></td>
+            <td class="text-center" style="font-weight: bold; font-size: 7.5pt">
+              Nivel 4: Análisis
+            </td>
+          </tr>
+        </table>
+
+        <!-- Contraste EC vs CE RA 1.5 -->
+        <table class="minerd-table">
+          <thead>
+            <tr class="bg-salmon-header">
+              <th style="width: 8%">#EC</th>
+              <th style="width: 44%">Elementos de Capacidad (EC)</th>
+              <th style="width: 14%">Contraste EC vs CE</th>
+              <th style="width: 34%">
+                Criterios de Evaluación (Texto Oficial)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">EC.1</td>
+              <td>
+                Interpretar resultados de investigación definiendo accesos,
+                entradas, salidas, consultas, reportes y confiabilidad.
+              </td>
+              <td class="text-center">CE1.5.1</td>
+              <td style="font-size: 6.8pt">
+                Determinación de requerimientos de acceso, procesamiento y
+                confiabilidad de resultados.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.2</td>
+              <td>
+                Revisar lógica algorítmica y operadores en pseudolenguaje
+                requeridos para la automatización.
+              </td>
+              <td class="text-center">CE1.5.2, CE1.5.3</td>
+              <td style="font-size: 6.8pt">
+                Elementos y componentes de algoritmos; clasificación de
+                operadores en pseudolenguaje.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.3</td>
+              <td>
+                Seleccionar y construir diagramas UML (casos de uso, clases,
+                comportamiento, secuencia y procesos).
+              </td>
+              <td class="text-center">CE1.5.4</td>
+              <td style="font-size: 6.8pt">
+                Modelado visual con casos de uso, clases, objetos e interacción
+                del sistema.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.4</td>
+              <td>
+                Diseñar interfaces de usuario (mockups UX/UI) y especificaciones
+                de entrada/salida bajo calidad.
+              </td>
+              <td class="text-center">CE1.5.5</td>
+              <td style="font-size: 6.8pt">
+                Diseño de componentes, interfaces de entrada/salida y controles
+                de acceso.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold">EC.5</td>
+              <td>
+                Demostrar compromiso con la calidad del diseño, orientación al
+                usuario y rigor técnico.
+              </td>
+              <td class="text-center">Todos los CE</td>
+              <td style="font-size: 6.8pt">
+                Transversal a todos los Criterios de Evaluación del RA 1.5.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Actividades RA 1.5 -->
+        <div class="section-title" style="margin-top: 6px">
+          MATRIZ DE ACTIVIDADES Y CONTENIDOS (RA 1.5)
+        </div>
+        <table class="minerd-table" style="margin-top: 2px">
+          <thead>
+            <tr class="bg-green-header">
+              <th style="width: 17%">Elemento de Capacidad (EC)</th>
+              <th style="width: 11%">Nivel de Dominio</th>
+              <th style="width: 27%">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th style="width: 11%">Fecha / Semanas</th>
+              <th style="width: 14%">Instrumento</th>
+              <th style="width: 20%">Contenidos Mediadores</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.1:</strong> Especificación formal de requerimientos
+                de software (SRS).
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 4: Análisis
+              </td>
+              <td class="valign-top">
+                <strong>A.5.1.</strong> Interpretar necesidades de control de
+                acceso y reportes elaborando el SRS bajo estándar IEEE 830.
+                (Evidencia: Documento SRS formal).
+              </td>
+              <td class="text-center valign-top">Sem. 32-34</td>
+              <td class="valign-top">Rúbrica de especificación SRS</td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Requerimientos funcionales y no
+                funcionales, IEEE 830.<br /><strong>Procedimentales:</strong>
+                Redacción técnica.<br /><strong>Actitudinales:</strong>
+                Orientación al cliente.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.3:</strong> Modelado orientado a objetos con
+                diagramas UML.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 4: Análisis
+              </td>
+              <td class="valign-top">
+                <strong>A.5.2.</strong> Diseñar el modelo de análisis orientado
+                a objetos estructurando Casos de Uso, Clases y Secuencia.
+                (Evidencia: Dossier UML en software CASE).
+              </td>
+              <td class="text-center valign-top">Sem. 35-37</td>
+              <td class="valign-top">Rúbrica de modelado UML</td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Lenguaje UML (Casos de Uso,
+                Clases, Secuencia).<br /><strong>Procedimentales:</strong>
+                Modelado en CASE.<br /><strong>Actitudinales:</strong>
+                Coherencia de diseño.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.4:</strong> Prototipado interactivo UX/UI y
+                validación de datos.
+              </td>
+              <td class="text-center valign-top text-bold">
+                Nivel 3: Aplicación
+              </td>
+              <td class="valign-top">
+                <strong>A.5.3.</strong> Diseñar mockups interactivos UX/UI para
+                pantallas de entrada, consulta y reportes con algoritmos de
+                validación. (Evidencia: Prototipo navegable y algoritmos).
+              </td>
+              <td class="text-center valign-top">Sem. 38-39</td>
+              <td class="valign-top">Rúbrica de prototipado UX/UI</td>
+              <td class="valign-top" style="font-size: 6.8pt">
+                <strong>Conceptuales:</strong> Patrones UX/UI, validación.<br /><strong
+                  >Procedimentales:</strong
+                >
+                Prototipado y pruebas de usabilidad.<br /><strong
+                  >Actitudinales:</strong
+                >
+                Creatividad y estética.
+              </td>
+            </tr>
+            <tr>
+              <td class="valign-top">
+                <strong>EC.5 (Actitudinal):</strong> Rigor documental y
+                compromiso con la calidad.
+              </td>
+              <td class="text-center valign-top text-bold">Actitudinal</td>
+              <td colspan="4" class="text-center" style="font-style: italic">
+                Permea todos los EC y Actividades del RA 1.5. Instrumento:
+                Escala de valoración actitudinal / Registro de observación.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span
+            >Colegio APEC Fernando Arturo de Meriño (CAFAM) - Ordenanza 07-2025
+            DETP/MINERD</span
+          >
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

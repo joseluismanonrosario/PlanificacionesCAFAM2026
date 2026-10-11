@@ -1,0 +1,2396 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planificación Modular - INCO-MF038_3 (CAFAM / MINERD)</title>
+    <style>
+      :root {
+        --color-verde-ra: #a9d18e;
+        --color-verde-header: #c5e0b4;
+        --color-azul-info: #bdd7ee;
+        --color-salmon-ec: #fce4d6;
+        --color-amarillo-nota: #ffff00;
+        --border-color: #000000;
+      }
+      * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #525659;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 8.5pt;
+        line-height: 1.2;
+        color: #000;
+      }
+      .top-toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background-color: #1f2937;
+        color: #fff;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 24px;
+        gap: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      }
+      .toolbar-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .toolbar-title {
+        font-size: 13px;
+        font-weight: bold;
+      }
+      .nav-ra-buttons {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .btn-ra {
+        background-color: #374151;
+        color: #e5e7eb;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-size: 11px;
+        font-weight: bold;
+        border-radius: 4px;
+        border: 1px solid #4b5563;
+      }
+      .btn-ra:hover {
+        background-color: #2563eb;
+        color: #fff;
+      }
+      .btn-print {
+        background-color: #16a34a;
+        color: #fff;
+        border: none;
+        padding: 7px 15px;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .btn-print:hover {
+        background-color: #15803d;
+      }
+      .document-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 15px 60px 15px;
+        gap: 35px;
+      }
+      .ra-container {
+        background-color: #ffffff;
+        width: 100%;
+        max-width: 216mm;
+        padding: 12mm 14mm 14mm 14mm;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        box-sizing: border-box;
+        scroll-margin-top: 60px;
+      }
+      .header-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 4px;
+      }
+      .header-table td {
+        border: none !important;
+        padding: 0;
+        vertical-align: middle;
+      }
+      .logo-cafam-img {
+        max-width: 65px;
+        height: auto;
+        display: block;
+      }
+      .logo-detp-img {
+        max-width: 140px;
+        height: auto;
+        display: block;
+        margin-left: auto;
+      }
+      .header-text {
+        text-align: center;
+        font-size: 9pt;
+        line-height: 1.25;
+        padding: 0 8px;
+      }
+      .header-text .t1 {
+        font-weight: bold;
+        font-size: 9.5pt;
+      }
+      .header-text .t2 {
+        font-weight: bold;
+        font-size: 9pt;
+      }
+      .header-text .t3 {
+        font-size: 8.5pt;
+      }
+      .header-text .t4 {
+        font-weight: bold;
+        font-size: 9pt;
+        margin-top: 1px;
+      }
+      .docente-update-bar {
+        text-align: center;
+        font-size: 7.2pt;
+        font-style: italic;
+        color: #333;
+        margin-bottom: 5px;
+      }
+      .docente-update-bar span {
+        margin: 0 10px;
+      }
+      .section-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 8.5pt;
+        margin-top: 4px;
+        margin-bottom: 3px;
+      }
+      table.minerd-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 5px;
+        font-size: 7.8pt;
+        table-layout: fixed;
+      }
+      table.minerd-table td,
+      table.minerd-table th {
+        border: 1px solid var(--border-color);
+        padding: 2.2px 3.5px;
+        vertical-align: middle;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      .bg-green-ra {
+        background-color: var(--color-verde-ra) !important;
+        font-weight: bold;
+      }
+      .bg-green-header {
+        background-color: var(--color-verde-header) !important;
+        font-weight: bold;
+        text-align: center;
+      }
+      .bg-blue-info {
+        background-color: var(--color-azul-info) !important;
+        font-weight: bold;
+      }
+      .bg-salmon-header {
+        background-color: var(--color-salmon-ec) !important;
+        font-weight: bold;
+        text-align: center;
+      }
+      .bg-yellow-note {
+        background-color: var(--color-amarillo-nota) !important;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .text-bold {
+        font-weight: bold;
+      }
+      .valign-top {
+        vertical-align: top !important;
+      }
+      .footer-bar {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #000;
+        padding-top: 4px;
+        margin-top: 12px;
+        font-size: 7.5pt;
+        font-weight: bold;
+      }
+      @page {
+        size: letter portrait;
+        margin: 8mm 8mm 8mm 8mm;
+      }
+      @media print {
+        html,
+        body {
+          background-color: #fff !important;
+          width: 100%;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        .top-toolbar {
+          display: none !important;
+        }
+        .document-wrapper {
+          padding: 0 !important;
+          margin: 0 !important;
+          gap: 0 !important;
+          display: block !important;
+        }
+        .ra-container {
+          box-shadow: none !important;
+          padding: 0 !important;
+          margin: 0 auto !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          page-break-before: always;
+        }
+        .ra-container:first-child {
+          page-break-before: avoid;
+        }
+        table.minerd-table {
+          page-break-inside: auto;
+        }
+        tr {
+          page-break-inside: avoid;
+          page-break-after: auto;
+        }
+        thead {
+          display: table-header-group;
+        }
+        .footer-bar {
+          page-break-after: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Barra superior fija con los enlaces a cada RA del documento -->
+    <div class="top-toolbar">
+      <div class="toolbar-left">
+        <span class="toolbar-title"
+          >INCO-MF038_3: Implementación y mantenimiento de aplicaciones y
+          sistemas informáticos, parametrizables</span
+        >
+        <div class="nav-ra-buttons">
+          <a href="#ra7-1" class="btn-ra">RA 7.1</a>
+          <a href="#ra7-2" class="btn-ra">RA 7.2</a>
+          <a href="#ra7-3" class="btn-ra">RA 7.3</a>
+          <a href="#ra7-4" class="btn-ra">RA 7.4</a>
+          <a href="#ra7-5" class="btn-ra">RA 7.5</a>
+          <a href="#ra7-6" class="btn-ra">RA 7.6</a>
+        </div>
+      </div>
+      <button class="btn-print" onclick="window.print()">
+        Descargar / Guardar como PDF
+      </button>
+    </div>
+
+    <div class="document-wrapper">
+      <!-- ========================================== -->
+      <!-- BLOQUE 1: RESULTADO DE APRENDIZAJE RA 7.1 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-1">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Bachillerato Técnico:</td>
+            <td>Diseño y Desarrollo de Aplicaciones Informáticas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito Educativo:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Módulo Formativo:</td>
+            <td>
+              Implementación y mantenimiento de aplicaciones y sistemas
+              informáticos, parametrizables
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>INCO-MF038_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Modular:</td>
+            <td>117 Horas/Año (3 Horas/Semana)</td>
+            <td class="bg-blue-info">Semanas Lectivas:</td>
+            <td>39 Semanas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC02_3:</strong> Configurar características básicas de
+              sistemas parametrizables de gestión según lineamientos
+              supervisados.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los Resultados de Aprendizaje
+          (RA)
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 16%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">Total Modular</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo (Semanas)</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">7 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor (Ponderación)</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">20%</td>
+              <td class="text-center">20%</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 7.1 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.1
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">INCO-MF038_3</td>
+              <td>
+                <strong>UC02_3:</strong> Configurar características básicas de
+                sistemas parametrizables de gestión según lineamientos
+                supervisados.
+              </td>
+              <td class="text-center">18 Horas (3 h/sem)</td>
+              <td class="text-center">Semanas 1 a 6 (6 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Enunciado Oficial del RA 7.1:</strong> Aplicar procesos
+                y técnicas de prueba específicas al tipo de aplicación o sistema
+                desarrollado para garantizar su calidad, funcionalidad y
+                rendimiento, asegurando que cumpla con los requisitos definidos
+                y detectando posibles defectos antes de su despliegue.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio Taxonómico:</strong> Nivel 4: Análisis
+              </td>
+              <td colspan="2"><strong>Valor del RA:</strong> 15% (15 Pts)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.1
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación (CE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Caracterizar e identificar los parámetros clave de calidad
+                organizacional y seleccionar los tipos de pruebas (unitarias,
+                integración, sistema, caja blanca, caja negra) aplicables al
+                software.
+              </td>
+              <td class="text-center valign-top">CE7.1.1, CE7.1.2, CE7.1.6</td>
+              <td class="valign-top">
+                <strong>CE7.1.1:</strong> Identificar y aplicar los parámetros
+                clave que determinan la calidad dentro de la organización,
+                comprendiendo sus impactos en el desarrollo y la evaluación del
+                sistema.<br />
+                <strong>CE7.1.2:</strong> Seleccionar e implementar de manera
+                adecuada el tipo de prueba más apropiado (código, pruebas
+                unitarias, integración, sistema, aceptación, caja blanca, caja
+                negra) según los requisitos específicos del sistema a
+                evaluar.<br />
+                <strong>CE7.1.6:</strong> Seleccionar e implementar
+                correctamente los tipos de prueba más adecuados según el tipo de
+                aplicación o sistema desarrollado, ajustándolos a las
+                características del entorno y los objetivos del proyecto.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Manipular técnicas de prueba avanzadas (regresión, rendimiento),
+                verificar el cumplimiento de requisitos funcionales y registrar
+                los defectos detectados en informes técnicos.
+              </td>
+              <td class="text-center valign-top">
+                CE7.1.3, CE7.1.4, CE7.1.5, CE7.1.7
+              </td>
+              <td class="valign-top">
+                <strong>CE7.1.3:</strong> Manipular correctamente las técnicas
+                de prueba adecuadas (unitarias, integrales, de regresión, de
+                rendimiento, entre otros) en el sistema o aplicación
+                desarrollada, garantizando su cobertura completa.<br />
+                <strong>CE7.1.4:</strong> Evaluar y comprobar que la aplicación
+                o sistema cumple con los requisitos establecidos, verificando su
+                calidad en términos de funcionalidad, usabilidad y
+                rendimiento.<br />
+                <strong>CE7.1.5:</strong> Identificar defectos y errores en el
+                sistema durante las pruebas, aplicando técnicas efectivas para
+                su resolución antes del despliegue.<br />
+                <strong>CE7.1.7:</strong> Registrar, documentar y analizar los
+                resultados de las pruebas realizadas, y proporcionar informes
+                claros que faciliten la toma de decisiones y posibles mejoras en
+                el sistema o aplicación.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Demostrar compromiso con la calidad, rigor técnico y objetividad
+                sistemática en la detección y reporte de errores de software.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 7.1.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Matriz de Actividades y Contenidos Mediadores RA 7.1
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.1.1.</strong> Diseñar y ejecutar un plan de pruebas
+                integral (caja blanca, caja negra, unitarias y de integración)
+                para un módulo de software parametrizable, identificando
+                parámetros de calidad y documentando los casos de prueba.<br />
+                <em
+                  >(Evidencia: Documento del Plan de Pruebas y Matriz de Casos
+                  de Prueba ejecutados).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 1 - Sem. 6</td>
+              <td class="valign-top">
+                Rúbrica analítica de pruebas de software
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Parámetros de calidad de
+                software. Tipos de prueba (código, unitarias, integración,
+                sistema, aceptación, caja blanca/negra). Principios y niveles de
+                calidad.<br />
+                <strong>Procedimentales:</strong> Selección e implementación de
+                tipos de prueba según requisitos del sistema. Diseño de matrices
+                de prueba de caja blanca y caja negra.<br />
+                <strong>Actitudinales:</strong> Rigor metodológico y precisión
+                en la evaluación de la calidad del software.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.1.2.</strong> Ejecutar pruebas de regresión y
+                rendimiento sobre la aplicación, registrando las fallas en un
+                informe de hallazgos y proponiendo acciones de corrección antes
+                del despliegue.<br />
+                <em
+                  >(Evidencia: Informe técnico de resultados de pruebas y
+                  registro de defectos (Bug Tracking Report)).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 1 - Sem. 6</td>
+              <td class="valign-top">
+                Lista de cotejo de ejecución y documentación de pruebas
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Técnicas de prueba (regresión,
+                rendimiento). Métricas de usabilidad y funcionalidad. Informes
+                de hallazgos y toma de decisiones.<br />
+                <strong>Procedimentales:</strong> Ejecución de pruebas de
+                rendimiento y regresión. Registro y clasificación de errores
+                detectados. Redacción de informes de prueba.<br />
+                <strong>Actitudinales:</strong> Objetividad y transparencia en
+                el reporte de fallas del sistema.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>EC Actitudinal:</strong> Demostrar compromiso con la
+                calidad, rigor técnico y objetividad sistemática en la detección
+                y reporte de errores de software.<br />
+                <em
+                  >(Evidencia: Registro de observación actitudinal en pruebas de
+                  software).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 1 - Sem. 6</td>
+              <td class="valign-top">
+                Escala estimativa de desempeño actitudinal
+              </td>
+              <td class="valign-top">
+                <strong>Actitudinal Transversal:</strong> Demostrar compromiso
+                con la calidad, rigor técnico y objetividad sistemática en la
+                detección y reporte de errores de software.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 2: RESULTADO DE APRENDIZAJE RA 7.2 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-2">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Bachillerato Técnico:</td>
+            <td>Diseño y Desarrollo de Aplicaciones Informáticas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito Educativo:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Módulo Formativo:</td>
+            <td>
+              Implementación y mantenimiento de aplicaciones y sistemas
+              informáticos, parametrizables
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>INCO-MF038_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Modular:</td>
+            <td>117 Horas/Año (3 Horas/Semana)</td>
+            <td class="bg-blue-info">Semanas Lectivas:</td>
+            <td>39 Semanas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC02_3:</strong> Configurar características básicas de
+              sistemas parametrizables de gestión según lineamientos
+              supervisados.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los Resultados de Aprendizaje
+          (RA)
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 16%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">Total Modular</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo (Semanas)</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">7 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor (Ponderación)</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">20%</td>
+              <td class="text-center">20%</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 7.2 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.2
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">INCO-MF038_3</td>
+              <td>
+                <strong>UC02_3:</strong> Configurar características básicas de
+                sistemas parametrizables de gestión según lineamientos
+                supervisados.
+              </td>
+              <td class="text-center">18 Horas (3 h/sem)</td>
+              <td class="text-center">Semanas 7 a 12 (6 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Enunciado Oficial del RA 7.2:</strong> Evaluar y
+                seleccionar el tipo de implementación más adecuado para la
+                puesta en marcha de la aplicación o sistema desarrollado,
+                considerando los requisitos técnicos, operativos y de negocio.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio Taxonómico:</strong> Nivel 3:
+                Aplicación
+              </td>
+              <td colspan="2"><strong>Valor del RA:</strong> 15% (15 Pts)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.2
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación (CE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Seleccionar y ejecutar el tipo de instalación adecuado (directa,
+                en paralelo, en localidades individuales, por fases) conforme a
+                las políticas institucionales y recepcionar los entregables.
+              </td>
+              <td class="text-center valign-top">CE7.2.1, CE7.2.2, CE7.2.3</td>
+              <td class="valign-top">
+                <strong>CE7.2.1:</strong> Seleccionar el tipo de instalación
+                (directa, en paralelo, en localidades individuales, por fases)
+                de acuerdo con los parámetros establecidos.<br />
+                <strong>CE7.2.2:</strong> Realizar la instalación seleccionada
+                (directa, en paralelo, en localidades individuales, por fases)
+                de acuerdo con las políticas de la organización.<br />
+                <strong>CE7.2.3:</strong> Realizar la recepción de los
+                entregables de los procesos de codificación, prueba e
+                instalación.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.2 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Valorar la planificación de la puesta en marcha y actuar con
+                responsabilidad en la entrega de productos de software
+                confiables.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 7.2.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Matriz de Actividades y Contenidos Mediadores RA 7.2
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.2.1.</strong> Simular la puesta en marcha de un
+                sistema informático empresarial evaluando los modelos de
+                instalación (directa, paralelo, por fases, localidades) y
+                ejecutando el protocolo de instalación y recepción de
+                entregables.<br />
+                <em
+                  >(Evidencia: Expediente de puesta en marcha con acta de
+                  recepción de entregables y manual de instalación).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 7 - Sem. 12</td>
+              <td class="valign-top">
+                Guía de observación de procesos de despliegue
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Estrategias de implementación y
+                despliegue (instalación directa, en paralelo, por fases, por
+                localidades). Políticas de instalación empresarial. Control de
+                entregables de software.<br />
+                <strong>Procedimentales:</strong> Análisis comparativo de
+                estrategias de despliegue. Configuración del entorno e
+                instalación del software. Verificación y recepción de
+                entregables de código y pruebas.<br />
+                <strong>Actitudinales:</strong> Responsabilidad en el
+                cumplimiento de las políticas organizacionales de despliegue.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.2 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>EC Actitudinal:</strong> Valorar la planificación de la
+                puesta en marcha y actuar con responsabilidad en la entrega de
+                productos de software confiables.<br />
+                <em
+                  >(Evidencia: Registro de observación actitudinal en despliegue
+                  de software).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 7 - Sem. 12</td>
+              <td class="valign-top">
+                Escala estimativa de compromiso profesional
+              </td>
+              <td class="valign-top">
+                <strong>Actitudinal Transversal:</strong> Valorar la
+                planificación de la puesta en marcha y actuar con
+                responsabilidad en la entrega de productos de software
+                confiables.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 3: RESULTADO DE APRENDIZAJE RA 7.3 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-3">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Bachillerato Técnico:</td>
+            <td>Diseño y Desarrollo de Aplicaciones Informáticas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito Educativo:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Módulo Formativo:</td>
+            <td>
+              Implementación y mantenimiento de aplicaciones y sistemas
+              informáticos, parametrizables
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>INCO-MF038_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Modular:</td>
+            <td>117 Horas/Año (3 Horas/Semana)</td>
+            <td class="bg-blue-info">Semanas Lectivas:</td>
+            <td>39 Semanas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC02_3:</strong> Configurar características básicas de
+              sistemas parametrizables de gestión según lineamientos
+              supervisados.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los Resultados de Aprendizaje
+          (RA)
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 16%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">Total Modular</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo (Semanas)</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">7 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor (Ponderación)</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">20%</td>
+              <td class="text-center">20%</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 7.3 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.3
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">INCO-MF038_3</td>
+              <td>
+                <strong>UC02_3:</strong> Configurar características básicas de
+                sistemas parametrizables de gestión según lineamientos
+                supervisados.
+              </td>
+              <td class="text-center">18 Horas (3 h/sem)</td>
+              <td class="text-center">Semanas 13 a 18 (6 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Enunciado Oficial del RA 7.3:</strong> Identificar y
+                analizar errores en la aplicación para garantizar su correcto
+                funcionamiento, y ejecutar copias de respaldo para asegurar la
+                continuidad operativa.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio Taxonómico:</strong> Nivel 4: Análisis
+              </td>
+              <td colspan="2"><strong>Valor del RA:</strong> 15% (15 Pts)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.3
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación (CE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Realizar pruebas diagnósticas, evaluar resultados, detectar y
+                citar errores del sistema conforme a los procedimientos del
+                departamento de desarrollo.
+              </td>
+              <td class="text-center valign-top">CE7.3.1, CE7.3.2, CE7.3.3</td>
+              <td class="valign-top">
+                <strong>CE7.3.1:</strong> Realizar las pruebas diagnósticas al
+                sistema según los parámetros establecidos por el departamento de
+                desarrollo.<br />
+                <strong>CE7.3.2:</strong> Evaluar los resultados de las pruebas
+                diagnósticas y detectar posibles errores en el sistema para su
+                corrección.<br />
+                <strong>CE7.3.3:</strong> Citar los errores encontrados en el
+                sistema de acuerdo con los procedimientos del departamento de
+                desarrollo.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Corregir errores de sintaxis, tipos, desbordamiento y
+                referencias, y aplicar políticas de copias de seguridad
+                (completa, incremental, diferencial).
+              </td>
+              <td class="text-center valign-top">CE7.3.4, CE7.3.5</td>
+              <td class="valign-top">
+                <strong>CE7.3.4:</strong> Corregir los errores (sintaxis, tamaño
+                del campo, tipos de variables, desbordamiento, referencias)
+                encontrados en el sistema de acuerdo con los procedimientos
+                establecidos por el departamento de desarrollo.<br />
+                <strong>CE7.3.5:</strong> Aplicar copias de seguridad (completa,
+                incremental y diferencial) de acuerdo con políticas de la
+                empresa.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Mostrar actitud meticulosa en la corrección de errores y
+                compromiso con la seguridad y respaldo de datos.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 7.3.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Matriz de Actividades y Contenidos Mediadores RA 7.3
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.3.1.</strong> Aplicar pruebas diagnósticas a un
+                sistema con fallas operativas simuladas, identificando,
+                clasificando y citando los errores de lógica y rendimiento en la
+                bitácora de incidencias.<br />
+                <em
+                  >(Evidencia: Bitácora técnica de diagnóstico de errores de
+                  aplicación).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 13 - Sem. 18</td>
+              <td class="valign-top">
+                Rúbrica de diagnóstico y análisis de errores
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Pruebas diagnósticas del sistema.
+                Clasificación de errores en software. Procedimientos
+                institucionales de citación y registro de fallas.<br />
+                <strong>Procedimentales:</strong> Ejecución de herramientas
+                diagnósticas. Análisis de logs y comportamiento anómalo.
+                Documentación estandarizada de errores.<br />
+                <strong>Actitudinales:</strong> Perseverancia y agudeza
+                analítica en la localización de fallas complejas.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.3.2.</strong> Refactorizar y corregir el código
+                defectuoso solucionando errores de desbordamiento, tipos de
+                variables y referencias, e implementar un plan de copias de
+                seguridad (completa, incremental y diferencial).<br />
+                <em
+                  >(Evidencia: Código fuente corregido y Scripts de respaldo de
+                  base de datos/archivos ejecutados).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 13 - Sem. 18</td>
+              <td class="valign-top">
+                Lista de cotejo de corrección de código y respaldos
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Tipos de errores de programación
+                (sintaxis, desbordamiento, referencias, tipos). Estrategias de
+                backup (completo, incremental, diferencial). Continuidad
+                operativa.<br />
+                <strong>Procedimentales:</strong> Depuración y corrección de
+                código fuente. Configuración y ejecución de procedimientos de
+                copia de seguridad.<br />
+                <strong>Actitudinales:</strong> Proactividad e interés por la
+                preservación e integridad de la información.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.3 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>EC Actitudinal:</strong> Mostrar actitud meticulosa en
+                la corrección de errores y compromiso con la seguridad y
+                respaldo de datos.<br />
+                <em
+                  >(Evidencia: Registro de observación actitudinal en depuración
+                  y resguardo).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 13 - Sem. 18</td>
+              <td class="valign-top">Escala estimativa de rigor operativo</td>
+              <td class="valign-top">
+                <strong>Actitudinal Transversal:</strong> Mostrar actitud
+                meticulosa en la corrección de errores y compromiso con la
+                seguridad y respaldo de datos.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 4: RESULTADO DE APRENDIZAJE RA 7.4 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-4">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Bachillerato Técnico:</td>
+            <td>Diseño y Desarrollo de Aplicaciones Informáticas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito Educativo:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Módulo Formativo:</td>
+            <td>
+              Implementación y mantenimiento de aplicaciones y sistemas
+              informáticos, parametrizables
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>INCO-MF038_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Modular:</td>
+            <td>117 Horas/Año (3 Horas/Semana)</td>
+            <td class="bg-blue-info">Semanas Lectivas:</td>
+            <td>39 Semanas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC02_3:</strong> Configurar características básicas de
+              sistemas parametrizables de gestión según lineamientos
+              supervisados.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los Resultados de Aprendizaje
+          (RA)
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 16%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">Total Modular</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo (Semanas)</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">7 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor (Ponderación)</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">20%</td>
+              <td class="text-center">20%</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 7.4 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.4
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">INCO-MF038_3</td>
+              <td>
+                <strong>UC02_3:</strong> Configurar características básicas de
+                sistemas parametrizables de gestión según lineamientos
+                supervisados.
+              </td>
+              <td class="text-center">18 Horas (3 h/sem)</td>
+              <td class="text-center">Semanas 19 a 24 (6 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Enunciado Oficial del RA 7.4:</strong> Optimizar el
+                sistema de software para aprovechar al máximo la capacidad del
+                hardware disponible.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio Taxonómico:</strong> Nivel 3:
+                Aplicación
+              </td>
+              <td colspan="2"><strong>Valor del RA:</strong> 15% (15 Pts)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.4
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación (CE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Ajustar la configuración del hardware, optimizar componentes de
+                software e integrarlos eficientemente según parámetros de
+                rendimiento.
+              </td>
+              <td class="text-center valign-top">CE7.4.1, CE7.4.2, CE7.4.3</td>
+              <td class="valign-top">
+                <strong>CE7.4.1:</strong> Ajustar la configuración del hardware
+                según los parámetros de rendimiento definidos para el sistema de
+                software.<br />
+                <strong>CE7.4.2:</strong> Optimizar los componentes del sistema
+                de software de acuerdo con los requerimientos técnicos y
+                funcionales establecidos.<br />
+                <strong>CE7.4.3:</strong> Integrar de manera eficiente los
+                componentes al sistema de software, asegurando el cumplimiento
+                de los requisitos establecidos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.2 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Moverse con iniciativa hacia la mejora continua del rendimiento
+                y el uso consciente de recursos de hardware.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 7.4.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Matriz de Actividades y Contenidos Mediadores RA 7.4
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.4.1.</strong> Configurar parámetros de memoria, caché
+                y procesamiento en el entorno de ejecución, optimizando los
+                módulos de software para maximizar la velocidad de respuesta y
+                el uso eficiente del hardware.<br />
+                <em
+                  >(Evidencia: Informe de optimización de rendimiento y
+                  benchmarks comparativos de procesamiento).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 19 - Sem. 24</td>
+              <td class="valign-top">
+                Lista de cotejo de optimización e integración hardware-software
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Parámetros de rendimiento de
+                hardware y software. Técnicas de optimización de código y uso de
+                memoria. Métricas de consumo de recursos (CPU, RAM, E/S).<br />
+                <strong>Procedimentales:</strong> Ajuste de configuraciones del
+                servidor/entorno. Refactorización de componentes para alta
+                eficiencia. Medición comparativa de tiempos de respuesta.<br />
+                <strong>Actitudinales:</strong> Orientación a la eficiencia y la
+                excelencia técnica en el uso de recursos tecnológicos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.2 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>EC Actitudinal:</strong> Moverse con iniciativa hacia la
+                mejora continua del rendimiento y el uso consciente de recursos
+                de hardware.<br />
+                <em
+                  >(Evidencia: Registro de observación de iniciativa y mejora
+                  continua).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 19 - Sem. 24</td>
+              <td class="valign-top">Guía de observación actitudinal</td>
+              <td class="valign-top">
+                <strong>Actitudinal Transversal:</strong> Moverse con iniciativa
+                hacia la mejora continua del rendimiento y el uso consciente de
+                recursos de hardware.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 5: RESULTADO DE APRENDIZAJE RA 7.5 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-5">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Bachillerato Técnico:</td>
+            <td>Diseño y Desarrollo de Aplicaciones Informáticas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito Educativo:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Módulo Formativo:</td>
+            <td>
+              Implementación y mantenimiento de aplicaciones y sistemas
+              informáticos, parametrizables
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>INCO-MF038_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Modular:</td>
+            <td>117 Horas/Año (3 Horas/Semana)</td>
+            <td class="bg-blue-info">Semanas Lectivas:</td>
+            <td>39 Semanas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC02_3:</strong> Configurar características básicas de
+              sistemas parametrizables de gestión según lineamientos
+              supervisados.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los Resultados de Aprendizaje
+          (RA)
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 16%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">Total Modular</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo (Semanas)</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">7 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor (Ponderación)</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">20%</td>
+              <td class="text-center">20%</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 7.5 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.5
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">INCO-MF038_3</td>
+              <td>
+                <strong>UC02_3:</strong> Configurar características básicas de
+                sistemas parametrizables de gestión según lineamientos
+                supervisados.
+              </td>
+              <td class="text-center">21 Horas (3 h/sem)</td>
+              <td class="text-center">Semanas 25 a 31 (7 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Enunciado Oficial del RA 7.5:</strong> Instalar y
+                realizar pruebas de nuevas versiones del sistema de software,
+                siguiendo los estándares y criterios establecidos para las
+                pruebas de calidad y funcionamiento del software.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio Taxonómico:</strong> Nivel 3:
+                Aplicación
+              </td>
+              <td colspan="2"><strong>Valor del RA:</strong> 20% (20 Pts)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.5
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación (CE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Instalar nuevas versiones, ejecutar pruebas funcionales y de
+                rendimiento, verificar la integración de componentes y
+                documentar los resultados para validación.
+              </td>
+              <td class="text-center valign-top">
+                CE7.5.1, CE7.5.2, CE7.5.3, CE7.5.4, CE7.5.5
+              </td>
+              <td class="valign-top">
+                <strong>CE7.5.1:</strong> Instalar la nueva versión del sistema
+                de software siguiendo el proceso de instalación estándar y los
+                procedimientos establecidos por la organización.<br />
+                <strong>CE7.5.2:</strong> Ejecutar pruebas de funcionamientos
+                básicos (pruebas de instalación y validación) para verificar que
+                la nueva versión del sistema se haya instalado correctamente.<br />
+                <strong>CE7.5.3:</strong> Realizar pruebas específicas de
+                rendimiento de la nueva versión del sistema para garantizar que
+                cumpla con los requisitos de rendimiento predefinidos.<br />
+                <strong>CE7.5.4:</strong> Verificar que todas las
+                funcionalidades de la nueva versión del sistema operen
+                correctamente, incluyendo pruebas de integración con otros
+                sistemas y componentes.<br />
+                <strong>CE7.5.5:</strong> Documentar los resultados de las
+                pruebas de la nueva versión, incluyendo los errores encontrados
+                y las soluciones aplicadas, para su revisión y validación por
+                parte del equipo de desarrollo.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.2 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Demostrar orden, previsión y sentido de responsabilidad al
+                aplicar cambios de versión en sistemas de producción/prueba.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 7.5.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Matriz de Actividades y Contenidos Mediadores RA 7.5
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.5.1.</strong> Realizar el despliegue y actualización a
+                una nueva versión del software en un entorno de pruebas,
+                ejecutando baterías de validación funcional, pruebas de
+                integración y documentando el expediente de actualización.<br />
+                <em
+                  >(Evidencia: Expediente de actualización de versión con
+                  protocolo de pruebas de validación e integración).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 25 - Sem. 31</td>
+              <td class="valign-top">
+                Rúbrica analítica de gestión de actualizaciones de software
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Procedimientos estándar de
+                actualización de software. Pruebas de instalación, validación e
+                integración. Documentación de release notes y validación de
+                versiones.<br />
+                <strong>Procedimentales:</strong> Despliegue de nuevas
+                versiones. Ejecución de pruebas de humo y validación integral.
+                Documentación de resultados de actualización.<br />
+                <strong>Actitudinales:</strong> Cuidado metódico en la ejecución
+                de cambios para garantizar la continuidad operativa.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.2 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>EC Actitudinal:</strong> Demostrar orden, previsión y
+                sentido de responsabilidad al aplicar cambios de versión en
+                sistemas de producción/prueba.<br />
+                <em
+                  >(Evidencia: Registro de observación actitudinal en gestión de
+                  cambios).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 25 - Sem. 31</td>
+              <td class="valign-top">
+                Escala estimativa de gestión de cambios
+              </td>
+              <td class="valign-top">
+                <strong>Actitudinal Transversal:</strong> Demostrar orden,
+                previsión y sentido de responsabilidad al aplicar cambios de
+                versión en sistemas de producción/prueba.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 6: RESULTADO DE APRENDIZAJE RA 7.6 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra7-6">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Bachillerato Técnico:</td>
+            <td>Diseño y Desarrollo de Aplicaciones Informáticas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito Educativo:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Módulo Formativo:</td>
+            <td>
+              Implementación y mantenimiento de aplicaciones y sistemas
+              informáticos, parametrizables
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>INCO-MF038_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Modular:</td>
+            <td>117 Horas/Año (3 Horas/Semana)</td>
+            <td class="bg-blue-info">Semanas Lectivas:</td>
+            <td>39 Semanas</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia:</td>
+            <td colspan="3">
+              <strong>UC02_3:</strong> Configurar características básicas de
+              sistemas parametrizables de gestión según lineamientos
+              supervisados.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los Resultados de Aprendizaje
+          (RA)
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 16%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+            <col style="width: 12%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">No. del RA</th>
+              <th class="bg-green-header">RA 7.1</th>
+              <th class="bg-green-header">RA 7.2</th>
+              <th class="bg-green-header">RA 7.3</th>
+              <th class="bg-green-header">RA 7.4</th>
+              <th class="bg-green-header">RA 7.5</th>
+              <th class="bg-green-header">RA 7.6</th>
+              <th class="bg-green-header">Total Modular</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo (Semanas)</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">6 Semanas</td>
+              <td class="text-center">7 Semanas</td>
+              <td class="text-center">8 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Valor (Ponderación)</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">15%</td>
+              <td class="text-center">20%</td>
+              <td class="text-center">20%</td>
+              <td class="text-center text-bold">100%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 7.6 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 7.6
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">INCO-MF038_3</td>
+              <td>
+                <strong>UC02_3:</strong> Configurar características básicas de
+                sistemas parametrizables de gestión según lineamientos
+                supervisados.
+              </td>
+              <td class="text-center">24 Horas (3 h/sem)</td>
+              <td class="text-center">Semanas 32 a 39 (8 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Enunciado Oficial del RA 7.6:</strong> Elaborar y
+                mantener la documentación del código fuente de programas
+                simples, con el fin de garantizar su comprensión y facilitar la
+                interpretación en entornos externos, asegurando que toda la
+                información relevante esté debidamente registrada y actualizada.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio Taxonómico:</strong> Nivel 4: Análisis
+              </td>
+              <td colspan="2"><strong>Valor del RA:</strong> 20% (20 Pts)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 7.6
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">Criterios de Evaluación (CE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Elaborar documentación detallada del código fuente, incluir
+                ejemplos prácticos, aplicar normas del sector
+                (Javadoc/Docstrings) y verificar su accesibilidad.
+              </td>
+              <td class="text-center valign-top">
+                CE7.6.1, CE7.6.2, CE7.6.3, CE7.6.4, CE7.6.5
+              </td>
+              <td class="valign-top">
+                <strong>CE7.6.1:</strong> Elaborar documentación clara y
+                detallada sobre el propósito y funcionalidad de cada módulo del
+                código fuente, garantizando que sea comprensible para los
+                desarrolladores externos.<br />
+                <strong>CE7.6.2:</strong> Incluir en la documentación del código
+                ejemplos prácticos de uso, entradas y salidas esperadas, y
+                posibles errores para facilitar su integración en otros
+                entornos.<br />
+                <strong>CE7.6.3:</strong> Asegurar que la documentación esté
+                organizada y estructurada de acuerdo con las normas y buenas
+                prácticas del sector, utilizando herramientas estándar para su
+                generación (por ejemplo, Javadoc, Docstrings, entre otro).<br />
+                <strong>CE7.6.4:</strong> Actualizar la documentación del código
+                fuente tras realizar cualquier modificación en el mismo,
+                manteniendo la coherencia con los cambios implementados.<br />
+                <strong>CE7.6.5:</strong> Verificar la legibilidad y
+                accesibilidad de la documentación, asegurando que esté
+                disponible para otros miembros del equipo de desarrollo y que
+                sea fácil de consultar y entender para los usuarios externos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.2 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Fomentar la cultura de código limpio, documentado y accesible
+                para el trabajo colaborativo y la sostenibilidad de los
+                proyectos.
+              </td>
+              <td class="text-center valign-top">Transversal</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 7.6.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Matriz de Actividades y Contenidos Mediadores RA 7.6
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.6.1.</strong> Producir la documentación técnica del
+                código fuente de una aplicación completa utilizando herramientas
+                automatizadas (Javadoc/Docstrings), incluyendo comentarios de
+                cabecera, ejemplos de uso y manual técnico de mantenimiento.<br />
+                <em
+                  >(Evidencia: Manual Técnico del Sistema y Repositorio de
+                  Documentación del Código generado automáticamente).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 32 - Sem. 39</td>
+              <td class="valign-top">
+                Rúbrica analítica de documentación de código fuente
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Estándares de documentación de
+                código (Javadoc, Docstrings). Estructura de manuales técnicos y
+                guías de desarrollador. Trazabilidad y actualización de
+                documentación.<br />
+                <strong>Procedimentales:</strong> Inserción de comentarios
+                estandarizados en código. Generación automática de sitios de
+                documentación. Verificación de legibilidad y completitud.<br />
+                <strong>Actitudinales:</strong> Valoración de la documentación
+                técnica como pilar de la mantenibilidad del software a largo
+                plazo.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.2 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>EC Actitudinal:</strong> Fomentar la cultura de código
+                limpio, documentado y accesible para el trabajo colaborativo y
+                la sostenibilidad de los proyectos.<br />
+                <em
+                  >(Evidencia: Registro de observación actitudinal en estándares
+                  de documentación).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 32 - Sem. 39</td>
+              <td class="valign-top">
+                Escala estimativa de compromiso con estándares de documentación
+              </td>
+              <td class="valign-top">
+                <strong>Actitudinal Transversal:</strong> Fomentar la cultura de
+                código limpio, documentado y accesible para el trabajo
+                colaborativo y la sostenibilidad de los proyectos.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

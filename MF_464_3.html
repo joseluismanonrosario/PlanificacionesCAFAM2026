@@ -1,0 +1,1963 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planificación Modular - MF_464_3 (MINERD / CAFAM)</title>
+    <style>
+      :root {
+        --color-verde-ra: #a9d18e;
+        --color-verde-header: #c5e0b4;
+        --color-azul-info: #bdd7ee;
+        --color-salmon-ec: #fce4d6;
+        --color-amarillo-nota: #ffff00;
+        --border-color: #000000;
+      }
+      * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #525659;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 8.5pt;
+        line-height: 1.2;
+        color: #000;
+      }
+      .top-toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background-color: #1f2937;
+        color: #fff;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 24px;
+        gap: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      }
+      .toolbar-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .toolbar-title {
+        font-size: 13px;
+        font-weight: bold;
+      }
+      .nav-ra-buttons {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .btn-ra {
+        background-color: #374151;
+        color: #e5e7eb;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-size: 11px;
+        font-weight: bold;
+        border-radius: 4px;
+        border: 1px solid #4b5563;
+      }
+      .btn-ra:hover {
+        background-color: #2563eb;
+        color: #fff;
+      }
+      .btn-print {
+        background-color: #16a34a;
+        color: #fff;
+        border: none;
+        padding: 7px 15px;
+        font-size: 12px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .btn-print:hover {
+        background-color: #15803d;
+      }
+      .document-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 15px 60px 15px;
+        gap: 35px;
+      }
+      .ra-container {
+        background-color: #ffffff;
+        width: 100%;
+        max-width: 216mm;
+        padding: 12mm 14mm 14mm 14mm;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        box-sizing: border-box;
+        scroll-margin-top: 60px;
+      }
+      .header-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 4px;
+      }
+      .header-table td {
+        border: none !important;
+        padding: 0;
+        vertical-align: middle;
+      }
+      .logo-cafam-img {
+        max-width: 65px;
+        height: auto;
+        display: block;
+      }
+      .logo-detp-img {
+        max-width: 140px;
+        height: auto;
+        display: block;
+        margin-left: auto;
+      }
+      .header-text {
+        text-align: center;
+        font-size: 9pt;
+        line-height: 1.25;
+        padding: 0 8px;
+      }
+      .header-text .t1 {
+        font-weight: bold;
+        font-size: 9.5pt;
+      }
+      .header-text .t2 {
+        font-weight: bold;
+        font-size: 9pt;
+      }
+      .header-text .t3 {
+        font-size: 8.5pt;
+      }
+      .header-text .t4 {
+        font-weight: bold;
+        font-size: 9pt;
+        margin-top: 1px;
+      }
+      .docente-update-bar {
+        text-align: center;
+        font-size: 7.2pt;
+        font-style: italic;
+        color: #333;
+        margin-bottom: 5px;
+      }
+      .docente-update-bar span {
+        margin: 0 10px;
+      }
+      .section-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 8.5pt;
+        margin-top: 4px;
+        margin-bottom: 3px;
+      }
+      table.minerd-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 5px;
+        font-size: 7.8pt;
+        table-layout: fixed;
+      }
+      table.minerd-table td,
+      table.minerd-table th {
+        border: 1px solid var(--border-color);
+        padding: 2.2px 3.5px;
+        vertical-align: middle;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      .bg-green-ra {
+        background-color: var(--color-verde-ra) !important;
+        font-weight: bold;
+      }
+      .bg-green-header {
+        background-color: var(--color-verde-header) !important;
+        font-weight: bold;
+        text-align: center;
+      }
+      .bg-blue-info {
+        background-color: var(--color-azul-info) !important;
+        font-weight: bold;
+      }
+      .bg-salmon-header {
+        background-color: var(--color-salmon-ec) !important;
+        font-weight: bold;
+        text-align: center;
+      }
+      .bg-yellow-note {
+        background-color: var(--color-amarillo-nota) !important;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .text-bold {
+        font-weight: bold;
+      }
+      .valign-top {
+        vertical-align: top !important;
+      }
+      .footer-bar {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #000;
+        padding-top: 4px;
+        margin-top: 12px;
+        font-size: 7.5pt;
+        font-weight: bold;
+      }
+      @page {
+        size: letter portrait;
+        margin: 8mm 8mm 8mm 8mm;
+      }
+      @media print {
+        html,
+        body {
+          background-color: #fff !important;
+          width: 100%;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        .top-toolbar {
+          display: none !important;
+        }
+        .document-wrapper {
+          padding: 0 !important;
+          margin: 0 !important;
+          gap: 0 !important;
+          display: block !important;
+        }
+        .ra-container {
+          box-shadow: none !important;
+          padding: 0 !important;
+          margin: 0 auto !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          page-break-before: always;
+        }
+        .ra-container:first-child {
+          page-break-before: avoid;
+        }
+        table.minerd-table {
+          page-break-inside: auto;
+        }
+        tr {
+          page-break-inside: avoid;
+          page-break-after: auto;
+        }
+        thead {
+          display: table-header-group;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Barra superior fija con los enlaces a cada RA del documento -->
+    <div class="top-toolbar">
+      <div class="toolbar-left">
+        <span class="toolbar-title"
+          >MF_464_3: Mantenimiento de equipos con circuitos
+          microprogramables</span
+        >
+        <div class="nav-ra-buttons">
+          <a href="#ra3-1" class="btn-ra">RA 3.1</a>
+          <a href="#ra3-2" class="btn-ra">RA 3.2</a>
+          <a href="#ra3-3" class="btn-ra">RA 3.3</a>
+          <a href="#ra3-4" class="btn-ra">RA 3.4</a>
+        </div>
+      </div>
+      <button class="btn-print" onclick="window.print()">
+        Descargar / Guardar como PDF
+      </button>
+    </div>
+
+    <div class="document-wrapper">
+      <!-- ========================================== -->
+      <!-- BLOQUE 1: RESULTADO DE APRENDIZAJE RA 3.1 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra3-1">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Título / Bachillerato Técnico:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Marco Normativo:</td>
+            <td>Ordenanza 07-2025</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Mantenimiento de equipos con circuitos microprogramables</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_464_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Modular:</td>
+            <td>315 Horas / Año (7 h/semana)</td>
+            <td class="bg-blue-info">Duración Lectiva / Curso:</td>
+            <td>39 Semanas Relativas | 5to Grado de Secundaria</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia (UC):</td>
+            <td colspan="3">
+              <strong>UC_464_3:</strong> Realizar el mantenimiento a equipos que
+              contienen circuitos microprogramables.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 25%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Criterio de Distribución</th>
+              <th class="bg-green-header">RA 3.1</th>
+              <th class="bg-green-header">RA 3.2</th>
+              <th class="bg-green-header">RA 3.3</th>
+              <th class="bg-green-header">RA 3.4</th>
+              <th class="bg-green-header">Total Módulo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo Estimado (Semanas)</td>
+              <td class="text-center">10 Semanas</td>
+              <td class="text-center">10 Semanas</td>
+              <td class="text-center">10 Semanas</td>
+              <td class="text-center">9 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Ponderación (Puntos / %)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center text-bold">100 Pts (100%)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 3.1 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 3.1
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_464_3</td>
+              <td>
+                <strong>UC_464_3:</strong> Realizar el mantenimiento a equipos
+                que contienen circuitos microprogramables.
+              </td>
+              <td class="text-center">70 Horas (7 h/sem)</td>
+              <td class="text-center">Semanas 1 a 10 (10 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 3.1: Aplicar
+                técnicas de mantenimiento preventivo en equipos con circuitos
+                microprogramables, actuando bajo normas de seguridad personal y
+                de los materiales.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio:</strong> Nivel 3: Aplicación
+                (Taxonomía de Bloom)
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a Trabajar:</strong> 25 Pts (25%)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 3.1
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">
+                Criterios de Evaluación (Texto Oficial)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Seleccionar, organizar y preparar las herramientas con
+                protección ESD, materiales auxiliares e instrumental de prueba
+                conforme al manual del fabricante para el mantenimiento
+                preventivo.
+              </td>
+              <td class="text-center valign-top">CE3.1.1, CE3.1.2</td>
+              <td class="valign-top">
+                <strong>CE3.1.1:</strong> Seleccionar y preparar los materiales,
+                equipos, herramientas y documentación necesarios para realizar
+                las labores de mantenimiento preventivo y dar seguimiento en
+                función del equipo que hay que mantener.<br />
+                <strong>CE3.1.2:</strong> Describir los procedimientos de cada
+                una de las operaciones de mantenimiento preventivo que deben ser
+                realizadas en el equipo y sus elementos, en función del equipo
+                que hay que mantener.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Ejecutar los procedimientos de inspección térmica, limpieza
+                técnica y mantenimiento preventivo en tarjetas electrónicas
+                microprogramables siguiendo el plan establecido.
+              </td>
+              <td class="text-center valign-top">CE3.1.3, CE3.1.5</td>
+              <td class="valign-top">
+                <strong>CE3.1.3:</strong> Efectuar operaciones de mantenimiento
+                preventivo siguiendo el plan de mantenimiento.<br />
+                <strong>CE3.1.5:</strong> Cumplir las normas de prevención de
+                riesgos y de manipulación de dispositivos electrónicos, en todas
+                las intervenciones realizadas.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="valign-top">
+                Realizar adaptaciones, sustitución de componentes discretos o
+                módulos y actualización de placas digitales en entornos
+                protegidos de cargas electrostáticas y gestionando los residuos
+                RAEE.
+              </td>
+              <td class="text-center valign-top">CE3.1.4, CE3.1.6</td>
+              <td class="valign-top">
+                <strong>CE3.1.4:</strong> Realizar adaptaciones y
+                actualizaciones de tarjetas, circuitos digitales modularizados o
+                de componentes discretos en los equipos, garantizando un entorno
+                protegido frente a descargas electrostáticas y siguiendo los
+                procedimientos establecidos en el plan de mantenimiento con la
+                seguridad requerida.<br />
+                <strong>CE3.1.6:</strong> Gestionar y reciclar los elementos
+                sustituidos y desechados en las labores de mantenimiento,
+                siguiendo la normativa de gestión de residuos de aparatos
+                eléctricos y electrónicos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Mostrar rigor técnico, apego a las normas de seguridad e higiene
+                laboral y compromiso con la gestión ambiental en el
+                mantenimiento preventivo.
+              </td>
+              <td class="text-center valign-top">Todos los CE</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 3.1.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizajes (RA 3.1) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.1.1.</strong> Seleccionar y acondicionar el
+                instrumental con protección ESD (pulsera, alfombrilla,
+                herramientas aisladas) e interpretar la documentación técnica
+                del equipo microprogramable, elaborando una lista de
+                verificación de mantenimiento preventivo.<br />
+                <em
+                  >(Evidencia: Lista de cotejo de preparación de estación de
+                  trabajo y kit ESD).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 1 - Sem. 3</td>
+              <td class="valign-top">
+                Lista de cotejo de acondicionamiento de estación ESD
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Elementos de los equipos
+                microprogramables. Normas de seguridad e higiene laboral.
+                Especificaciones técnicas de fabricantes.<br />
+                <strong>Procedimentales:</strong> Selección e inspección de
+                instrumental ESD y manuales de servicio.<br />
+                <strong>Actitudinales:</strong> Orden y método de trabajo en el
+                puesto.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.1.2.</strong> Ejecutar la rutina de mantenimiento
+                preventivo (inspección de disipadores, control térmico, limpieza
+                con alcohol isopropílico de slots y revisión de voltaje de
+                fuentes de precisión) en un equipo con microcontrolador.<br />
+                <em
+                  >(Evidencia: Informe técnico de mantenimiento preventivo
+                  ejecutado con registro de lecturas térmicas y eléctricas).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 4 - Sem. 7</td>
+              <td class="valign-top">
+                Rúbrica analítica de procedimiento de mantenimiento preventivo
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Mantenimiento preventivo. Control
+                e influencia térmica en circuitos integrados. Disipación de
+                calor según encapsulados.<br />
+                <strong>Procedimentales:</strong> Ejecución de rutinas de
+                limpieza técnica y verificación de parámetros de
+                alimentación.<br />
+                <strong>Actitudinales:</strong> Responsabilidad y rigor técnico
+                en la intervención.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.1.3.</strong> Realizar la actualización y reemplazo
+                modular de memorias/tarjetas digitales auxiliares en un equipo
+                microprogramable, aplicando el protocolo de manejo RAEE para
+                componentes desechados.<br />
+                <em
+                  >(Evidencia: Ficha de intervención técnica con manifiesto de
+                  reciclaje de residuos electrónicos).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 8 - Sem. 10</td>
+              <td class="valign-top">
+                Escala estimativa de reemplazo modular y gestión ambiental
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Procesos de actualización de
+                código firmware. Encapsulado de circuitos digitales. Normativa
+                de gestión de residuos RAEE.<br />
+                <strong>Procedimentales:</strong> Reemplazo de módulos digitales
+                y clasificación de residuos electrónicos.<br />
+                <strong>Actitudinales:</strong> Compromiso con la protección
+                medioambiental.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Demostración continua de
+                responsabilidad en el cuidado de componentes sensibles a ESD y
+                respeto de protocolos de seguridad.<br />
+                <em
+                  >(Evidencia: Registro de observación actitudinal continua en
+                  taller).</em
+                >
+              </td>
+              <td class="text-center valign-top">Transversal (Sem. 1-10)</td>
+              <td class="valign-top">
+                Registro de observación / Escala de actitudes
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Normas de prevención de riesgos
+                laborales y protección ESD.<br />
+                <strong>Procedimentales:</strong> Aplicación permanente de
+                medidas de bioseguridad y protección.<br />
+                <strong>Actitudinales:</strong> Apego estricto a normas de
+                seguridad y limpieza.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 2: RESULTADO DE APRENDIZAJE RA 3.2 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra3-2">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Título / Bachillerato Técnico:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Marco Normativo:</td>
+            <td>Ordenanza 07-2025</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Mantenimiento de equipos con circuitos microprogramables</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_464_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Modular:</td>
+            <td>315 Horas / Año (7 h/semana)</td>
+            <td class="bg-blue-info">Duración Lectiva / Curso:</td>
+            <td>39 Semanas Relativas | 5to Grado de Secundaria</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia (UC):</td>
+            <td colspan="3">
+              <strong>UC_464_3:</strong> Realizar el mantenimiento a equipos que
+              contienen circuitos microprogramables.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 25%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Criterio de Distribución</th>
+              <th class="bg-green-header">RA 3.1</th>
+              <th class="bg-green-header">RA 3.2</th>
+              <th class="bg-green-header">RA 3.3</th>
+              <th class="bg-green-header">RA 3.4</th>
+              <th class="bg-green-header">Total Módulo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo Estimado (Semanas)</td>
+              <td class="text-center">10 Semanas</td>
+              <td class="text-center">10 Semanas</td>
+              <td class="text-center">10 Semanas</td>
+              <td class="text-center">9 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Ponderación (Puntos / %)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center text-bold">100 Pts (100%)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 3.2 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 3.2
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_464_3</td>
+              <td>
+                <strong>UC_464_3:</strong> Realizar el mantenimiento a equipos
+                que contienen circuitos microprogramables.
+              </td>
+              <td class="text-center">70 Horas (7 h/sem)</td>
+              <td class="text-center">Semanas 11 a 20 (10 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 3.2:
+                Diagnosticar disfunciones o averías en los equipos con circuitos
+                microprogramables, en condiciones de calidad, seguridad y tiempo
+                de respuesta establecido.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio:</strong> Nivel 4: Análisis (Taxonomía
+                de Bloom)
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a Trabajar:</strong> 25 Pts (25%)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 3.2
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">
+                Criterios de Evaluación (Texto Oficial)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Preparar los equipos de prueba (analizador lógico, osciloscopio,
+                sonda lógica) y ejecutar protocolos de diagnóstico previo local
+                o remoto en circuitos microprogramables.
+              </td>
+              <td class="text-center valign-top">CE3.2.1, CE3.2.2</td>
+              <td class="valign-top">
+                <strong>CE3.2.1:</strong> Identificar los equipos y prepararlos
+                según protocolos establecidos.<br />
+                <strong>CE3.2.2:</strong> Realizar el diagnóstico previo de
+                forma remota o local, utilizando las herramientas específicas de
+                diagnóstico y siguiendo los procedimientos de comprobación
+                establecidos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Analizar los síntomas de fallas registradas en la orden de
+                trabajo para formular hipótesis y aislar los bloques funcionales
+                o componentes lógicos defectuosos.
+              </td>
+              <td class="text-center valign-top">CE3.2.3, CE3.2.4</td>
+              <td class="valign-top">
+                <strong>CE3.2.3:</strong> Analizar los síntomas de la disfunción
+                o avería detectados en el diagnóstico previo, o contenidos en la
+                orden de trabajo, con el fin de determinar su naturaleza y
+                localizar los elementos defectuosos.<br />
+                <strong>CE3.2.4:</strong> Determinar la disfunción o avería a
+                través de las pruebas, medidas y rutinas de diagnóstico,
+                utilizando las herramientas y equipos indicados.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="valign-top">
+                Registrar los resultados de las mediciones de bus, frecuencias y
+                estados lógicos en la ficha técnica de intervención cumpliendo
+                normas ESD.
+              </td>
+              <td class="text-center valign-top">CE3.2.5, CE3.2.6</td>
+              <td class="valign-top">
+                <strong>CE3.2.5:</strong> Recoger las acciones realizadas en la
+                ficha técnica de intervención.<br />
+                <strong>CE3.2.6:</strong> Cumplir las normas de prevención de
+                riesgos y protección frente a descargas electrostáticas en todas
+                las intervenciones que realiza.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Demostrar capacidad analítica, sistematicidad y responsabilidad
+                en el diagnóstico de averías complejas en sistemas
+                microprogramables.
+              </td>
+              <td class="text-center valign-top">Todos los CE</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 3.2.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizajes (RA 3.2) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.2.1.</strong> Configurar y utilizar el osciloscopio
+                digital y la sonda lógica para realizar la captura previa de
+                señales de reloj (CLK), líneas de reset y buses de
+                datos/direcciones en una tarjeta madre con microprocesador.<br />
+                <em
+                  >(Evidencia: Protocolo de diagnóstico de señales con captura
+                  de formas de onda).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 11 - Sem. 13</td>
+              <td class="valign-top">
+                Guía de observación técnica de instrumental de diagnóstico
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Arquitectura de microprocesadores
+                y microcontroladores. Tipología de averías. Instrumentos de
+                medida y diagnóstico.<br />
+                <strong>Procedimentales:</strong> Configuración de osciloscopio
+                y analizador lógico para captura de buses.<br />
+                <strong>Actitudinales:</strong> Rigor y precisión en la captura
+                de señales digitales.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.2.2.</strong> Analizar el flujograma de síntomas de un
+                equipo microprogramable inoperativo, formulando hipótesis de
+                avería (falla de cristal oscilador, daño en memoria Flash o
+                puerto de E/S bloqueado) y aislando la etapa defectuosa.<br />
+                <em
+                  >(Evidencia: Informe de diagnóstico de fallas con árbol de
+                  decisión e hipótesis comprobadas).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 14 - Sem. 17</td>
+              <td class="valign-top">
+                Rúbrica analítica de diagnóstico de averías en microprocesadores
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Técnicas de elaboración de
+                hipótesis y plan de intervención. Verificación de cronogramas de
+                señales.<br />
+                <strong>Procedimentales:</strong> Formulación de hipótesis de
+                falla y localización de componentes defectuosos.<br />
+                <strong>Actitudinales:</strong> Pensamiento sistemático y
+                analítico en la resolución de problemas.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.2.3.</strong> Documentar de forma detallada las
+                mediciones lógicas y eléctricas realizadas durante el proceso de
+                diagnóstico en la ficha técnica de intervención institucional,
+                asegurando la protección ESD.<br />
+                <em
+                  >(Evidencia: Expediente de diagnóstico con ficha técnica de
+                  intervención cumplimentada).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 18 - Sem. 20</td>
+              <td class="valign-top">
+                Lista de cotejo de registro de ficha técnica e intervención ESD
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Documentación en el
+                mantenimiento. Históricos de servicio. Normativa de protección
+                ESD.<br />
+                <strong>Procedimentales:</strong> Registro estandarizado de
+                parámetros y diagnóstico en formularios técnicos.<br />
+                <strong>Actitudinales:</strong> Honestidad y precisión en el
+                reporte de fallas.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Demostración de actitud
+                metódica y perseverancia en la investigación de causas raíz de
+                averías lógicas.<br />
+                <em
+                  >(Evidencia: Registro de observación actitudinal en resolución
+                  de fallas).</em
+                >
+              </td>
+              <td class="text-center valign-top">Transversal (Sem. 11-20)</td>
+              <td class="valign-top">
+                Registro de observación / Escala de actitudes
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Ética profesional y
+                responsabilidad técnica en el servicio.<br />
+                <strong>Procedimentales:</strong> Trabajo disciplinado y
+                metódico en diagnóstico.<br />
+                <strong>Actitudinales:</strong> Perseverancia y rigor
+                científico.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 3: RESULTADO DE APRENDIZAJE RA 3.3 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra3-3">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Título / Bachillerato Técnico:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Marco Normativo:</td>
+            <td>Ordenanza 07-2025</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Mantenimiento de equipos con circuitos microprogramables</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_464_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Modular:</td>
+            <td>315 Horas / Año (7 h/semana)</td>
+            <td class="bg-blue-info">Duración Lectiva / Curso:</td>
+            <td>39 Semanas Relativas | 5to Grado de Secundaria</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia (UC):</td>
+            <td colspan="3">
+              <strong>UC_464_3:</strong> Realizar el mantenimiento a equipos que
+              contienen circuitos microprogramables.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 25%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Criterio de Distribución</th>
+              <th class="bg-green-header">RA 3.1</th>
+              <th class="bg-green-header">RA 3.2</th>
+              <th class="bg-green-header">RA 3.3</th>
+              <th class="bg-green-header">RA 3.4</th>
+              <th class="bg-green-header">Total Módulo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo Estimado (Semanas)</td>
+              <td class="text-center">10 Semanas</td>
+              <td class="text-center">10 Semanas</td>
+              <td class="text-center">10 Semanas</td>
+              <td class="text-center">9 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Ponderación (Puntos / %)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center text-bold">100 Pts (100%)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 3.3 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 3.3
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_464_3</td>
+              <td>
+                <strong>UC_464_3:</strong> Realizar el mantenimiento a equipos
+                que contienen circuitos microprogramables.
+              </td>
+              <td class="text-center">70 Horas (7 h/sem)</td>
+              <td class="text-center">Semanas 21 a 30 (10 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 3.3: Reparar
+                averías diagnosticadas en equipos con circuitos
+                microprogramables, asegurando las condiciones óptimas de
+                funcionamiento, calidad, seguridad y respeto medioambiental.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio:</strong> Nivel 3: Aplicación
+                (Taxonomía de Bloom)
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a Trabajar:</strong> 25 Pts (25%)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 3.3
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">
+                Criterios de Evaluación (Texto Oficial)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Acondicionar la estación de soldadura ESD y seleccionar las
+                herramientas e instrumentación apropiadas salvaguardando la
+                integridad de las memorias y datos.
+              </td>
+              <td class="text-center valign-top">CE3.3.1, CE3.3.2, CE3.3.3</td>
+              <td class="valign-top">
+                <strong>CE3.3.1:</strong> Proteger el puesto de trabajo ante
+                riesgos por descargas electrostáticas y cumplir las normas de
+                seguridad.<br />
+                <strong>CE3.3.2:</strong> Seleccionar y preparar las
+                herramientas específicas e instrumentación de ensayo y medida
+                necesaria para la reparación de acuerdo con los procedimientos
+                establecidos.<br />
+                <strong>CE3.3.3:</strong> Identificar y prevenir los riesgos en
+                la manipulación de componentes electrónicos, adoptando las
+                medidas establecidas y salvaguardando los datos que contengan.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Ejecutar la extracción, reemplazo y soldadura de componentes
+                lógicos o chips montados en PCB aplicando perfiles de
+                temperatura recomendados por el fabricante.
+              </td>
+              <td class="text-center valign-top">CE3.3.4, CE3.3.5</td>
+              <td class="valign-top">
+                <strong>CE3.3.4:</strong> Elegir los procedimientos y
+                componentes electrónicos por sustituir, seleccionados para su
+                reemplazo en la placa de circuito impreso.<br />
+                <strong>CE3.3.5:</strong> Ajustar las técnicas de soldadura a
+                los procesos de reparación establecidos y las recomendaciones de
+                seguridad y temperatura indicadas por el fabricante.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="valign-top">
+                Instalar/desinstalar controladores (drivers) y firmware
+                adaptativo, cumpliendo normativas sobre sustancias peligrosas
+                (RoHS) y gestión de residuos RAEE.
+              </td>
+              <td class="text-center valign-top">CE3.3.6, CE3.3.7, CE3.3.8</td>
+              <td class="valign-top">
+                <strong>CE3.3.6:</strong> Seleccionar los materiales y
+                componentes utilizados en los equipos, teniendo en cuenta las
+                recomendaciones nacionales e internacionales sobre sustancias
+                peligrosas.<br />
+                <strong>CE3.3.7:</strong> Gestionar y reciclar los componentes y
+                materiales desechados en la intervención según la normativa
+                vigente de gestión de residuos de aparatos eléctricos y
+                electrónicos.<br />
+                <strong>CE3.3.8:</strong> Instalación y desinstalación de
+                drivers o secuencias de código para dispositivos electrónicos
+                microprogramables de acuerdo con los procedimientos
+                establecidos.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Mantener una conducta ética, rigor técnico y respeto
+                medioambiental durante el reemplazo y reprogramación de
+                elementos dañados.
+              </td>
+              <td class="text-center valign-top">Todos los CE</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 3.3.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizajes (RA 3.3) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.3.1.</strong> Acondicionar la estación de
+                desoldadura/soldadura SMD de aire caliente, ajustando perfiles
+                térmicos y seleccionando el estaño libre de plomo para la
+                intervención de una placa de circuito impreso dañada.<br />
+                <em
+                  >(Evidencia: Lista de cotejo de preparación de estación de
+                  soldadura y perfilado térmico).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 21 - Sem. 23</td>
+              <td class="valign-top">
+                Lista de cotejo de parámetros de soldadura y protección de datos
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Técnicas y estaciones de
+                soldadura. Optimización de procesos de soldadura. Protección de
+                datos almacenados en memorias.<br />
+                <strong>Procedimentales:</strong> Ajuste de temperatura de
+                cautín/aire caliente y salvaguarda de datos.<br />
+                <strong>Actitudinales:</strong> Cuidado y precaución en la
+                preservación de información del cliente.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.3.2.</strong> Efectuar la desoldadura de un circuito
+                integrado lógicamente averiado (encapsulado DIP o SMD/SOIC) y
+                soldar el repuesto nuevo, verificando la ausencia de puentes de
+                soldadura y continuidad de pistas.<br />
+                <em
+                  >(Evidencia: Placa de circuito impreso reparada con control de
+                  calidad de soldadura).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 24 - Sem. 27</td>
+              <td class="valign-top">
+                Rúbrica analítica de destreza en soldadura y sustitución de CI
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Encapsulado de circuitos
+                digitales, técnicas de montaje y extracción. Soldadura blanda
+                con estaño.<br />
+                <strong>Procedimentales:</strong> Extracción, limpieza de pad y
+                soldadura de precisión de CIs.<br />
+                <strong>Actitudinales:</strong> Pulcritud y destreza técnica en
+                intervenciones delicadas.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="text-center valign-top">Nivel 3: Aplicación</td>
+              <td class="valign-top">
+                <strong>A.3.3.</strong> Flashear y actualizar la secuencia de
+                código firmware o reinstalar los controladores (drivers) de
+                comunicación en el dispositivo microprogramable reparado,
+                gestionando los residuos de componentes dañados según la norma
+                RAEE.<br />
+                <em
+                  >(Evidencia: Registro de actualización de firmware y acta de
+                  entrega de residuos).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 28 - Sem. 30</td>
+              <td class="valign-top">
+                Escala estimativa de flasheo de firmware y gestión de RAEE
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Descarga de código en sistemas
+                embebidos. Drivers de adaptación. Directiva RoHS y residuos
+                RAEE.<br />
+                <strong>Procedimentales:</strong> Programación de firmware y
+                reciclaje selectivo de componentes.<br />
+                <strong>Actitudinales:</strong> Compromiso ecológico y rigor
+                profesional.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Integración de hábitos de
+                trabajo seguro ante altas temperaturas y manejo responsable de
+                sustancias peligrosas.<br />
+                <em
+                  >(Evidencia: Registro de observación actitudinal en manejo de
+                  residuos y seguridad).</em
+                >
+              </td>
+              <td class="text-center valign-top">Transversal (Sem. 21-30)</td>
+              <td class="valign-top">
+                Registro de observación / Escala de actitudes
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Normas internacionales de
+                seguridad e impacto ambiental.<br />
+                <strong>Procedimentales:</strong> Prevención continua de
+                quemaduras y contaminación.<br />
+                <strong>Actitudinales:</strong> Conciencia ecológica y seguridad
+                ocupacional.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- BLOQUE 4: RESULTADO DE APRENDIZAJE RA 3.4 -->
+      <!-- ========================================== -->
+      <div class="ra-container" id="ra3-4">
+        <table class="header-table">
+          <tr>
+            <td style="width: 75px">
+              <img
+                src="logoCafam.png"
+                alt="Logo CAFAM"
+                class="logo-cafam-img"
+              />
+            </td>
+            <td>
+              <div class="header-text">
+                <div class="t1">República Dominicana</div>
+                <div class="t2">Ministerio de Educación</div>
+                <div class="t3">Dirección General de Educación Secundaria</div>
+                <div class="t3">Dirección de Educación Técnico Profesional</div>
+                <div class="t4">
+                  Planificación Bajo el Enfoque de Competencias
+                </div>
+              </div>
+            </td>
+            <td style="width: 145px; text-align: right">
+              <img src="logoDETP.png" alt="Logo DETP" class="logo-detp-img" />
+            </td>
+          </tr>
+        </table>
+        <div class="docente-update-bar">
+          <span
+            >Unidad de Apoyo y Actualización Docente – DETP. Arcenio Paulino
+            Salcedo, MA.</span
+          >
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+        </div>
+
+        <!-- Tabla Datos Generales del Módulo Formativo -->
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+            <col style="width: 22%" />
+            <col style="width: 28%" />
+          </colgroup>
+          <tr>
+            <td class="bg-blue-info">Nombre de la Institución:</td>
+            <td>Colegio APEC Fernando Arturo de Meriño (CAFAM)</td>
+            <td class="bg-blue-info">Título / Bachillerato Técnico:</td>
+            <td>Bachillerato Técnico en Equipos Electrónicos</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Regional / Distrito:</td>
+            <td>15-03</td>
+            <td class="bg-blue-info">Familia Profesional:</td>
+            <td>Electricidad y Electrónica</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Nombre del Docente:</td>
+            <td>José Luis Mañón Rosario</td>
+            <td class="bg-blue-info">Marco Normativo:</td>
+            <td>Ordenanza 07-2025</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Módulo Formativo (MF):</td>
+            <td>Mantenimiento de equipos con circuitos microprogramables</td>
+            <td class="bg-blue-info">Código MF:</td>
+            <td>MF_464_3</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Carga Horaria Modular:</td>
+            <td>315 Horas / Año (7 h/semana)</td>
+            <td class="bg-blue-info">Duración Lectiva / Curso:</td>
+            <td>39 Semanas Relativas | 5to Grado de Secundaria</td>
+          </tr>
+          <tr>
+            <td class="bg-blue-info">Unidad de Competencia (UC):</td>
+            <td colspan="3">
+              <strong>UC_464_3:</strong> Realizar el mantenimiento a equipos que
+              contienen circuitos microprogramables.
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tabla de Priorización y Ponderación del MF -->
+        <div class="section-title">
+          Tabla de Priorización y Ponderación de los RA dentro del MF
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 25%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Criterio de Distribución</th>
+              <th class="bg-green-header">RA 3.1</th>
+              <th class="bg-green-header">RA 3.2</th>
+              <th class="bg-green-header">RA 3.3</th>
+              <th class="bg-green-header">RA 3.4</th>
+              <th class="bg-green-header">Total Módulo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-bold">Tiempo Estimado (Semanas)</td>
+              <td class="text-center">10 Semanas</td>
+              <td class="text-center">10 Semanas</td>
+              <td class="text-center">10 Semanas</td>
+              <td class="text-center">9 Semanas</td>
+              <td class="text-center text-bold">39 Semanas</td>
+            </tr>
+            <tr>
+              <td class="text-bold">Ponderación (Puntos / %)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center">25 Pts (25%)</td>
+              <td class="text-center text-bold">100 Pts (100%)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Matriz de Identificación del RA 3.4 -->
+        <div class="section-title">
+          MATRIZ DEL RESULTADO DE APRENDIZAJE: RA 3.4
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 20%" />
+            <col style="width: 45%" />
+            <col style="width: 17%" />
+            <col style="width: 18%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Módulo Formativo</th>
+              <th class="bg-green-header">Unidad de Competencia</th>
+              <th class="bg-green-header">Carga en Periodo</th>
+              <th class="bg-green-header">Semanas Ejecución</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold">MF_464_3</td>
+              <td>
+                <strong>UC_464_3:</strong> Realizar el mantenimiento a equipos
+                que contienen circuitos microprogramables.
+              </td>
+              <td class="text-center">63 Horas (7 h/sem)</td>
+              <td class="text-center">Semanas 31 a 39 (9 Sem.)</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="bg-green-ra">
+                <strong>Resultado de Aprendizaje (RA):</strong> RA 3.4: Poner en
+                funcionamiento equipos con circuitos microprogramables, en
+                condiciones de calidad, seguridad y tiempo de respuesta
+                establecido.
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Nivel de Dominio:</strong> Nivel 4: Análisis (Taxonomía
+                de Bloom)
+              </td>
+              <td colspan="2">
+                <strong>Valor del RA a Trabajar:</strong> 25 Pts (25%)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Salmón de Contraste (EC vs CE) -->
+        <div class="section-title">
+          Tabla de Desglose y Contraste de Competencias (EC vs CE) RA 3.4
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 40%" />
+            <col style="width: 14%" />
+            <col style="width: 38%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-salmon-header">#EC</th>
+              <th class="bg-salmon-header">Elementos de Capacidad (EC)</th>
+              <th class="bg-salmon-header">Contraste EC vs CE</th>
+              <th class="bg-salmon-header">
+                Criterios de Evaluación (Texto Oficial)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="valign-top">
+                Comprobar las condiciones de seguridad del puesto e inspeccionar
+                las fuentes de alimentación, buses de comunicación e interfaces
+                de E/S.
+              </td>
+              <td class="text-center valign-top">CE3.4.1, CE3.4.3</td>
+              <td class="valign-top">
+                <strong>CE3.4.1:</strong> Comprobar que se cumple las
+                condiciones de seguridad del puesto de trabajo, herramientas e
+                instrumentación de medida y prueba, con la normativa vigente.<br />
+                <strong>CE3.4.3:</strong> Verificar las conexiones y los
+                interfaces de comunicación que cumplen con lo indicado en la
+                documentación técnica.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="valign-top">
+                Evaluar la ejecución del código de programa, drivers de
+                adaptación y cronogramas de señales mediante software de
+                emulación y pruebas funcionales de laboratorio.
+              </td>
+              <td class="text-center valign-top">CE3.4.2, CE3.4.4</td>
+              <td class="valign-top">
+                <strong>CE3.4.2:</strong> Verificar, mediante pruebas y ensayos,
+                el funcionamiento del equipo, cumpliendo las especificaciones
+                indicadas en la documentación técnica.<br />
+                <strong>CE3.4.4:</strong> Comprobar los códigos de los
+                dispositivos microprogramables y los drivers de adaptación, de
+                acuerdo con las especificaciones y funcionalidades establecidas
+                para el equipo.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="valign-top">
+                Realizar la puesta en marcha oficial del equipo
+                microprogramable, documentando las pruebas de desempeño en la
+                ficha técnica y aplicando protocolos de almacenamiento.
+              </td>
+              <td class="text-center valign-top">CE3.4.5, CE3.4.6, CE3.4.7</td>
+              <td class="valign-top">
+                <strong>CE3.4.5:</strong> Poner en funcionamiento equipos con
+                circuitos microprogramables.<br />
+                <strong>CE3.4.6:</strong> Recoger en la ficha técnica de
+                intervención las acciones realizadas.<br />
+                <strong>CE3.4.7:</strong> Identificar y almacenar, según
+                protocolos establecidos, los equipos verificados.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="valign-top">
+                Asumir con responsabilidad, precisión y método la verificación
+                funcional final y entrega del equipo certificado.
+              </td>
+              <td class="text-center valign-top">Todos los CE</td>
+              <td class="valign-top">
+                Transversal a todos los Criterios de Evaluación del RA 3.4.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tabla Verde de Actividades con sus 6 columnas -->
+        <div class="section-title">
+          Bloque B: Matriz por Resultados de Aprendizajes (RA 3.4) Actividades y
+          Contenidos
+        </div>
+        <table class="minerd-table">
+          <colgroup>
+            <col style="width: 8%" />
+            <col style="width: 11%" />
+            <col style="width: 37%" />
+            <col style="width: 10%" />
+            <col style="width: 14%" />
+            <col style="width: 20%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="bg-green-header">Elemento de Capacidad (EC)</th>
+              <th class="bg-green-header">Nivel de Dominio de los EC</th>
+              <th class="bg-green-header">
+                Enunciado de las Actividades y Evidencias
+              </th>
+              <th class="bg-green-header">Fecha / Semanas</th>
+              <th class="bg-green-header">Instrumento de Evaluación</th>
+              <th class="bg-green-header">
+                Contenidos Mediadores (Conceptuales, Procedimentales,
+                Actitudinales)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.1</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.4.1.</strong> Inspeccionar y verificar los niveles de
+                voltaje de la fuente de precisión, calidad de rizado y
+                conexiones de puerto serie/USB de comunicación antes de la
+                energización del equipo microprogramable.<br />
+                <em
+                  >(Evidencia: Informe de verificación eléctrica y conectividad
+                  previa a puesta en marcha).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 31 - Sem. 33</td>
+              <td class="valign-top">
+                Lista de cotejo de verificación eléctrica e interfaces de
+                comunicación
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Protección de sistemas de
+                alimentación de precisión. Interfaces de comunicación.
+                Protocolos de seguridad.<br />
+                <strong>Procedimentales:</strong> Medición de voltajes de
+                regulación y prueba de continuidad en buses.<br />
+                <strong>Actitudinales:</strong> Cuidado y prudencia antes de la
+                puesta bajo tensión.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.2</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.4.2.</strong> Someter el equipo a ensayos de carga
+                funcional continuada, monitoreando la ejecución del código de
+                programa, la respuesta a interrupciones y el mapa de memoria
+                mediante terminal de depuración.<br />
+                <em
+                  >(Evidencia: Reporte de ensayos funcionales y prueba de estrés
+                  del firmware).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 34 - Sem. 36</td>
+              <td class="valign-top">
+                Rúbrica analítica de ensayos funcionales y evaluación de
+                desempeño
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Verificación local y remota
+                mediante software. Análisis de entradas/salidas y mapa de
+                memoria. Cronogramas de señales.<br />
+                <strong>Procedimentales:</strong> Ejecución de rutinas de prueba
+                y análisis de rendimiento funcional.<br />
+                <strong>Actitudinales:</strong> Exigencia técnica y rigor en el
+                control de calidad.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">EC.3</td>
+              <td class="text-center valign-top">Nivel 4: Análisis</td>
+              <td class="valign-top">
+                <strong>A.4.3.</strong> Elaborar el informe de puesta en marcha
+                y certificación final del equipo, registrando la intervención en
+                la ficha técnica y almacenando el equipo verificado bajo
+                protocolo antiestático.<br />
+                <em
+                  >(Evidencia: Certificado final de puesta en servicio y
+                  protocolo de entrega/almacenamiento).</em
+                >
+              </td>
+              <td class="text-center valign-top">Sem. 37 - Sem. 39</td>
+              <td class="valign-top">
+                Escala estimativa de documentación final y certificación de
+                equipo
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Informes de puesta en marcha.
+                Plan de calidad. Protocolos de empaque y almacenamiento.<br />
+                <strong>Procedimentales:</strong> Redacción de memorias técnicas
+                de puesta en servicio y empaquetado ESD.<br />
+                <strong>Actitudinales:</strong> Responsabilidad y
+                profesionalismo en la entrega final del producto.
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center text-bold valign-top">
+                EC.4 (Actitudinal)
+              </td>
+              <td class="text-center valign-top">Actitudinal</td>
+              <td class="valign-top">
+                Permea todos los EC y Actividades. Compromiso con la excelencia
+                operativa, la satisfacción del usuario y el cumplimiento de
+                estándares de calidad.<br />
+                <em
+                  >(Evidencia: Registro de observación actitudinal en
+                  certificación y entrega de equipos).</em
+                >
+              </td>
+              <td class="text-center valign-top">Transversal (Sem. 31-39)</td>
+              <td class="valign-top">
+                Registro de observación / Escala de actitudes
+              </td>
+              <td class="valign-top">
+                <strong>Conceptuales:</strong> Cultura de calidad y garantía de
+                servicio técnico.<br />
+                <strong>Procedimentales:</strong> Aplicación constante de
+                controles de calidad finales.<br />
+                <strong>Actitudinales:</strong> Orientación a la excelencia y
+                ética profesional.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="footer-bar">
+          <span>Colegio APEC Fernando Arturo de Meriño (CAFAM)</span>
+          <span>Docente: José Luis Mañón Rosario</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
